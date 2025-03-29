@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import { GridItem } from "@chakra-ui/react";
 
 const Pocetna = () => {
   const [message, setMessage] = useState("");
@@ -27,10 +29,13 @@ const Pocetna = () => {
 
   return (
     <div>
-      <h1>Ovo je početna stranica</h1>;
+      <Navbar></Navbar>
       <div>
-        <h2>Poruka s backenda:</h2>
-        <p>{message}</p>
+        <h1>Ovo je početna stranica</h1>;
+        <div>
+          <h2>Poruka s backenda:</h2>
+          <p>{message}</p>
+        </div>
       </div>
     </div>
   );

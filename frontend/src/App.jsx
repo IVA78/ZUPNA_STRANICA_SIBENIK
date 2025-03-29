@@ -17,6 +17,10 @@ import BlagoslovObitelji from "./pages/BlagoslovObitelji";
 import Sprovod from "./pages/Sprovod";
 import Hodocasca from "./pages/Hodocasca";
 import Fotogalerija from "./pages/Fotogalerija";
+import Formulari from "./pages/Formulari";
+import Kontakt from "./pages/Kontakt";
+import ZupnoVijece from "./pages/ZupnoVijece";
+import Euharistija from "./pages/Euharistija";
 
 function App() {
   return (
@@ -27,7 +31,7 @@ function App() {
         <Route path="/sv-petar" element={<SvPetar />} />
         <Route path="/raspored-bogosluzja" element={<RasporedBogo />} />
         <Route path="/zupna-kateheza" element={<ZupnaKateheza />} />
-        <Route path="/djeciji-zbor" element={<DjecijiZbor />} />
+        <Route path="/djecji-zbor" element={<DjecijiZbor />} />
         <Route path="/zupni-pjevacki-zbor" element={<ZupniPjevackiZbor />} />
         <Route path="/poboznosti" element={<Poboznosti />} />
         <Route path="/krstenje" element={<Krstenje />} />
@@ -39,7 +43,11 @@ function App() {
         <Route path="/blagoslov-obitelji" element={<BlagoslovObitelji />} />
         <Route path="/sprovod" element={<Sprovod />} />
         <Route path="/hodocasca" element={<Hodocasca />} />
+        <Route path="/formulari" element={<Formulari />} />
+        <Route path="/kontakt" element={<Kontakt />} />
+        <Route path="/zupno-vijece" element={<ZupnoVijece />} />
         <Route path="/fotogalerija" element={<Fotogalerija />} />
+        <Route path="/euharistija" element={<Euharistija />} />
       </Routes>
     </Router>
   );
