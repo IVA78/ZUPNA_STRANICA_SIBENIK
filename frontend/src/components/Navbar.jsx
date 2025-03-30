@@ -108,7 +108,7 @@ const Navbar = () => {
           justifyContent="center"
         >
           <Box px={12} py={2}>
-            <Flex gap={{ base: 1, lg: 8, xl: 10 }} align="center">
+            <Flex gap={{ base: 1, lg: 1, xl: 10 }} align="center">
               <Link
                 href="/"
                 color="gray.700"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { GridItem } from "@chakra-ui/react";
+import PolaroidFrame from "../components/PolaroidFrame";
 
 const Pocetna = () => {
   const [message, setMessage] = useState("");
@@ -37,6 +38,7 @@ const Pocetna = () => {
           <p>{message}</p>
         </div>
       </div>
+      <PolaroidFrame></PolaroidFrame>
     </div>
   );
 };
