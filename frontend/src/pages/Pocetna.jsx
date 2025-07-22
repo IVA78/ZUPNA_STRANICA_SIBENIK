@@ -38,7 +38,10 @@ const Pocetna = () => {
           <p>{message}</p>
         </div>
       </div>
-      <PolaroidFrame></PolaroidFrame>
+      <PolaroidFrame
+        imageSrc="src\assets\logo.jpg"
+        altText="Pocetna"
+      ></PolaroidFrame>
     </div>
   );
 };

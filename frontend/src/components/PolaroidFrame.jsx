@@ -1,8 +1,8 @@
 import { Box, Image } from "@chakra-ui/react";
 
-const PolaroidFrame = () => {
+const PolaroidFrame = ({ imageSrc, altText = "Polaroid" }) => {
   return (
-    <Box position="relative" display="inline-block">
+    <Box position="relative" display="inline-block" marginTop={5}>
       {/* Donji sloj */}
       <Box
         position="absolute"
@@ -37,7 +37,7 @@ const PolaroidFrame = () => {
         boxShadow="xl"
         position="relative"
       >
-        <Image src="src\assets\logo.jpg" alt="Polaroid" borderRadius="5px" />
+        <Image src={imageSrc} alt={altText} borderRadius="5px" />
       </Box>
 
       {/* Spajalica */}

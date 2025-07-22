@@ -1,5 +1,14 @@
+import Navbar from "../components/Navbar";
+
 const ZupnoVijece = () => {
-  return <h1>Ovo je stranica ZupnoVijece</h1>;
+  return (
+    <div>
+      <Navbar></Navbar>
+      <div>
+        <h1>Ovo je stranica Zupno Vijece</h1>;
+      </div>
+    </div>
+  );
 };
 
 export default ZupnoVijece;

@@ -1,5 +1,14 @@
+import Navbar from "../components/Navbar";
+
 const PovijestZupe = () => {
-  return <h1>Ovo je stranica Povijest župe</h1>;
+  return (
+    <div>
+      <Navbar></Navbar>
+      <div>
+        <h1>Ovo je stranica Povijest župe</h1>;
+      </div>
+    </div>
+  );
 };
 
 export default PovijestZupe;
