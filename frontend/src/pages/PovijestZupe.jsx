@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 const PovijestZupe = () => {
@@ -7,6 +8,7 @@ const PovijestZupe = () => {
       <div>
         <h1>Ovo je stranica Povijest župe</h1>;
       </div>
+      <Footer></Footer>
     </div>
   );
 };

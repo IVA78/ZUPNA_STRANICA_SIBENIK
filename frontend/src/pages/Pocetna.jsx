@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { GridItem } from "@chakra-ui/react";
 import PolaroidFrame from "../components/PolaroidFrame";
+import Footer from "../components/Footer";
 
 const Pocetna = () => {
   const [message, setMessage] = useState("");
@@ -42,6 +43,7 @@ const Pocetna = () => {
         imageSrc="src\assets\logo.jpg"
         altText="Pocetna"
       ></PolaroidFrame>
+      <Footer></Footer>
     </div>
   );
 };

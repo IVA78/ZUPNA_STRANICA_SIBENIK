@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 const RasporedBogo = () => {
@@ -7,6 +8,7 @@ const RasporedBogo = () => {
       <div>
         <h1>Ovo je stranica Raspored bogoslužja</h1>;
       </div>
+      <Footer></Footer>
     </div>
   );
 };

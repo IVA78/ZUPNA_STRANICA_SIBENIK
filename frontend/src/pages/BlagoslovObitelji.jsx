@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 const BlagoslovObitelji = () => {
@@ -7,6 +8,7 @@ const BlagoslovObitelji = () => {
       <div>
         <h1>Ovo je stranica Blagoslov obitelji</h1>;
       </div>
+      <Footer></Footer>
     </div>
   );
 };

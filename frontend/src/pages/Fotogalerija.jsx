@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const Fotogalerija = () => {
   return (
@@ -7,6 +8,7 @@ const Fotogalerija = () => {
       <div>
         <h1>Ovo je stranica Fotogalerija</h1>;
       </div>
+      <Footer></Footer>
     </div>
   );
 };

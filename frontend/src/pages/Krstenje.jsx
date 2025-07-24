@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 const Krstenje = () => {
@@ -7,6 +8,7 @@ const Krstenje = () => {
       <div>
         <h1>Ovo je stranica Krštenje</h1>;
       </div>
+      <Footer></Footer>
     </div>
   );
 };

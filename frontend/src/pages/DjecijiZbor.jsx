@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const DjecijiZbor = () => {
   return (
@@ -7,6 +8,7 @@ const DjecijiZbor = () => {
       <div>
         <h1>Ovo je stranica Dječiji zbor</h1>;
       </div>
+      <Footer></Footer>
     </div>
   );
 };

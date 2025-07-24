@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 import emailjs from "@emailjs/browser";
 
@@ -250,7 +251,11 @@ const Kontakt = () => {
               variant="outline"
               color="black"
               borderColor="rgba(23,24,16)"
-              _hover={{ color: "white", bg: "rgba(23,24,16)" }}
+              _hover={{
+                bg: "#86654b",
+                color: "RGBA(248, 245, 240)",
+                fontWeight: "bold",
+              }}
               marginTop={{ base: "1em", lg: "3em" }}
               onClick={handleButtonClick}
             >
@@ -259,6 +264,7 @@ const Kontakt = () => {
           </Box>
         </Box>
       </Grid>
+      <Footer></Footer>
     </div>
   );
 };
