@@ -19,3 +19,10 @@ INSERT INTO Category (name) VALUES ('Sprovod');
 INSERT INTO Category (name) VALUES ('Hodočašća');
 INSERT INTO Category (name) VALUES ('Župni Caritas');
 INSERT INTO Category (name) VALUES ('Ministranti');
+INSERT INTO Category (name) VALUES ('Mladi');
+INSERT INTO Category (name) VALUES ('Kršćansko kazalište župe sv. Petra');
+
+INSERT INTO korisnik (id, korisnickoime, tipKorisnika, email, lozinka, adresa) VALUES (1, 'iva', 'USER', 'admin@example.com', '$2a$12$Y3XC4LI0nkr6kLnt/YI75O8Tzd/IHR2HGol/Dt.VQ/T0jjzvopGia', 'Ulica 1');
+
+INSERT INTO korisnik (id, korisnickoime, tipKorisnika, email, lozinka, adresa) VALUES (2, 'ana', 'USER', 'user1@example.com', '$2a$12$Y3XC4LI0nkr6kLnt/YI75O8Tzd/IHR2HGol/Dt.VQ/T0jjzvopGia', 'Ulica 2');
+

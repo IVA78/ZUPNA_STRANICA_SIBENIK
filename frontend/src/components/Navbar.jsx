@@ -184,7 +184,7 @@ const Navbar = () => {
                     fontSize="xl"
                     fontWeight="semibold"
                   >
-                    Župna kateheza za odrasle
+                    Kateheze za odrasle
                   </MenuItem>
                   <MenuItem
                     as="a"
@@ -233,6 +233,22 @@ const Navbar = () => {
                     fontWeight="semibold"
                   >
                     Ministranti
+                  </MenuItem>
+                  <MenuItem
+                    as="a"
+                    href="/mladi"
+                    fontSize="xl"
+                    fontWeight="semibold"
+                  >
+                    Mladi
+                  </MenuItem>
+                  <MenuItem
+                    as="a"
+                    href="/kazaliste"
+                    fontSize="xl"
+                    fontWeight="semibold"
+                  >
+                    Kršćansko kazalište župe sv. Petra
                   </MenuItem>
                 </MenuList>
               </Menu>
@@ -464,7 +480,7 @@ const Navbar = () => {
                         fontSize="xl"
                         fontWeight="semibold"
                       >
-                        Župna kateheza za odrasle
+                        Kateheze za odrasle
                       </MenuItem>
                       <MenuItem
                         as="a"
@@ -513,6 +529,22 @@ const Navbar = () => {
                         fontWeight="semibold"
                       >
                         Ministranti
+                      </MenuItem>
+                      <MenuItem
+                        as="a"
+                        href="/mladi"
+                        fontSize="xl"
+                        fontWeight="semibold"
+                      >
+                        Mladi
+                      </MenuItem>
+                      <MenuItem
+                        as="a"
+                        href="/kazaliste"
+                        fontSize="xl"
+                        fontWeight="semibold"
+                      >
+                        Kršćansko kazalište župe sv. Petra
                       </MenuItem>
                     </MenuList>
                   </Menu>

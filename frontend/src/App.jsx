@@ -24,6 +24,7 @@ import Euharistija from "./pages/Euharistija";
 import SvetaPotvrda from "./pages/SvetaPotvrda";
 import ZupniCaritas from "./pages/ZupniCaritas";
 import Ministranti from "./pages/Ministranti";
+import Mladi from "./pages/Mladi";
 
 function App() {
   return (
@@ -54,6 +55,8 @@ function App() {
         <Route path="/euharistija" element={<Euharistija />} />
         <Route path="/zupni-caritas" element={<ZupniCaritas />} />
         <Route path="/ministranti" element={<Ministranti />} />
+        <Route path="/mladi" element={<Mladi />} />
+        <Route path="/kazaliste" element={<Mladi />} />
       </Routes>
     </Router>
   );

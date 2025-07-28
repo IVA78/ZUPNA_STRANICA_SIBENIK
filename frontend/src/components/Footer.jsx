@@ -6,11 +6,47 @@ import {
   Flex,
   Stack,
   Divider,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalCloseButton,
+  Input,
+  useDisclosure,
+  FormControl,
+  FormLabel,
 } from "@chakra-ui/react";
 
+import { useState } from "react";
+
 const Footer = () => {
-  const handleButtonClick = () => {
-    console.log("Clicked!");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Prijava nije uspjela.");
+      }
+
+      const data = await response.json();
+      console.log("Uspješna prijava:", data);
+      // Po potrebi: spremi token, redirect, zatvori modal
+      onClose();
+    } catch (error) {
+      console.error("Greška prilikom prijave:", error);
+    }
   };
 
   return (
@@ -48,7 +84,7 @@ const Footer = () => {
               fontWeight: "bold",
             }}
             marginTop={{ base: "1em", lg: "3em" }}
-            onClick={handleButtonClick}
+            onClick={onOpen}
             fontSize="xl"
           >
             Ulaz za autore
@@ -75,6 +111,54 @@ const Footer = () => {
         &copy; {new Date().getFullYear()} Župa sv. Petra, Vidici. Sva prava
         pridržana.
       </Text>
+
+      {/* Modal za prijavu */}
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Prijava</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Stack spacing={4}>
+              <FormControl>
+                <FormLabel>Korisničko ime</FormLabel>
+                <Input
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Unesite korisničko ime"
+                />
+              </FormControl>
+
+              <FormControl>
+                <FormLabel>Lozinka</FormLabel>
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Unesite lozinku"
+                />
+              </FormControl>
+            </Stack>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              mt={4}
+              variant="outline"
+              color="black"
+              borderColor="rgba(23,24,16)"
+              _hover={{
+                bg: "#86654b",
+                color: "RGBA(248, 245, 240)",
+                fontWeight: "bold",
+              }}
+              onClick={handleLogin}
+            >
+              Prijavi se
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 };
