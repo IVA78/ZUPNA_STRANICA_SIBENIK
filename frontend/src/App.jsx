@@ -21,6 +21,9 @@ import Formulari from "./pages/Formulari";
 import Kontakt from "./pages/Kontakt";
 import ZupnoVijece from "./pages/ZupnoVijece";
 import Euharistija from "./pages/Euharistija";
+import SvetaPotvrda from "./pages/SvetaPotvrda";
+import ZupniCaritas from "./pages/ZupniCaritas";
+import Ministranti from "./pages/Ministranti";
 
 function App() {
   return (
@@ -36,6 +39,7 @@ function App() {
         <Route path="/poboznosti" element={<Poboznosti />} />
         <Route path="/krstenje" element={<Krstenje />} />
         <Route path="/sveta-pricest" element={<SvetaPricest />} />
+        <Route path="/sveta-potvrda" element={<SvetaPotvrda />} />
         <Route path="/ispovijed" element={<Ispovijed />} />
         <Route path="/bolesnicko-pomazanje" element={<BolesnickoPomazanje />} />
         <Route path="/zenidba" element={<Zenidba />} />
@@ -48,6 +52,8 @@ function App() {
         <Route path="/zupno-vijece" element={<ZupnoVijece />} />
         <Route path="/fotogalerija" element={<Fotogalerija />} />
         <Route path="/euharistija" element={<Euharistija />} />
+        <Route path="/zupni-caritas" element={<ZupniCaritas />} />
+        <Route path="/ministranti" element={<Ministranti />} />
       </Routes>
     </Router>
   );

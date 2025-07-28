@@ -1,13 +1,12 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import CategoryPage from "../components/CategoryPage";
 
 const Euharistija = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div>
-        <h1>Ovo je stranica Euharistija</h1>;
-      </div>
+      <CategoryPage categoryId={12} />
       <Footer></Footer>
     </div>
   );

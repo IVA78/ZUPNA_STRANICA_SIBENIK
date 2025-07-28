@@ -1,15 +1,17 @@
-import Footer from "../components/Footer";
+// src/pages/SvPetar.jsx
+
+import React from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import CategoryPage from "../components/CategoryPage";
 
 const SvPetar = () => {
   return (
-    <div>
-      <Navbar></Navbar>
-      <div>
-        <h1>Ovo je stranica Sv. Petar</h1>;
-      </div>
-      <Footer></Footer>
-    </div>
+    <>
+      <Navbar />
+      <CategoryPage categoryId={2} />
+      <Footer />
+    </>
   );
 };
 

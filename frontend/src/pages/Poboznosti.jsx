@@ -1,13 +1,12 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import CategoryPage from "../components/CategoryPage";
 
 const Poboznosti = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div>
-        <h1>Ovo je stranica Pobožnosti</h1>;
-      </div>
+      <CategoryPage categoryId={8} />
       <Footer></Footer>
     </div>
   );

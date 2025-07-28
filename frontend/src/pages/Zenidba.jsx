@@ -1,3 +1,4 @@
+import CategoryPage from "../components/CategoryPage";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
@@ -5,9 +6,7 @@ const Zenidba = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div>
-        <h1>Ovo je stranica Ženidba</h1>;
-      </div>
+      <CategoryPage categoryId={15} />
       <Footer></Footer>
     </div>
   );

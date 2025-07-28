@@ -218,6 +218,22 @@ const Navbar = () => {
                   >
                     Pobožnosti
                   </MenuItem>
+                  <MenuItem
+                    as="a"
+                    href="/zupni-caritas"
+                    fontSize="xl"
+                    fontWeight="semibold"
+                  >
+                    Župni Caritas
+                  </MenuItem>
+                  <MenuItem
+                    as="a"
+                    href="/ministranti"
+                    fontSize="xl"
+                    fontWeight="semibold"
+                  >
+                    Ministranti
+                  </MenuItem>
                 </MenuList>
               </Menu>
 
@@ -244,6 +260,14 @@ const Navbar = () => {
                   <MenuItem
                     as="a"
                     href="/sveta-pricest"
+                    fontSize="xl"
+                    fontWeight="semibold"
+                  >
+                    Sveta Pričest
+                  </MenuItem>
+                  <MenuItem
+                    as="a"
+                    href="/sveta-potvrda"
                     fontSize="xl"
                     fontWeight="semibold"
                   >
@@ -474,6 +498,22 @@ const Navbar = () => {
                       >
                         Pobožnosti
                       </MenuItem>
+                      <MenuItem
+                        as="a"
+                        href="/zupni-caritas"
+                        fontSize="xl"
+                        fontWeight="semibold"
+                      >
+                        Župni Caritas
+                      </MenuItem>
+                      <MenuItem
+                        as="a"
+                        href="/ministranti"
+                        fontSize="xl"
+                        fontWeight="semibold"
+                      >
+                        Ministranti
+                      </MenuItem>
                     </MenuList>
                   </Menu>
 
@@ -507,6 +547,14 @@ const Navbar = () => {
                       <MenuItem
                         as="a"
                         href="/sveta-pricest"
+                        fontSize="xl"
+                        fontWeight="semibold"
+                      >
+                        Sveta Pričest
+                      </MenuItem>
+                      <MenuItem
+                        as="a"
+                        href="/sveta-potvrda"
                         fontSize="xl"
                         fontWeight="semibold"
                       >

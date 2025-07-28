@@ -1,13 +1,12 @@
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import CategoryPage from "../components/CategoryPage";
 
 const SvetaPricest = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div>
-        <h1>Ovo je stranica Sveta pričest</h1>;
-      </div>
+      <CategoryPage categoryId={10} />
       <Footer></Footer>
     </div>
   );
