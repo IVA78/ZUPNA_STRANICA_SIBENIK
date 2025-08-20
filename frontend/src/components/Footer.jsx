@@ -20,11 +20,13 @@ import {
 } from "@chakra-ui/react";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -41,9 +43,13 @@ const Footer = () => {
       }
 
       const data = await response.json();
-      console.log("Uspješna prijava:", data);
-      // Po potrebi: spremi token, redirect, zatvori modal
+      console.log("Uspješna prijava:", data.token);
+      // spremi token
+      sessionStorage.setItem("token", data.token);
+
       onClose();
+
+      navigate("/dashboard");
     } catch (error) {
       console.error("Greška prilikom prijave:", error);
     }
@@ -96,12 +102,12 @@ const Footer = () => {
             Autor
           </Heading>
           <Text fontSize="xl">
-            Izrada web stranice: <strong>Iva Svalina</strong>
+            Izrada web stranice: <strong>Iva Pavičić</strong>
           </Text>
           <Text fontSize="sm" color="gray.600" mb={2}>
             Student @FER
           </Text>
-          <Text fontSize="xl">Email: isvalina3@gmail.com</Text>
+          <Text fontSize="xl">Email: ivapavicicc@gmail.com</Text>
         </Box>
       </Flex>
 

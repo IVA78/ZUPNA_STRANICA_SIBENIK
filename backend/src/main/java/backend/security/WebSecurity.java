@@ -15,8 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
-
 @EnableMethodSecurity(prePostEnabled = true) //this enables method-level security: use @Secured to secure individual methods
 @Configuration
 @EnableWebSecurity

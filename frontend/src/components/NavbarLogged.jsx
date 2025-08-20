@@ -24,25 +24,9 @@ import {
 import { ArrowRightIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const NavbarLogged = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // provjera na mount
-  useEffect(() => {
-    const token = sessionStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  }, []);
-
-  const handleLogout = () => {
-    sessionStorage.removeItem("token");
-    setIsLoggedIn(false); // odmah refresha navbar
-    navigate("/login");
-  };
 
   return (
     <Box as="nav" bg="#f8f5f0" p="1em">
@@ -392,19 +376,6 @@ const Navbar = () => {
               >
                 KONTAKT
               </Link>
-              {isLoggedIn ? (
-                <Link
-                  href="/dashboard"
-                  color="gray.700"
-                  fontSize="xl"
-                  fontWeight="semibold"
-                  _hover={{ color: "#86654b", fontWeight: "bold" }}
-                >
-                  KONTROLNA PLOČA
-                </Link>
-              ) : (
-                <></>
-              )}
             </Flex>
           </Box>
         </GridItem>
@@ -708,19 +679,15 @@ const Navbar = () => {
                   >
                     KONTAKT
                   </Link>
-                  {isLoggedIn ? (
-                    <Link
-                      href="/dashboard"
-                      color="gray.700"
-                      fontSize="xl"
-                      fontWeight="semibold"
-                      _hover={{ color: "#86654b", fontWeight: "bold" }}
-                    >
-                      KONTROLNA PLOČA
-                    </Link>
-                  ) : (
-                    <></>
-                  )}
+                  <Link
+                    href="/dashboard"
+                    color="gray.700"
+                    fontSize="xl"
+                    fontWeight="semibold"
+                    _hover={{ color: "#86654b", fontWeight: "bold" }}
+                  >
+                    KONTROLNA PLOČA
+                  </Link>
                 </Flex>
               </Box>
             </DrawerBody>
@@ -731,4 +698,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavbarLogged;
