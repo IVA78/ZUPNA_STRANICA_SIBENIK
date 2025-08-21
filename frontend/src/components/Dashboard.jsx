@@ -25,8 +25,17 @@ const Dashboard = () => {
             naći u navigacijskoj traci.
           </Text>
           <Text>
+            Objava i uredjivanje obavijesti mogu se napraviti na stranici
+            Početna. Da bi promjene kod ažuriranja bile vidljive, potrebno je
+            osvježiti preglednik nakon potvrđivanja željenih promjena.
+          </Text>
+          <Text>
             Najava novih događanja, objavljivanje korisnih poveznica i brisanje
             istih može se napraviti na početnoj stranici.
+          </Text>
+          <Text>
+            Fotogalerija se puni automatski kod objavljivanja obavijesti
+            (željene fotografije dodati kod objavljivanja obavijesti)
           </Text>
         </Box>
         <Button

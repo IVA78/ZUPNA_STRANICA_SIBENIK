@@ -11,11 +11,12 @@ import {
   Stack,
   SimpleGrid,
   Spinner,
-  Link,
   Modal,
   ModalOverlay,
   ModalContent,
+  ModalHeader,
   ModalBody,
+  ModalFooter,
   ModalCloseButton,
   useDisclosure,
   HStack,
@@ -27,6 +28,7 @@ import {
   Input,
   Textarea,
   VStack,
+  Select,
   useToast,
 } from "@chakra-ui/react";
 
@@ -39,7 +41,27 @@ const Pocetna = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  // Za modal slike
+  const {
+    isOpen: isImageOpen,
+    onOpen: onImageOpen,
+    onClose: onImageClose,
+  } = useDisclosure();
+
+  // Za modal obavijesti
+  const {
+    isOpen: isEventOpen,
+    onOpen: onEventOpen,
+    onClose: onEventClose,
+  } = useDisclosure();
+
+  // Za modal eventa - uredjivanje
+  const {
+    isOpen: isFormOpen,
+    onOpen: onFormOpen,
+    onClose: onFormClose,
+  } = useDisclosure();
+
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [currentGallery, setCurrentGallery] = useState([]);
 
@@ -65,10 +87,43 @@ const Pocetna = () => {
     text: "",
   });
 
+  // State za obavijest
+  const [notification, setNotification] = useState({
+    title: "",
+    summary: "",
+    content: "",
+    categoryId: "",
+    coverPhoto: null,
+    galleryPhotos: [],
+  });
+
+  //State za kategorije
+  const [categories, setCategories] = useState([]);
+
+  const [formData, setFormData] = useState({
+    title: "",
+    summary: "",
+    content: "",
+  });
+
   // provjera na mount
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     setIsLoggedIn(!!token);
+  }, []);
+
+  // Dohvat kategorija s backend-a
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const res = await fetch("/api/categories");
+        const data = await res.json();
+        setCategories(data);
+      } catch (err) {
+        console.error("Greška kod dohvaćanja kategorija", err);
+      }
+    }
+    fetchCategories();
   }, []);
 
   useEffect(() => {
@@ -189,10 +244,100 @@ const Pocetna = () => {
     }
   };
 
+  const handleGalleryChange = (e) => {
+    setNotification({
+      ...notification,
+      galleryPhotos: Array.from(e.target.files),
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("title", notification.title);
+      formData.append("summary", notification.summary);
+      formData.append("content", notification.content);
+      formData.append("categoryId", notification.categoryId);
+      if (notification.coverPhoto) {
+        formData.append("coverPhoto", notification.coverPhoto);
+      }
+      notification.galleryPhotos.forEach((file, index) => {
+        formData.append("galleryPhotos", file); // backend očekuje niz
+      });
+
+      const res = await fetch("/api/notifications", {
+        method: "PUT",
+        body: formData,
+      });
+
+      if (res.ok) {
+        toast({
+          title: "Uspješno!",
+          description: "Obavijest je dodana.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        setNotification({
+          title: "",
+          summary: "",
+          content: "",
+          categoryId: "",
+          coverPhoto: null,
+          galleryPhotos: [],
+        });
+      } else {
+        throw new Error("Greška kod dodavanja obavijesti");
+      }
+    } catch (err) {
+      toast({
+        title: "Greška",
+        description: err.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
+  // inicijaliziraj formData kad se modal otvori
+  const handleOpen = () => {
+    setFormData({
+      title: event.title || "",
+      summary: event.summary || "",
+      content: event.content || "",
+    });
+    onFormOpen();
+  };
+
+  const handleSave = async (id) => {
+    try {
+      console.log(formData);
+
+      const res = await fetch(`/api/notifications/${id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        const updated = await res.json();
+        // update state-a u parent komponenti
+
+        // update state-a liste obavijesti (npr. notifications)
+
+        onFormClose();
+      }
+    } catch (err) {
+      console.error("Greška kod uređivanja eventa:", err);
+    }
+  };
+
   const openImageModal = (gallery, index) => {
     setCurrentGallery(gallery);
     setSelectedImageIndex(index);
-    onOpen();
+    onImageOpen();
   };
 
   if (loading) return <Spinner size="xl" mt={10} />;
@@ -237,6 +382,9 @@ const Pocetna = () => {
                 overflow="hidden"
                 boxShadow="md"
                 bg="white"
+                display="flex"
+                flexDirection="column"
+                justifyContent="space-between"
               >
                 {event.coverPhoto?.imageUrl && (
                   <Image
@@ -252,14 +400,14 @@ const Pocetna = () => {
                   />
                 )}
 
-                <Box p={4}>
+                <Box p={4} flex="1">
                   <Heading size="md">{event.title}</Heading>
                   <Text fontSize="sm" color="gray.600">
                     {event.date} • {event.categoryName}
                   </Text>
                   <Text mt={2}>{event.summary}</Text>
 
-                  {event.galleryPhotos.length > 0 && (
+                  {event.galleryPhotos?.length > 0 && (
                     <Stack direction="row" spacing={2} mt={4} wrap="wrap">
                       {event.galleryPhotos.slice(0, 3).map((photo, index) => (
                         <Image
@@ -279,7 +427,152 @@ const Pocetna = () => {
                       ))}
                     </Stack>
                   )}
+
+                  <Text
+                    mt={2}
+                    color="blue.500"
+                    cursor="pointer"
+                    onClick={onEventOpen}
+                  >
+                    Pročitaj cijelu obavijest
+                  </Text>
+
+                  <Modal isOpen={isEventOpen} onClose={onEventClose} size="xl">
+                    <ModalOverlay bg="blackAlpha.300" />
+                    <ModalContent>
+                      <ModalHeader>{event.title}</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <Text>{event.content}</Text>
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button onClick={onEventClose}>Zatvori</Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
                 </Box>
+
+                {isLoggedIn && (
+                  <>
+                    <Button
+                      colorScheme="red"
+                      m={4}
+                      size="sm"
+                      variant="outline"
+                      color="black"
+                      borderColor="rgba(23,24,16)"
+                      _hover={{
+                        bg: "#86654b",
+                        color: "RGBA(248, 245, 240)",
+                        fontWeight: "bold",
+                      }}
+                      onClick={() => {
+                        // inicijaliziraj formData s trenutnim vrijednostima eventa
+                        setFormData({
+                          title: event.title || "",
+                          summary: event.summary || "",
+                          content: event.content || "",
+                        });
+                        onFormOpen(); // otvara modal
+                      }}
+                    >
+                      Uredi
+                    </Button>
+
+                    <Modal isOpen={isFormOpen} onClose={onFormClose} size="xl">
+                      <ModalOverlay bg="blackAlpha.300" />
+                      <ModalContent>
+                        <ModalHeader>Uredi obavijest</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                          <FormControl mb={3}>
+                            <FormLabel>Naslov</FormLabel>
+                            <Input
+                              value={formData.title}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  title: e.target.value,
+                                })
+                              }
+                            />
+                          </FormControl>
+
+                          <FormControl mb={3}>
+                            <FormLabel>Sažetak</FormLabel>
+                            <Textarea
+                              value={formData.summary}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  summary: e.target.value,
+                                })
+                              }
+                            />
+                          </FormControl>
+
+                          <FormControl mb={3}>
+                            <FormLabel>Sadržaj</FormLabel>
+                            <Textarea
+                              value={formData.content}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  content: e.target.value,
+                                })
+                              }
+                            />
+                          </FormControl>
+                        </ModalBody>
+
+                        <ModalFooter>
+                          <Button
+                            m={4}
+                            variant="outline"
+                            color="black"
+                            borderColor="rgba(23,24,16)"
+                            _hover={{
+                              bg: "#86654b",
+                              color: "RGBA(248, 245, 240)",
+                              fontWeight: "bold",
+                            }}
+                            onClick={() => handleSave(event.id)}
+                          >
+                            Spremi
+                          </Button>
+                          <Button m={4} variant="outline" onClick={onFormClose}>
+                            Odustani
+                          </Button>
+                        </ModalFooter>
+                      </ModalContent>
+                    </Modal>
+
+                    <Button
+                      colorScheme="red"
+                      variant="outline"
+                      m={4}
+                      size="sm"
+                      onClick={async () => {
+                        try {
+                          const res = await fetch(`/api/events/${event.id}`, {
+                            method: "DELETE",
+                          });
+                          if (res.ok) {
+                            setEvents((prev) =>
+                              prev.filter((e) => e.id !== event.id)
+                            );
+                          } else {
+                            console.error("Greška kod brisanja eventa");
+                          }
+                        } catch (err) {
+                          console.error("Došlo je do greške:", err);
+                        }
+                      }}
+                    >
+                      Obriši
+                    </Button>
+                  </>
+                )}
               </Box>
             ))}
           </SimpleGrid>
@@ -432,6 +725,146 @@ const Pocetna = () => {
         >
           {/* Forma za Event */}
           <Box
+            bg="RGBA(248, 245, 240)"
+            p={4}
+            borderRadius="md"
+            mb={6}
+            boxShadow="sm"
+            marginTop="1.5em"
+          >
+            <Box
+              mx="auto"
+              mt={10}
+              p={6}
+              borderWidth={1}
+              borderRadius="lg"
+              shadow="md"
+              bg="white"
+            >
+              <Text fontSize="xl">Dodavanje nove obavijesti</Text>
+              <Text marginTop=".5em">
+                Unesite naslov, sažetak, sadržaj i odaberite kategoriju
+                obavijesti. Odaberite naslovnu sliku i galerijske slike (više
+                slika). Kliknite na gumb <strong>„Objavi”</strong> kako bi se
+                obavijest pohranila. Promjena će biti vidljiva nakon
+                osvježavanja preglednika{" "}
+                <Icon
+                  as={FiRefreshCw}
+                  ml={1}
+                  boxSize={4}
+                  verticalAlign="middle"
+                />
+              </Text>
+
+              <form onSubmit={handleSubmit}>
+                <VStack spacing={4} mt={4}>
+                  <FormControl isRequired>
+                    <FormLabel>Naslov</FormLabel>
+                    <Input
+                      type="text"
+                      placeholder="Unesite naslov"
+                      value={notification.title}
+                      onChange={(e) =>
+                        setNotification({
+                          ...notification,
+                          title: e.target.value,
+                        })
+                      }
+                    />
+                  </FormControl>
+
+                  <FormControl isRequired>
+                    <FormLabel>Sažetak</FormLabel>
+                    <Textarea
+                      placeholder="Unesite sažetak"
+                      value={notification.summary}
+                      onChange={(e) =>
+                        setNotification({
+                          ...notification,
+                          summary: e.target.value,
+                        })
+                      }
+                    />
+                  </FormControl>
+
+                  <FormControl isRequired>
+                    <FormLabel>Sadržaj</FormLabel>
+                    <Textarea
+                      placeholder="Unesite sadržaj obavijesti"
+                      value={notification.content}
+                      onChange={(e) =>
+                        setNotification({
+                          ...notification,
+                          content: e.target.value,
+                        })
+                      }
+                    />
+                  </FormControl>
+
+                  <FormControl isRequired>
+                    <FormLabel>Kategorija obavijesti</FormLabel>
+                    <Select
+                      placeholder="Odaberite kategoriju"
+                      value={notification.categoryId}
+                      onChange={(e) =>
+                        setNotification({
+                          ...notification,
+                          categoryId: e.target.value,
+                        })
+                      }
+                    >
+                      {categories.map((cat) => (
+                        <option key={cat.id} value={cat.id}>
+                          {cat.name}
+                        </option>
+                      ))}
+                    </Select>
+                  </FormControl>
+
+                  <FormControl>
+                    <FormLabel>Naslovna slika</FormLabel>
+                    <Input
+                      type="file"
+                      onChange={(e) =>
+                        setNotification({
+                          ...notification,
+                          coverPhoto: e.target.files[0],
+                        })
+                      }
+                    />
+                  </FormControl>
+
+                  <FormControl>
+                    <FormLabel>Galerijske slike</FormLabel>
+                    <Input
+                      type="file"
+                      multiple
+                      onChange={handleGalleryChange}
+                    />
+                  </FormControl>
+
+                  <Button
+                    mt={4}
+                    variant="outline"
+                    color="black"
+                    borderColor="rgba(23,24,16)"
+                    type="submit"
+                    w="full"
+                    _hover={{
+                      bg: "#86654b",
+                      color: "RGBA(248, 245, 240)",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Objavi
+                  </Button>
+                </VStack>
+              </form>
+            </Box>
+          </Box>
+
+          {/* Forma za Link */}
+          <Box
             mx="auto"
             mt={10}
             p={6}
@@ -440,7 +873,72 @@ const Pocetna = () => {
             shadow="md"
             bg="white"
           >
-            <Text fontSize="xl">Dodavanje novog eventa</Text>
+            <Text fontSize="xl">Dodavanje preporučenog sadržaja</Text>
+            <Text marginTop=".5em">
+              Za dodavanje poveznice potrebno je unijeti URL i tekst koji će se
+              prikazivati korisnicima. Kliknite na gumb{" "}
+              <strong>„Objavi”</strong> kako bi se poveznica pohranila. Promjena
+              će biti vidljiva nakon osvježavanja preglednika{" "}
+              <Icon
+                as={FiRefreshCw}
+                ml={1}
+                boxSize={4}
+                verticalAlign="middle"
+              />
+              .
+            </Text>
+
+            <form onSubmit={handleLinkSubmit}>
+              <VStack spacing={4} mt={4}>
+                <FormControl isRequired>
+                  <FormLabel>URL</FormLabel>
+                  <Input
+                    type="url"
+                    value={link.url}
+                    onChange={(e) => setLink({ ...link, url: e.target.value })}
+                    placeholder="Unesite URL"
+                  />
+                </FormControl>
+
+                <FormControl isRequired>
+                  <FormLabel>Tekst poveznice</FormLabel>
+                  <Input
+                    type="text"
+                    value={link.text}
+                    onChange={(e) => setLink({ ...link, text: e.target.value })}
+                    placeholder="Unesite tekst"
+                  />
+                </FormControl>
+
+                <Button
+                  mt={4}
+                  variant="outline"
+                  color="black"
+                  borderColor="rgba(23,24,16)"
+                  type="submit"
+                  w="full"
+                  _hover={{
+                    bg: "#86654b",
+                    color: "RGBA(248, 245, 240)",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Objavi
+                </Button>
+              </VStack>
+            </form>
+          </Box>
+
+          <Box
+            mx="auto"
+            mt={10}
+            p={6}
+            borderWidth={1}
+            borderRadius="lg"
+            shadow="md"
+            bg="white"
+          >
+            <Text fontSize="xl">Dodavanje nadolazećeg događaja</Text>
             <Text marginTop=".5em">
               Za dodavanje eventa potrebno je unijeti naslov, datum i vrijeme,
               lokaciju i opis. Nakon toga kliknite na gumb{" "}
@@ -521,79 +1019,13 @@ const Pocetna = () => {
               </VStack>
             </form>
           </Box>
-
-          {/* Forma za Link */}
-          <Box
-            mx="auto"
-            mt={10}
-            p={6}
-            borderWidth={1}
-            borderRadius="lg"
-            shadow="md"
-            bg="white"
-          >
-            <Text fontSize="xl">Dodavanje nove poveznice</Text>
-            <Text marginTop=".5em">
-              Za dodavanje poveznice potrebno je unijeti URL i tekst koji će se
-              prikazivati korisnicima. Kliknite na gumb{" "}
-              <strong>„Objavi”</strong> kako bi se poveznica pohranila. Promjena
-              će biti vidljiva nakon osvježavanja preglednika{" "}
-              <Icon
-                as={FiRefreshCw}
-                ml={1}
-                boxSize={4}
-                verticalAlign="middle"
-              />
-              .
-            </Text>
-
-            <form onSubmit={handleLinkSubmit}>
-              <VStack spacing={4} mt={4}>
-                <FormControl isRequired>
-                  <FormLabel>URL</FormLabel>
-                  <Input
-                    type="url"
-                    value={link.url}
-                    onChange={(e) => setLink({ ...link, url: e.target.value })}
-                    placeholder="Unesite URL"
-                  />
-                </FormControl>
-
-                <FormControl isRequired>
-                  <FormLabel>Tekst poveznice</FormLabel>
-                  <Input
-                    type="text"
-                    value={link.text}
-                    onChange={(e) => setLink({ ...link, text: e.target.value })}
-                    placeholder="Unesite tekst"
-                  />
-                </FormControl>
-
-                <Button
-                  mt={4}
-                  variant="outline"
-                  color="black"
-                  borderColor="rgba(23,24,16)"
-                  type="submit"
-                  w="full"
-                  _hover={{
-                    bg: "#86654b",
-                    color: "RGBA(248, 245, 240)",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Objavi
-                </Button>
-              </VStack>
-            </form>
-          </Box>
         </Box>
       ) : (
         <></>
       )}
 
       {/* Modal za prikaz slike */}
-      <Modal isOpen={isOpen} onClose={onClose} isCentered size="xl">
+      <Modal isOpen={isImageOpen} onClose={onImageClose} isCentered size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />

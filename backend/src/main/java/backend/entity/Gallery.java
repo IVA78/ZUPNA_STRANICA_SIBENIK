@@ -18,7 +18,7 @@ public class Gallery {
     @OneToOne
     private Notification notification;
 
-    @OneToMany(mappedBy = "gallery", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "gallery", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Photo> photos = new ArrayList<>();
 
     // getters/setters

@@ -21,7 +21,7 @@ public class Notification {
     @ManyToOne
     private Category category;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Photo coverPhoto; // naslovna slika
 
     @OneToOne(mappedBy = "notification", cascade = CascadeType.ALL)

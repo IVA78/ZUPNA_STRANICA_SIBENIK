@@ -10,15 +10,18 @@ public class NotificationDTO {
     private LocalDate date;
     private String categoryName;
 
+    private String content;
+
     private PhotoDTO coverPhoto;  // naslovna
     private List<PhotoDTO> galleryPhotos;  // galerijske slike
 
-    public NotificationDTO(Long id, String title, String summary, LocalDate date, String categoryName, PhotoDTO coverPhoto, List<PhotoDTO> galleryPhotos) {
+    public NotificationDTO(Long id, String title, String summary, LocalDate date, String categoryName, String content, PhotoDTO coverPhoto, List<PhotoDTO> galleryPhotos) {
         this.id = id;
         this.title = title;
         this.summary = summary;
         this.date = date;
         this.categoryName = categoryName;
+        this.content = content;
         this.coverPhoto = coverPhoto;
         this.galleryPhotos = galleryPhotos;
     }
@@ -63,6 +66,14 @@ public class NotificationDTO {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public PhotoDTO getCoverPhoto() {

@@ -40,4 +40,19 @@ public class FileUploadService {
         }
     }
 
+    public void delete(String fileUrl) {
+        try {
+            // Izvuci public_id iz URL-a
+            String[] parts = fileUrl.split("/");
+            String filename = parts[parts.length - 1];  // npr. "slika.jpg"
+            String publicId = filename.contains(".") ? filename.substring(0, filename.lastIndexOf(".")) : filename;
+
+            cloudinary.uploader().destroy(publicId, Map.of());
+        } catch (Exception e) {
+            // logiranje greške ili ponovni pokušaj
+            System.err.println("Greška prilikom brisanja s Cloudinaryja: " + e.getMessage());
+        }
+    }
+
+
 }

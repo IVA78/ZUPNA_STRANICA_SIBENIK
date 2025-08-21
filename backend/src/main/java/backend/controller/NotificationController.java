@@ -1,6 +1,7 @@
 package backend.controller;
 
 import backend.DTO.NotificationDTO;
+import backend.DTO.NotificationUpdateDTO;
 import backend.service.NotificationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,7 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/notifications")
@@ -40,6 +44,29 @@ public class NotificationController {
         }
     }
 
+    @PostMapping("/{id}")
+    public ResponseEntity<?> updateNotification(
+            @PathVariable Long id,
+            @RequestBody NotificationUpdateDTO dto
+    ) {
+        try {
+            notificationService.updateNotification(id, dto.getTitle(), dto.getSummary(), dto.getContent());
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", id);
+            response.put("message", "Obavijest ažurirana");
+
+            return ResponseEntity.ok(response);
+
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Collections.singletonMap("error", "Greška prilikom ažuriranja"));
+        }
+    }
+
     @GetMapping("/all")
     public List<NotificationDTO> getAllNotifications() {
         return notificationService.getAllNotifications();
@@ -49,5 +76,18 @@ public class NotificationController {
     public List<NotificationDTO> getNotificationsByCategory(@PathVariable Long categoryId) {
         return notificationService.getNotificationsByCategoryId(categoryId);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteNotification(@PathVariable Long id) {
+        try {
+            notificationService.deleteNotification(id);
+            return ResponseEntity.ok("Obavijest obrisana");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Greška prilikom brisanja");
+        }
+    }
+
 
 }

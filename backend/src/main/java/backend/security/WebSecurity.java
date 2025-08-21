@@ -46,7 +46,9 @@ public class WebSecurity  {
                 .requestMatchers("/api/links/**").permitAll()
                 .requestMatchers("/api/notifications/**").permitAll()
                 .requestMatchers("/api/pages/**").permitAll()
+                .requestMatchers("/api/categories/**").permitAll()
                 .requestMatchers("/conversations/**").hasRole("USER")
+
                 .anyRequest().authenticated()
         );
 

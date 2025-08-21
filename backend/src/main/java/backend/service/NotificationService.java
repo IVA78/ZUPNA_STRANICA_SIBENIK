@@ -116,9 +116,59 @@ public class NotificationService {
                 notification.getSummary(),
                 notification.getDate(),
                 notification.getCategory().getName(),
+                notification.getContent(),
                 cover,
                 galleryPhotos
         );
     }
+
+    public void updateNotification(Long id, String title, String summary, String content) {
+        Notification notification = notificationRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Obavijest ne postoji"));
+
+        if (title != null && !title.isEmpty()) {
+            notification.setTitle(title);
+        }
+        if (summary != null && !summary.isEmpty()) {
+            notification.setSummary(summary);
+        }
+        if (content != null && !content.isEmpty()) {
+            notification.setContent(content);
+        }
+
+        notificationRepo.save(notification);
+    }
+
+
+    public void deleteNotification(Long notificationId) {
+        Notification notification = notificationRepo.findById(notificationId)
+                .orElseThrow(() -> new RuntimeException("Obavijest ne postoji"));
+
+        // Brisanje naslovne slike sa cloud servisa ako postoji
+        if (notification.getCoverPhoto() != null) {
+            try {
+                fileUploadService.delete(notification.getCoverPhoto().getImageUrl());
+            } catch (Exception e) {
+                // možeš logirati grešku, ali ne prekidaj brisanje
+            }
+            photoRepo.delete(notification.getCoverPhoto());
+        }
+
+        // Brisanje galerijskih slika
+        if (notification.getGallery() != null) {
+            notification.getGallery().getPhotos().forEach(photo -> {
+                try {
+                    fileUploadService.delete(photo.getImageUrl());
+                } catch (Exception e) {
+                    // log greške
+                }
+                photoRepo.delete(photo);
+            });
+        }
+
+        // Na kraju obriši obavijest
+        notificationRepo.delete(notification);
+    }
+
 
 }
