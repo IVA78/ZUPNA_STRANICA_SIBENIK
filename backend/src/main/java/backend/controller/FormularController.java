@@ -41,5 +41,12 @@ public class FormularController {
                 .contentType(MediaType.parseMediaType(f.getFileType()))
                 .body(f.getData());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFormular(@PathVariable Long id) {
+        service.deleteById(id);
+        return ResponseEntity.noContent().build(); // 204 No Content
+    }
+
 }
 

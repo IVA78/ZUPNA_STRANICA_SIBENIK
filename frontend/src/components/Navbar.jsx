@@ -23,13 +23,11 @@ import {
 } from "@chakra-ui/react";
 import { ArrowRightIcon, HamburgerIcon } from "@chakra-ui/icons";
 
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // provjera na mount
@@ -37,12 +35,6 @@ const Navbar = () => {
     const token = sessionStorage.getItem("token");
     setIsLoggedIn(!!token);
   }, []);
-
-  const handleLogout = () => {
-    sessionStorage.removeItem("token");
-    setIsLoggedIn(false); // odmah refresha navbar
-    navigate("/login");
-  };
 
   return (
     <Box as="nav" bg="#f8f5f0" p="1em">

@@ -38,4 +38,12 @@ public class FormularService {
     public Formular getById(Long id) {
         return repo.findById(id).orElseThrow(() -> new RuntimeException("Formular not found"));
     }
+
+    public void deleteById(Long id) {
+        if (!repo.existsById(id)) {
+            throw new RuntimeException("Formular with id " + id + " not found");
+        }
+        repo.deleteById(id);
+    }
+
 }
