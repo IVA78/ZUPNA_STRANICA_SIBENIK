@@ -2,7 +2,7 @@
 import { Box, Button, Stack, Heading, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-import NavbarLogged from "./NavbarLogged";
+import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 const Dashboard = () => {
@@ -15,11 +15,19 @@ const Dashboard = () => {
 
   return (
     <>
-      <NavbarLogged></NavbarLogged>
+      <Navbar></Navbar>
       <Stack spacing={6} align="center">
         <Box p={8}>
           <Heading mb={4}> Dobrodošao u kontrolnu ploču!</Heading>
           <Text>Ovdje vidiš sadržaj samo ako si prijavljen.</Text>
+          <Text>
+            Formulari se dodaju i brišu na podstranici formulari koja se može
+            naći u navigacijskoj traci.
+          </Text>
+          <Text>
+            Najava novih događanja, objavljivanje korisnih poveznica i brisanje
+            istih može se napraviti na početnoj stranici.
+          </Text>
         </Box>
         <Button
           size="lg"
