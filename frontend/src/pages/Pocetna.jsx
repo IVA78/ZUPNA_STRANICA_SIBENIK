@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import FilterKategorija from "../components/FilterKategorija";
 
 import {
   Box,
@@ -100,6 +101,8 @@ const Pocetna = () => {
   //State za kategorije
   const [categories, setCategories] = useState([]);
 
+  const [filteredEvents, setFilteredEvents] = useState();
+
   const [formData, setFormData] = useState({
     title: "",
     summary: "",
@@ -134,6 +137,7 @@ const Pocetna = () => {
       .then((res) => res.json())
       .then((data) => {
         setEvents(data);
+        setFilteredEvents(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -334,6 +338,14 @@ const Pocetna = () => {
     }
   };
 
+  const handleFilterChange = (category) => {
+    if (!category) {
+      setFilteredEvents(events); // ako nema filtera, prikaži sve
+    } else {
+      setFilteredEvents(events.filter((e) => e.categoryName === category));
+    }
+  };
+
   const openImageModal = (gallery, index) => {
     setCurrentGallery(gallery);
     setSelectedImageIndex(index);
@@ -367,6 +379,9 @@ const Pocetna = () => {
               nadolazeće događaje naše župne zajednice.
             </Text>
           </Box>
+
+          <FilterKategorija onFilterChange={handleFilterChange} />
+
           <SimpleGrid
             columns={{ base: 1, md: 2 }}
             spacing={6}
@@ -374,7 +389,7 @@ const Pocetna = () => {
             borderRadius="md"
             padding={3}
           >
-            {events.map((event) => (
+            {filteredEvents.map((event) => (
               <Box
                 key={event.id}
                 borderWidth="1px"

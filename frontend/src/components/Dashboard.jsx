@@ -1,5 +1,15 @@
 // Dashboard.jsx
-import { Box, Button, Stack, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Stack,
+  Heading,
+  Text,
+  VStack,
+  Divider,
+  Alert,
+  AlertIcon,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 import Navbar from "./Navbar";
@@ -15,32 +25,94 @@ const Dashboard = () => {
 
   return (
     <>
-      <Navbar></Navbar>
-      <Stack spacing={6} align="center">
-        <Box p={8}>
-          <Heading mb={4}> Dobrodošao u kontrolnu ploču!</Heading>
-          <Text>Ovdje vidiš sadržaj samo ako si prijavljen.</Text>
+      <Navbar />
+      <Stack spacing={8} align="center" p={8}>
+        <Heading mb={4} textAlign="center" textTransform="uppercase">
+          Kontrolna ploča
+        </Heading>
+        <Text fontSize="lg" textAlign="center" maxW="800px">
+          Dobrodošao u kontrolnu ploču! Ovdje pristupaš svim administrativnim
+          funkcijama dostupnima samo prijavljenim korisnicima.
+        </Text>
+
+        <Alert status="info" maxW="800px" borderRadius="lg" flexWrap="wrap">
+          <AlertIcon />
+          Nakon svake promjene potrebno je osvježiti preglednik kako bi bile
+          vidljive najnovije izmjene.
+        </Alert>
+
+        <VStack spacing={6} align="stretch" maxW="800px">
+          <Box>
+            <Heading as="h3" size="md" mb={2}>
+              📑 Upravljanje formularima
+            </Heading>
+            <Text>
+              Dodavanje i brisanje formulara moguće je na podstranici{" "}
+              <b>Formulari</b>, dostupnoj u navigacijskoj traci.
+            </Text>
+          </Box>
+          <Divider />
+
+          <Box>
+            <Heading as="h3" size="md" mb={2}>
+              📰 Obavijesti
+            </Heading>
+            <Text>
+              Objava i uređivanje obavijesti vrši se izravno ovdje, na stranici{" "}
+              <b>KONTROLNA PLOČA</b>.
+            </Text>
+            <Text mt={2}>
+              Kako biste vidjeli promjene nakon uređivanja ili dodavanja
+              obavijesti, potrebno je <i>osvježiti preglednik</i>.
+            </Text>
+            <Text mt={2}>
+              Za pregled obavijesti prema temama koristite{" "}
+              <b>filter po kategoriji</b>i prikazat će se samo obavijesti iz
+              željene kategorije.
+            </Text>
+          </Box>
+          <Divider />
+
+          <Box>
+            <Heading as="h3" size="md" mb={2}>
+              📅 Najave događanja i poveznice
+            </Heading>
+            <Text>
+              Na stranici <b>Početna</b> možete:
+            </Text>
+            <ul style={{ marginLeft: "1.5em", marginTop: "0.5em" }}>
+              <li>dodati najavu novog događanja,</li>
+              <li>objaviti korisne poveznice,</li>
+              <li>obrisati postojeće najave i poveznice.</li>
+            </ul>
+          </Box>
+          <Divider />
+
+          <Box>
+            <Heading as="h3" size="md" mb={2}>
+              📷 Fotogalerija
+            </Heading>
+            <Text>
+              Galerija fotografija se automatski puni prilikom objave
+              obavijesti. Potrebno je samo dodati željene fotografije tijekom
+              objavljivanja.
+            </Text>
+          </Box>
+        </VStack>
+
+        <Box maxW="800px">
+          <Heading as="h3" size="md" mb={2}>
+            🚪 Odjava
+          </Heading>
           <Text>
-            Formulari se dodaju i brišu na podstranici formulari koja se može
-            naći u navigacijskoj traci.
-          </Text>
-          <Text>
-            Objava i uredjivanje obavijesti mogu se napraviti na stranici
-            Početna. Da bi promjene kod ažuriranja bile vidljive, potrebno je
-            osvježiti preglednik nakon potvrđivanja željenih promjena.
-          </Text>
-          <Text>
-            Najava novih događanja, objavljivanje korisnih poveznica i brisanje
-            istih može se napraviti na početnoj stranici.
-          </Text>
-          <Text>
-            Fotogalerija se puni automatski kod objavljivanja obavijesti
-            (željene fotografije dodati kod objavljivanja obavijesti)
+            Odjava se vrši izravno na ovoj stranici pod naslovom{" "}
+            <b>KONTROLNA PLOČA</b>. Klikom na gumb <b>Odjavi se</b> završava
+            tvoja sesija i vraćaš se na početnu stranicu.
           </Text>
         </Box>
+
         <Button
           size="lg"
-          mt={4}
           variant="outline"
           color="black"
           borderColor="rgba(23,24,16)"
@@ -56,7 +128,7 @@ const Dashboard = () => {
           Odjavi se
         </Button>
       </Stack>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 };
