@@ -1,8 +1,10 @@
 package backend.security;
 
+import com.cloudinary.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -39,15 +41,34 @@ public class WebSecurity  {
 
         http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
+        /*
+        * HttpMethod.GET, "/api/events" – točno mapira GET request na /api/events i dopušta pristup svima.
+        * /api/events/** – pokriva sve ostale HTTP metode (POST, DELETE, PUT) i zahtijeva ROLE_USER.
+        */
+
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/login").permitAll()
-                .requestMatchers("/api/events/**").permitAll()
-                .requestMatchers("/api/forms/**").permitAll()
-                .requestMatchers("/api/links/**").permitAll()
-                .requestMatchers("/api/notifications/**").permitAll()
-                .requestMatchers("/api/pages/**").permitAll()
-                .requestMatchers("/api/categories/**").permitAll()
-                .requestMatchers("/conversations/**").hasRole("USER")
+
+                .requestMatchers(HttpMethod.GET, "/api/events").permitAll()
+                .requestMatchers("/api/events/**").hasRole("USER")
+
+                .requestMatchers(HttpMethod.GET, "/api/forms").permitAll()
+                .requestMatchers("/api/forms/**").hasRole("USER")
+
+
+                .requestMatchers(HttpMethod.GET, "/api/links").permitAll()
+                .requestMatchers("/api/links/**").hasRole("USER")
+
+
+                .requestMatchers(HttpMethod.GET, "/api/notifications/all").permitAll()
+                .requestMatchers("/api/notifications/**").hasRole("USER")
+
+
+                .requestMatchers(HttpMethod.GET, "/api/pages/dto/**").permitAll()
+                .requestMatchers("/api/pages/**").hasRole("USER")
+
+
+                .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
 
                 .anyRequest().authenticated()
         );

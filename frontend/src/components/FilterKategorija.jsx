@@ -27,7 +27,7 @@ export default function FilterKategorija({ onFilterChange }) {
   return (
     <Box mb={4}>
       <Select
-        placeholder="Filtriraj po kategoriji"
+        placeholder="Filtriraj obavijesti po kategoriji"
         value={selected}
         onChange={handleChange}
       >
