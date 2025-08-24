@@ -392,7 +392,7 @@ const Navbar = () => {
                   fontWeight="semibold"
                   _hover={{ color: "#86654b", fontWeight: "bold" }}
                 >
-                  KONTROLNA PLOČA
+                  UPUTE
                 </Link>
               ) : (
                 <></>
@@ -708,7 +708,7 @@ const Navbar = () => {
                       fontWeight="semibold"
                       _hover={{ color: "#86654b", fontWeight: "bold" }}
                     >
-                      KONTROLNA PLOČA
+                      UPUTE
                     </Link>
                   ) : (
                     <></>

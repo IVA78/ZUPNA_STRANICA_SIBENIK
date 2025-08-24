@@ -28,11 +28,14 @@ const Dashboard = () => {
       <Navbar />
       <Stack spacing={8} align="center" p={8}>
         <Heading mb={4} textAlign="center" textTransform="uppercase">
-          Kontrolna ploča
+          UPUTE ZA PRIJAVLJENE KORISNIKE
         </Heading>
         <Text fontSize="lg" textAlign="center" maxW="800px">
-          Dobrodošao u kontrolnu ploču! Ovdje pristupaš svim administrativnim
-          funkcijama dostupnima samo prijavljenim korisnicima.
+          Dobrodošao/la!
+        </Text>
+        <Text fontSize="lg" textAlign="center" maxW="800px">
+          Ovdje pristupaš uputama o svim administrativnim funkcijama dostupnim
+          samo prijavljenim korisnicima.
         </Text>
 
         <Alert status="info" maxW="800px" borderRadius="lg" flexWrap="wrap">
