@@ -72,6 +72,8 @@ const Pocetna = () => {
   const [futureEvents, setFutureEvents] = useState([]);
   const [isFutureEventsLoading, setFutureEventsLoading] = useState(true);
 
+  const [currentNotificationId, setCurrentNotificationId] = useState(null);
+
   const toast = useToast();
 
   // State za event
@@ -346,9 +348,10 @@ const Pocetna = () => {
     }
   };
 
-  const openImageModal = (gallery, index) => {
+  const openImageModal = (gallery, index, notificationId) => {
     setCurrentGallery(gallery);
     setSelectedImageIndex(index);
+    setCurrentNotificationId(notificationId);
     onImageOpen();
   };
 
@@ -409,7 +412,9 @@ const Pocetna = () => {
                     w="100%"
                     h="200px"
                     cursor="pointer"
-                    onClick={() => openImageModal([event.coverPhoto], 0)}
+                    onClick={() =>
+                      openImageModal([event.coverPhoto], 0, event.id)
+                    }
                     transition="transform 0.2s"
                     _hover={{ transform: "scale(1.02)" }}
                   />
@@ -434,7 +439,7 @@ const Pocetna = () => {
                           borderRadius="md"
                           cursor="pointer"
                           onClick={() =>
-                            openImageModal(event.galleryPhotos, index)
+                            openImageModal(event.galleryPhotos, index, event.id)
                           }
                           transition="transform 0.2s"
                           _hover={{ transform: "scale(1.05)" }}
@@ -1059,6 +1064,51 @@ const Pocetna = () => {
                     {currentGallery[selectedImageIndex].description}
                   </Text>
                 </Box>
+
+                {/* Gumb za brisanje slike */}
+                {isLoggedIn ? (
+                  <>
+                    <Box px={4} pb={4}>
+                      <Button
+                        colorScheme="red"
+                        size="sm"
+                        onClick={async () => {
+                          if (
+                            !currentNotificationId ||
+                            selectedImageIndex === null
+                          )
+                            return;
+
+                          const photoId = currentGallery[selectedImageIndex].id;
+
+                          const res = await fetch(
+                            `/api/notifications/${currentNotificationId}/photos/${photoId}`,
+                            { method: "DELETE" }
+                          );
+
+                          if (res.ok) {
+                            setCurrentGallery((prev) =>
+                              prev.filter(
+                                (_, idx) => idx !== selectedImageIndex
+                              )
+                            );
+                            setSelectedImageIndex(null);
+                            onImageClose();
+                          } else {
+                            const err = await res.json();
+                            alert(
+                              err.error || "Greška prilikom brisanja slike"
+                            );
+                          }
+                        }}
+                      >
+                        Obriši fotografiju
+                      </Button>
+                    </Box>
+                  </>
+                ) : (
+                  <></>
+                )}
 
                 {currentGallery.length > 1 && (
                   <Stack direction="row" justify="space-between" p={4}>

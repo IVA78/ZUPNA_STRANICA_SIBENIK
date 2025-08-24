@@ -98,7 +98,9 @@ public class NotificationService {
     public NotificationDTO toDTO(Notification notification) {
         PhotoDTO cover = null;
         if (notification.getCoverPhoto() != null) {
-            cover = new PhotoDTO(notification.getCoverPhoto().getImageUrl(),
+            cover = new PhotoDTO(
+                    notification.getCoverPhoto().getId(),
+                    notification.getCoverPhoto().getImageUrl(),
                     notification.getCoverPhoto().getDescription());
         }
 
@@ -106,7 +108,10 @@ public class NotificationService {
         if (notification.getGallery() != null) {
             galleryPhotos = notification.getGallery().getPhotos()
                     .stream()
-                    .map(photo -> new PhotoDTO(photo.getImageUrl(), photo.getDescription()))
+                    .map(photo -> new PhotoDTO(
+                            photo.getId(),
+                            photo.getImageUrl(),
+                            photo.getDescription()))
                     .toList();
         }
 
@@ -169,6 +174,45 @@ public class NotificationService {
         // Na kraju obriši obavijest
         notificationRepo.delete(notification);
     }
+
+    public void deletePhotoFromNotification(Long notificationId, Long photoId) {
+        Notification notification = notificationRepo.findById(notificationId)
+                .orElseThrow(() -> new RuntimeException("Obavijest ne postoji"));
+
+        Photo photo = photoRepo.findById(photoId)
+                .orElseThrow(() -> new RuntimeException("Fotografija ne postoji"));
+
+        // Ako je naslovna slika
+        if (notification.getCoverPhoto() != null &&
+                notification.getCoverPhoto().getId().equals(photoId)) {
+            try {
+                fileUploadService.delete(photo.getImageUrl());
+            } catch (Exception e) {
+                // logirati ako treba
+            }
+            notification.setCoverPhoto(null);
+            photoRepo.delete(photo);
+            notificationRepo.save(notification);
+            return;
+        }
+
+        // Ako je u galeriji
+        if (notification.getGallery() != null &&
+                notification.getGallery().getPhotos().contains(photo)) {
+            try {
+                fileUploadService.delete(photo.getImageUrl());
+            } catch (Exception e) {
+                // logirati ako treba
+            }
+            notification.getGallery().getPhotos().remove(photo);
+            photoRepo.delete(photo);
+            notificationRepo.save(notification);
+            return;
+        }
+
+        throw new RuntimeException("Fotografija nije vezana uz ovu obavijest");
+    }
+
 
 
 }

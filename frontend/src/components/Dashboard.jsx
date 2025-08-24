@@ -70,6 +70,11 @@ const Dashboard = () => {
               <b>filter po kategoriji</b>i prikazat će se samo obavijesti iz
               željene kategorije.
             </Text>
+            <Text mt={2}>
+              Fotografije određene obavijesti mogu se obrisati na stranici{" "}
+              <b>Početna</b>. Klikom na neku od fotografija i otvaranjem
+              galerije možete naći željenu fotografiju.
+            </Text>
           </Box>
           <Divider />
 

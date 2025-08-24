@@ -89,5 +89,25 @@ public class NotificationController {
         }
     }
 
+    @DeleteMapping("/{notificationId}/photos/{photoId}")
+    public ResponseEntity<?> deletePhotoFromNotification(
+            @PathVariable Long notificationId,
+            @PathVariable Long photoId
+    ) {
+        try {
+            notificationService.deletePhotoFromNotification(notificationId, photoId);
+            return ResponseEntity.ok("Fotografija obrisana");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Collections.singletonMap("error", "Greška prilikom brisanja fotografije"));
+        }
+    }
+
+
+
+
 
 }
