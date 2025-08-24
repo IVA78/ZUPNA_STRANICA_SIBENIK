@@ -99,5 +99,47 @@ public class PageService {
                 imageUrl
         );
     }
+
+    public Page updatePage(Long id, String title, String text,
+                           MultipartFile imageFile, boolean deleteImage) throws IOException {
+
+        Page page = pageRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Stranica nije pronađena s id " + id));
+
+        // Naslov i tekst
+        if (title != null) page.setTitle(title);
+        if (text != null) page.setText(text);
+
+        // Brisanje slike ako je traženo
+        if (deleteImage) {
+            if (page.getImage() != null) {
+                photoRepository.delete(page.getImage());
+                page.setImage(null);
+            }
+        }
+
+        // Dodavanje ili ažuriranje slike
+        if (imageFile != null && !imageFile.isEmpty()) {
+            String url = fileUploadService.upload(imageFile, null, "image");
+
+            Photo photo;
+            if (page.getImage() != null) {
+                // Update postojeće slike
+                photo = page.getImage();
+                photo.setImageUrl(url);
+                photo.setDescription("Naslovna slika stranice (ažurirano)");
+            } else {
+                // Dodavanje nove slike
+                photo = new Photo();
+                photo.setImageUrl(url);
+                photo.setDescription("Naslovna slika stranice");
+            }
+            photoRepository.save(photo);
+            page.setImage(photo);
+        }
+
+        return pageRepo.save(page);
+    }
+
 }
 

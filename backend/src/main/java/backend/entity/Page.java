@@ -15,10 +15,10 @@ public class Page {
     @Lob
     private String text;
 
-    @ManyToOne
+    @OneToOne
     private Category category;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Photo image;
 
     public Page() {

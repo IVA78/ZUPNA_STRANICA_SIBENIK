@@ -9,22 +9,45 @@ import {
   Stack,
   Image,
   SimpleGrid,
+  Input,
+  Button,
+  Textarea,
   Flex,
+  IconButton,
+  useToast,
 } from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
 import PolaroidFrame from "./PolaroidFrame";
 
 const CategoryPage = ({ categoryId }) => {
   const [page, setPage] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [imageFile, setImageFile] = useState(null);
+  const [deleteImage, setDeleteImage] = useState(false);
+
   const [notifications, setNotifications] = useState([]);
   const [notifLoading, setNotifLoading] = useState(true);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const toast = useToast();
+
+  // provjera na mount
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
 
   useEffect(() => {
     fetch(`/api/pages/dto/category/${categoryId}`)
       .then((res) => res.json())
       .then((data) => {
         setPage(data);
+        setTitle(data.title);
+        setText(data.text);
         setLoading(false);
       })
       .catch((err) => {
@@ -46,33 +69,142 @@ const CategoryPage = ({ categoryId }) => {
       });
   }, [categoryId]);
 
+  const handleUpdatePage = async () => {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("text", text);
+    if (imageFile) formData.append("image", imageFile);
+    formData.append("deleteImage", deleteImage ? "true" : "false");
+
+    try {
+      const res = await fetch(`/api/pages/${page.id}`, {
+        method: "PUT",
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error("Greška pri ažuriranju stranice");
+
+      const updated = await res.json();
+      setPage(updated);
+      setDeleteImage(false);
+      setImageFile(null);
+
+      toast({
+        title: "Uspjeh",
+        description: "Stranica je uspješno ažurirana!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: "Greška",
+        description: "Došlo je do greške prilikom ažuriranja stranice.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
+    }
+  };
+
   if (loading) return <Spinner size="xl" mt={10} />;
 
   return (
     <>
-      <Box
-        borderRadius="md"
-        mx="auto"
-        p={6}
-        bg="RGBA(248, 245, 240)"
-        margin={3}
-      >
-        <Heading as="h2" size="xl">
-          {page.title}
-        </Heading>
-
-        {page.imageUrl && (
-          <PolaroidFrame imageSrc={page.imageUrl} altText={page.title} />
-        )}
-
-        <Box mt={6}>
-          <Box
-            className="page-text"
-            fontSize="md"
-            lineHeight="1.8"
-            dangerouslySetInnerHTML={{ __html: page.text }}
-          />
+      <Box>
+        <Box
+          borderRadius="md"
+          mx="auto"
+          p={6}
+          bg="RGBA(248, 245, 240)"
+          margin={3}
+        >
+          <Heading as="h2" size="xl">
+            {page.title}
+          </Heading>
+          {page.imageUrl && (
+            <PolaroidFrame imageSrc={page.imageUrl} altText={page.title} />
+          )}
+          <Box mt={6}>
+            <Box
+              className="page-text"
+              fontSize="md"
+              lineHeight="1.8"
+              dangerouslySetInnerHTML={{ __html: page.text }}
+            />
+          </Box>
         </Box>
+        {isLoggedIn && (
+          <>
+            <Box
+              borderRadius="md"
+              mx="auto"
+              p={6}
+              bg="RGBA(248, 245, 240)"
+              margin={3}
+            >
+              <Text mb={4} fontSize="md" color="gray.700">
+                Ovdje možete urediti naslov, tekst i naslovnu fotografiju
+                stranice. Ako stranica trenutno nema sliku, možete ju dodati.
+                Ako naslovna fotografija postoji, možete ju obrisati klikom na
+                ikonu kante za smeće. U slučaju brisanja, možete ponovno dodati
+                novu fotografiju.
+              </Text>
+              <Input
+                mb={3}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Naslov stranice"
+                size="lg"
+              />
+              <Textarea
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder="Tekst stranice"
+                rows={8}
+                mb={3}
+              />
+              {page.imageUrl && !deleteImage && (
+                <Flex align="center" mb={3}>
+                  <Text>Naslovna fotografija </Text>
+                  <IconButton
+                    aria-label="Obriši sliku"
+                    icon={<DeleteIcon />}
+                    ml={3}
+                    colorScheme="red"
+                    onClick={() => setDeleteImage(true)}
+                  />
+                </Flex>
+              )}
+              {!page.imageUrl || deleteImage ? (
+                <Input
+                  type="file"
+                  mb={3}
+                  onChange={(e) => setImageFile(e.target.files[0])}
+                />
+              ) : null}
+
+              <Button
+                size="lg"
+                variant="outline"
+                color="black"
+                borderColor="rgba(23,24,16)"
+                _hover={{
+                  bg: "#86654b",
+                  color: "RGBA(248, 245, 240)",
+                  fontWeight: "bold",
+                }}
+                marginTop={{ base: "1em", lg: "3em" }}
+                onClick={handleUpdatePage}
+              >
+                Spremi promjene
+              </Button>
+            </Box>
+          </>
+        )}
       </Box>
 
       {/* Obavijesti */}

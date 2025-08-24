@@ -43,17 +43,40 @@ const Dashboard = () => {
           Nakon svake promjene potrebno je osvježiti preglednik kako bi bile
           vidljive najnovije izmjene.
         </Alert>
+        <Alert status="info" maxW="800px" borderRadius="lg" flexWrap="wrap">
+          <AlertIcon />U slučaju isteka sesije (2 sata), što se može
+          manifestirati nefunkcioniranjem određenih funkcionalnosti, potrebno je
+          ponovno se prijaviti u sustav.
+        </Alert>
+        <Alert status="info" maxW="800px" borderRadius="lg" flexWrap="wrap">
+          <AlertIcon />
+          Preporuka je svim fotografijama u sustavu dodijeliti jedinstven naziv
+          kod učitavanja.
+        </Alert>
 
         <VStack spacing={6} align="stretch" maxW="800px">
+          <Divider />
+
           <Box>
             <Heading as="h3" size="md" mb={2}>
-              📑 Upravljanje formularima
+              📝 Stranice
             </Heading>
             <Text>
-              Dodavanje i brisanje formulara moguće je na podstranici{" "}
-              <b>Formulari</b>, dostupnoj u navigacijskoj traci.
+              Upravljanje stranicama moguće je na <b>podstranicama </b>,
+              dostupnima u navigacijskoj traci. Na svakoj stranici (izuzev
+              stranice Početna) možete:
+            </Text>
+            <ul style={{ marginLeft: "1.5em", marginTop: "0.5em" }}>
+              <li>urediti naslov podstranice</li>
+              <li>urediti tekst koji se nalazi na podstranici</li>
+              <li>dodati, brisati/promijeniti naslovnu fotografiju stranice</li>
+            </ul>
+            <Text mt={2}>
+              Nakon dodavanja ili uređivanja stranice, potrebno je{" "}
+              <i>osvježiti preglednik</i> kako bi se promjene prikazale.
             </Text>
           </Box>
+
           <Divider />
 
           <Box>
@@ -79,6 +102,7 @@ const Dashboard = () => {
               galerije možete naći željenu fotografiju.
             </Text>
           </Box>
+
           <Divider />
 
           <Box>
@@ -93,6 +117,17 @@ const Dashboard = () => {
               <li>objaviti korisne poveznice,</li>
               <li>obrisati postojeće najave i poveznice.</li>
             </ul>
+          </Box>
+          <Divider />
+
+          <Box>
+            <Heading as="h3" size="md" mb={2}>
+              📑 Upravljanje formularima
+            </Heading>
+            <Text>
+              Dodavanje i brisanje formulara moguće je na podstranici{" "}
+              <b>Formulari</b>, dostupnoj u navigacijskoj traci.
+            </Text>
           </Box>
           <Divider />
 
@@ -113,9 +148,9 @@ const Dashboard = () => {
             🚪 Odjava
           </Heading>
           <Text>
-            Odjava se vrši izravno na ovoj stranici pod naslovom{" "}
-            <b>KONTROLNA PLOČA</b>. Klikom na gumb <b>Odjavi se</b> završava
-            tvoja sesija i vraćaš se na početnu stranicu.
+            Odjava se vrši izravno na ovoj stranici pod naslovom <b>UPUTE</b>.
+            Klikom na gumb <b>Odjavi se</b> završava tvoja sesija i vraćaš se na
+            početnu stranicu.
           </Text>
         </Box>
 
@@ -135,7 +170,9 @@ const Dashboard = () => {
         >
           Odjavi se
         </Button>
+        <Divider />
       </Stack>
+
       <Footer />
     </>
   );
