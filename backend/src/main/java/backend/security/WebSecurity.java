@@ -61,6 +61,7 @@ public class WebSecurity  {
 
 
                 .requestMatchers(HttpMethod.GET, "/api/notifications/all").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/notifications/category/**").permitAll()
                 .requestMatchers("/api/notifications/**").hasRole("USER")
 
 

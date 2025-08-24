@@ -57,8 +57,13 @@ const Formulari = () => {
     formData.append("file", file);
 
     try {
+      const token = sessionStorage.getItem("token");
+
       const res = await fetch("/api/forms", {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`, // <-- token ovdje
+        },
         body: formData,
       });
 

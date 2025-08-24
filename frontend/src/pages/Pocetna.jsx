@@ -191,9 +191,14 @@ const Pocetna = () => {
     const payload = { ...event, datetime };
 
     try {
+      const token = sessionStorage.getItem("token");
+
       const res = await fetch("/api/events", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(payload),
       });
       if (res.ok) {
@@ -204,7 +209,13 @@ const Pocetna = () => {
           duration: 3000,
           isClosable: true,
         });
-        setEvent({ title: "", datetime: "", location: "", description: "" });
+        setEvent({
+          title: "",
+          datetime: "",
+          location: "",
+          description: "",
+          id: "",
+        });
       } else {
         throw new Error("Greška kod dodavanja eventa");
       }
@@ -222,9 +233,14 @@ const Pocetna = () => {
   const handleLinkSubmit = async (e) => {
     e.preventDefault();
     try {
+      const token = sessionStorage.getItem("token");
+
       const res = await fetch("/api/links", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(link),
       });
       if (res.ok) {
@@ -272,8 +288,13 @@ const Pocetna = () => {
         formData.append("galleryPhotos", file); // backend očekuje niz
       });
 
+      const token = sessionStorage.getItem("token");
+
       const res = await fetch("/api/notifications", {
-        method: "PUT",
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`, // <-- token ovdje
+        },
         body: formData,
       });
 
@@ -321,9 +342,14 @@ const Pocetna = () => {
     try {
       console.log(formData);
 
+      const token = sessionStorage.getItem("token");
+
       const res = await fetch(`/api/notifications/${id}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // <-- token ovdje
+        },
         body: JSON.stringify(formData),
       });
 
@@ -574,19 +600,33 @@ const Pocetna = () => {
                       size="sm"
                       onClick={async () => {
                         try {
-                          const res = await fetch(`/api/events/${event.id}`, {
-                            method: "DELETE",
-                          });
+                          const token = sessionStorage.getItem("token");
+
+                          const res = await fetch(
+                            `/api/notifications/${event.id}`,
+                            {
+                              method: "DELETE",
+                              headers: {
+                                Authorization: `Bearer ${token}`, // <-- token ovdje
+                              },
+                            }
+                          );
                           if (res.ok) {
                             setEvents((prev) =>
                               prev.filter((e) => e.id !== event.id)
                             );
+                            setFilteredEvents((prev) =>
+                              prev.filter((e) => e.id !== event.id)
+                            );
                           } else {
-                            console.error("Greška kod brisanja eventa");
+                            console.error("Greška kod brisanja obavijesti");
                           }
                         } catch (err) {
                           console.error("Došlo je do greške:", err);
                         }
+
+                        console.log(events);
+                        console.log("event id: ", event.id);
                       }}
                     >
                       Obriši
@@ -648,8 +688,13 @@ const Pocetna = () => {
                       variant="outline"
                       onClick={async () => {
                         try {
+                          const token = sessionStorage.getItem("token");
+
                           const res = await fetch(`/api/links/${link.id}`, {
                             method: "DELETE",
+                            headers: {
+                              Authorization: `Bearer ${token}`, // <-- token ovdje
+                            },
                           });
                           if (res.ok) {
                             setLinks((prev) =>
@@ -710,8 +755,13 @@ const Pocetna = () => {
                       mt={2}
                       onClick={async () => {
                         try {
+                          const token = sessionStorage.getItem("token");
+
                           const res = await fetch(`/api/events/${event.id}`, {
                             method: "DELETE",
+                            headers: {
+                              Authorization: `Bearer ${token}`, // <-- token ovdje
+                            },
                           });
                           if (res.ok) {
                             setFutureEvents((prev) =>
@@ -1081,9 +1131,19 @@ const Pocetna = () => {
 
                           const photoId = currentGallery[selectedImageIndex].id;
 
+                          const token = sessionStorage.getItem("token");
+
                           const res = await fetch(
                             `/api/notifications/${currentNotificationId}/photos/${photoId}`,
-                            { method: "DELETE" }
+                            {
+                              method: "DELETE",
+                              headers: {
+                                "Content-Type": "application/json",
+                                Authorization: `Bearer ${sessionStorage.getItem(
+                                  "token"
+                                )}`,
+                              },
+                            }
                           );
 
                           if (res.ok) {

@@ -43,7 +43,7 @@ const Footer = () => {
       }
 
       const data = await response.json();
-      console.log("Uspješna prijava:", data.token);
+
       // spremi token
       sessionStorage.setItem("token", data.token);
 

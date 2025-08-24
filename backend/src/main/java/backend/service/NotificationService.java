@@ -10,6 +10,7 @@ import backend.entity.Photo;
 import backend.repository.CategoryRepository;
 import backend.repository.NotificationRepository;
 import backend.repository.PhotoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -145,30 +146,36 @@ public class NotificationService {
     }
 
 
+    @Transactional
     public void deleteNotification(Long notificationId) {
         Notification notification = notificationRepo.findById(notificationId)
                 .orElseThrow(() -> new RuntimeException("Obavijest ne postoji"));
 
-        // Brisanje naslovne slike sa cloud servisa ako postoji
+        // Brisanje naslovne slike
         if (notification.getCoverPhoto() != null) {
             try {
                 fileUploadService.delete(notification.getCoverPhoto().getImageUrl());
             } catch (Exception e) {
-                // možeš logirati grešku, ali ne prekidaj brisanje
+                // log greške
             }
-            photoRepo.delete(notification.getCoverPhoto());
+            notification.setCoverPhoto(null); // ukloni FK prije brisanja
         }
 
-        // Brisanje galerijskih slika
+        // Brisanje galerije i svih fotografija
         if (notification.getGallery() != null) {
-            notification.getGallery().getPhotos().forEach(photo -> {
-                try {
-                    fileUploadService.delete(photo.getImageUrl());
-                } catch (Exception e) {
-                    // log greške
+            Gallery gallery = notification.getGallery();
+            if (gallery.getPhotos() != null) {
+                for (Photo photo : gallery.getPhotos()) {
+                    try {
+                        fileUploadService.delete(photo.getImageUrl());
+                    } catch (Exception e) {
+                        // log greške
+                    }
+                    photoRepo.delete(photo);
                 }
-                photoRepo.delete(photo);
-            });
+                gallery.getPhotos().clear();
+            }
+            notification.setGallery(null); // ukloni FK prije brisanja
         }
 
         // Na kraju obriši obavijest

@@ -77,8 +77,13 @@ const CategoryPage = ({ categoryId }) => {
     formData.append("deleteImage", deleteImage ? "true" : "false");
 
     try {
+      const token = sessionStorage.getItem("token");
+
       const res = await fetch(`/api/pages/${page.id}`, {
         method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`, // <-- token ovdje
+        },
         body: formData,
       });
 
