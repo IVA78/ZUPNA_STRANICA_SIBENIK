@@ -12,7 +12,6 @@ public class Page {
 
     private String title;
 
-    @Lob
     private String text;
 
     @OneToOne

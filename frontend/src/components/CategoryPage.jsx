@@ -180,6 +180,33 @@ const CategoryPage = ({ categoryId }) => {
                 Ako naslovna fotografija postoji, možete ju obrisati klikom na
                 ikonu kante za smeće. U slučaju brisanja, možete ponovno dodati
                 novu fotografiju.
+                <br></br>
+                <b>Upute za autora teksta:</b>
+                <ul style={{ marginLeft: "2em" }}>
+                  <li>
+                    <code>&lt;p&gt; ... &lt;/p&gt;</code> – koristi se za
+                    označavanje pasusa, tj. za grupiranje jednog ili više
+                    rečenica koje pripadaju zajedno.
+                  </li>
+                  <li>
+                    <code>&lt;br&gt;</code> – koristi se za umetanje prijeloma
+                    linije unutar pasusa, bez stvaranja novog pasusa.
+                  </li>
+                  <li>
+                    <code>&lt;ul&gt;</code> i <code>&lt;li&gt;</code> – za
+                    navođenje popisa stavki.
+                  </li>
+                  <li>
+                    <code>&lt;b&gt;</code> ili <code>&lt;strong&gt;</code> – za
+                    isticanje teksta (bold).
+                  </li>
+                  <li>
+                    <b>
+                      HTML tagove koristite samo unutar polja za tekst kako bi
+                      se sadržaj pravilno prikazao.{" "}
+                    </b>
+                  </li>
+                </ul>
               </Text>
               <Input
                 mb={3}

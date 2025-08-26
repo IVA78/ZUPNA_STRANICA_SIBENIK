@@ -1,30 +1,31 @@
-INSERT INTO Category (name) VALUES ('Povijest župe');
-INSERT INTO Category (name) VALUES ('Sv. Petar');
-INSERT INTO Category (name) VALUES ('Raspored bogoslužja');
-INSERT INTO Category (name) VALUES ('Župna kateheza za odrasle');
-INSERT INTO Category (name) VALUES ('Dječji zbor');
-INSERT INTO Category (name) VALUES ('Župni pjevački zbor');
-INSERT INTO Category (name) VALUES ('Župno pastoralno i ekonomsko vijeće');
-INSERT INTO Category (name) VALUES ('Pobožnosti');
-INSERT INTO Category (name) VALUES ('Krštenje');
-INSERT INTO Category (name) VALUES ('Sveta Pričest');
-INSERT INTO Category (name) VALUES ('Sveta Potvrda');
-INSERT INTO Category (name) VALUES ('Euharistija');
-INSERT INTO Category (name) VALUES ('Ispovijed');
-INSERT INTO Category (name) VALUES ('Bolesničko pomazanje');
-INSERT INTO Category (name) VALUES ('Ženidba');
-INSERT INTO Category (name) VALUES ('Sveti red');
-INSERT INTO Category (name) VALUES ('Blagoslov obitelji');
-INSERT INTO Category (name) VALUES ('Sprovod');
-INSERT INTO Category (name) VALUES ('Hodočašća');
-INSERT INTO Category (name) VALUES ('Župni Caritas');
-INSERT INTO Category (name) VALUES ('Ministranti');
-INSERT INTO Category (name) VALUES ('Mladi');
-INSERT INTO Category (name) VALUES ('Kršćansko kazalište župe sv. Petra');
+INSERT INTO Category (id, name) VALUES (1, 'Povijest župe');
+INSERT INTO Category (id, name) VALUES (2, 'Sv. Petar');
+INSERT INTO Category (id, name) VALUES (3, 'Raspored bogoslužja');
+INSERT INTO Category (id, name) VALUES (4, 'Župna kateheza za odrasle');
+INSERT INTO Category (id, name) VALUES (5, 'Dječji zbor');
+INSERT INTO Category (id, name) VALUES (6, 'Župni pjevački zbor');
+INSERT INTO Category (id, name) VALUES (7, 'Župno pastoralno i ekonomsko vijeće');
+INSERT INTO Category (id, name) VALUES (8, 'Pobožnosti');
+INSERT INTO Category (id, name) VALUES (9, 'Krštenje');
+INSERT INTO Category (id, name) VALUES (10, 'Sveta Pričest');
+INSERT INTO Category (id, name) VALUES (11, 'Sveta Potvrda');
+INSERT INTO Category (id, name) VALUES (12, 'Euharistija');
+INSERT INTO Category (id, name) VALUES (13, 'Ispovijed');
+INSERT INTO Category (id, name) VALUES (14, 'Bolesničko pomazanje');
+INSERT INTO Category (id, name) VALUES (15, 'Ženidba');
+INSERT INTO Category (id, name) VALUES (16, 'Sveti red');
+INSERT INTO Category (id, name) VALUES (17, 'Blagoslov obitelji');
+INSERT INTO Category (id, name) VALUES (18, 'Sprovod');
+INSERT INTO Category (id, name) VALUES (19, 'Hodočašća');
+INSERT INTO Category (id, name) VALUES (20, 'Župni Caritas');
+INSERT INTO Category (id, name) VALUES (21, 'Ministranti');
+INSERT INTO Category (id, name) VALUES (22, 'Mladi');
+INSERT INTO Category (id, name) VALUES (23, 'Kršćansko kazalište župe sv. Petra');
+
 
 INSERT INTO korisnik (id, korisnickoime, tipKorisnika, email, lozinka, adresa) VALUES (1, 'iva', 'USER', 'admin@example.com', '$2a$12$Y3XC4LI0nkr6kLnt/YI75O8Tzd/IHR2HGol/Dt.VQ/T0jjzvopGia', 'Ulica 1');
 
-INSERT INTO korisnik (id, korisnickoime, tipKorisnika, email, lozinka, adresa) VALUES (2, 'ana', 'USER', 'user1@example.com', '$2a$12$Y3XC4LI0nkr6kLnt/YI75O8Tzd/IHR2HGol/Dt.VQ/T0jjzvopGia', 'Ulica 2');
+INSERT INTO korisnik (id, korisnickoime, tipKorisnika, email, lozinka, adresa) VALUES (2, 'zeljko', 'USER', 'user1@example.com', '$2a$12$Y3XC4LI0nkr6kLnt/YI75O8Tzd/IHR2HGol/Dt.VQ/T0jjzvopGia', 'Ulica 2');
 
 INSERT INTO Pages ( title, text, category_id, image_id) VALUES ('POVIJEST ŽUPE', 'Privremeni tekst', 1, NULL );
 
