@@ -113,8 +113,31 @@ const Pocetna = () => {
 
   // provjera na mount
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
-    setIsLoggedIn(!!token);
+    async function checkLogin() {
+      const token = sessionStorage.getItem("token");
+      if (!token) {
+        setIsLoggedIn(false);
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/auth/verify", {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (res.ok) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+          sessionStorage.removeItem("token"); // očisti nevažeći token
+        }
+      } catch (err) {
+        setIsLoggedIn(false);
+      }
+    }
+
+    checkLogin();
   }, []);
 
   // Dohvat kategorija s backend-a

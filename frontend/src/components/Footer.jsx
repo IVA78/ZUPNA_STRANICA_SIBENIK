@@ -49,7 +49,7 @@ const Footer = () => {
 
       onClose();
 
-      navigate("/dashboard");
+      navigate("/upute");
     } catch (error) {
       console.error("Greška prilikom prijave:", error);
     }

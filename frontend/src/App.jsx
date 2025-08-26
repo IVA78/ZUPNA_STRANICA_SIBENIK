@@ -61,7 +61,7 @@ function App() {
         <Route path="/kazaliste" element={<Mladi />} />
 
         <Route
-          path="/dashboard"
+          path="/upute"
           element={
             <ProtectedRoute>
               <Dashboard />
