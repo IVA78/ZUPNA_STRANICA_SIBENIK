@@ -5,7 +5,7 @@ module.exports = function (app) {
     app.use(
       "/api",
       createProxyMiddleware({
-        target: "http://localhost:8080",
+        target: "https://zupna-stranica-sibenik-b.onrender.com",
         changeOrigin: true,
       })
     );

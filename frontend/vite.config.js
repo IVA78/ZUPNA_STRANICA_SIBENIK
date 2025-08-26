@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": "http://localhost:8080", // Proxy preusmjerava "/api" na backend
+      "/api": "https://zupna-stranica-sibenik-b.onrender.com", // Proxy preusmjerava "/api" na backend
     },
   },
 });
