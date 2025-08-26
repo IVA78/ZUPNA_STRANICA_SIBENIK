@@ -25,6 +25,8 @@ import { ArrowRightIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 import { useEffect, useState } from "react";
 
+import logo from "../assets/logo.jpg";
+
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -69,7 +71,7 @@ const Navbar = () => {
           marginLeft={2}
         >
           <Image
-            src="src\assets\logo.jpg"
+            src={logo}
             alt="Logo"
             maxWidth={{ base: "3em", lg: "10em", xl: "10em" }}
             maxHeight={{ base: "3em", lg: "5em", xl: "5em" }}

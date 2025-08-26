@@ -21,6 +21,8 @@ import {
 } from "@chakra-ui/react";
 import PolaroidFrame from "../components/PolaroidFrame";
 
+import crkva from "../assets/crkva.jpg";
+
 const Kontakt = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -94,10 +96,7 @@ const Kontakt = () => {
           <Text fontSize="xl">
             Ovdje možete pronaći informacije o župi i kontakt podatke.
           </Text>
-          <PolaroidFrame
-            imageSrc="src\assets\crkva.jpg"
-            altText="Župa sv. Petra"
-          />
+          <PolaroidFrame imageSrc={crkva} altText="Župa sv. Petra" />
         </Box>
 
         <Box
