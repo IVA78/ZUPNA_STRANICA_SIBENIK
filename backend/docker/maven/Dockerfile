@@ -25,4 +25,4 @@ COPY --from=builder target/*.jar /app.jar
 EXPOSE 8080
 
 # Naredba kojom se pokrece aplikacija
-ENTRYPOINT ["java", "-jar", "/app.jar", "--spring.profiles.active=prod"]
+ENTRYPOINT ["java", "-jar", "/app.jar"]
