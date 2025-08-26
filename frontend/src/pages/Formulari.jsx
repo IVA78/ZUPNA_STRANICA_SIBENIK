@@ -84,7 +84,7 @@ const Formulari = () => {
     try {
       const token = sessionStorage.getItem("token");
 
-      const res = await fetch("/api/forms", {
+      const res = await fetch(`${API_URL}/api/forms`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`, // <-- token ovdje
