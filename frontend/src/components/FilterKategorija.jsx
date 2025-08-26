@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Select, Box } from "@chakra-ui/react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function FilterKategorija({ onFilterChange }) {
   const [categories, setCategories] = useState([]);
   const [selected, setSelected] = useState("");
@@ -8,7 +10,7 @@ export default function FilterKategorija({ onFilterChange }) {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const res = await fetch("/api/categories");
+        const res = await fetch(`${API_URL}/api/categories`);
         const data = await res.json();
         setCategories(data);
       } catch (err) {

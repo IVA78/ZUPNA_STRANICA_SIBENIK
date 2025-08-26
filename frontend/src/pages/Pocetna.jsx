@@ -36,6 +36,8 @@ import {
 import { IoShareSocialSharp } from "react-icons/io5";
 import { FiRefreshCw } from "react-icons/fi";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Pocetna = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -121,7 +123,7 @@ const Pocetna = () => {
       }
 
       try {
-        const res = await fetch("/api/auth/verify", {
+        const res = await fetch(`${API_URL}/api/auth/verify`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -144,7 +146,7 @@ const Pocetna = () => {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const res = await fetch("/api/categories");
+        const res = await fetch(`${API_URL}/api/categories`);
         const data = await res.json();
         setCategories(data);
       } catch (err) {
@@ -155,7 +157,7 @@ const Pocetna = () => {
   }, []);
 
   useEffect(() => {
-    fetch("/api/notifications/all", {
+    fetch(`${API_URL}/api/notifications/all`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -172,7 +174,7 @@ const Pocetna = () => {
   }, []);
 
   useEffect(() => {
-    fetch("/api/links", {
+    fetch(`${API_URL}/api/links`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -188,7 +190,7 @@ const Pocetna = () => {
   }, []);
 
   useEffect(() => {
-    fetch("/api/events", {
+    fetch(`${API_URL}/api/events`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -216,7 +218,7 @@ const Pocetna = () => {
     try {
       const token = sessionStorage.getItem("token");
 
-      const res = await fetch("/api/events", {
+      const res = await fetch(`${API_URL}/api/events`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -258,7 +260,7 @@ const Pocetna = () => {
     try {
       const token = sessionStorage.getItem("token");
 
-      const res = await fetch("/api/links", {
+      const res = await fetch(`${API_URL}/api/links`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -313,7 +315,7 @@ const Pocetna = () => {
 
       const token = sessionStorage.getItem("token");
 
-      const res = await fetch("/api/notifications", {
+      const res = await fetch(`${API_URL}/api/notifications`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`, // <-- token ovdje
@@ -367,7 +369,7 @@ const Pocetna = () => {
 
       const token = sessionStorage.getItem("token");
 
-      const res = await fetch(`/api/notifications/${id}`, {
+      const res = await fetch(`${API_URL}/api/notifications/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -626,7 +628,7 @@ const Pocetna = () => {
                           const token = sessionStorage.getItem("token");
 
                           const res = await fetch(
-                            `/api/notifications/${event.id}`,
+                            `${API_URL}/api/notifications/${event.id}`,
                             {
                               method: "DELETE",
                               headers: {
@@ -713,12 +715,15 @@ const Pocetna = () => {
                         try {
                           const token = sessionStorage.getItem("token");
 
-                          const res = await fetch(`/api/links/${link.id}`, {
-                            method: "DELETE",
-                            headers: {
-                              Authorization: `Bearer ${token}`, // <-- token ovdje
-                            },
-                          });
+                          const res = await fetch(
+                            `${API_URL}/api/links/${link.id}`,
+                            {
+                              method: "DELETE",
+                              headers: {
+                                Authorization: `Bearer ${token}`, // <-- token ovdje
+                              },
+                            }
+                          );
                           if (res.ok) {
                             setLinks((prev) =>
                               prev.filter((l) => l.id !== link.id)
@@ -780,12 +785,15 @@ const Pocetna = () => {
                         try {
                           const token = sessionStorage.getItem("token");
 
-                          const res = await fetch(`/api/events/${event.id}`, {
-                            method: "DELETE",
-                            headers: {
-                              Authorization: `Bearer ${token}`, // <-- token ovdje
-                            },
-                          });
+                          const res = await fetch(
+                            `${API_URL}/api/events/${event.id}`,
+                            {
+                              method: "DELETE",
+                              headers: {
+                                Authorization: `Bearer ${token}`, // <-- token ovdje
+                              },
+                            }
+                          );
                           if (res.ok) {
                             setFutureEvents((prev) =>
                               prev.filter((e) => e.id !== event.id)
@@ -1157,7 +1165,7 @@ const Pocetna = () => {
                           const token = sessionStorage.getItem("token");
 
                           const res = await fetch(
-                            `/api/notifications/${currentNotificationId}/photos/${photoId}`,
+                            `${API_URL}/api/notifications/${currentNotificationId}/photos/${photoId}`,
                             {
                               method: "DELETE",
                               headers: {

@@ -22,6 +22,8 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Footer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [username, setUsername] = useState("");
@@ -30,7 +32,7 @@ const Footer = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch(`${API_URL}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

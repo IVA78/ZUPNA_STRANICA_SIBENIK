@@ -27,6 +27,8 @@ import { useEffect, useState } from "react";
 
 import logo from "../assets/logo.jpg";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -42,7 +44,7 @@ const Navbar = () => {
       }
 
       try {
-        const res = await fetch("/api/auth/verify", {
+        const res = await fetch(`${API_URL}/api/auth/verify`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });

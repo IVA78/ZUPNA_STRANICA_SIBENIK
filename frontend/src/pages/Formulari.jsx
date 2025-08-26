@@ -18,6 +18,8 @@ import {
 import { useEffect, useState } from "react";
 import { FiRefreshCw } from "react-icons/fi";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Formulari = () => {
   const [formulari, setFormulari] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,7 +37,7 @@ const Formulari = () => {
       }
 
       try {
-        const res = await fetch("/api/auth/verify", {
+        const res = await fetch(`${API_URL}/api/auth/verify`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -55,7 +57,7 @@ const Formulari = () => {
   }, []);
 
   useEffect(() => {
-    fetch("/api/forms")
+    fetch(`${API_URL}/api/forms`)
       .then((res) => res.json())
       .then((data) => setFormulari(data))
       .catch((err) => console.error("Greška pri dohvaćanju formulara:", err));

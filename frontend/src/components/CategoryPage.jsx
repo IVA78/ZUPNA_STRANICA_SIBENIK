@@ -19,6 +19,8 @@ import {
 import { DeleteIcon } from "@chakra-ui/icons";
 import PolaroidFrame from "./PolaroidFrame";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const CategoryPage = ({ categoryId }) => {
   const [page, setPage] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -45,7 +47,7 @@ const CategoryPage = ({ categoryId }) => {
       }
 
       try {
-        const res = await fetch("/api/auth/verify", {
+        const res = await fetch(`${API_URL}/api/auth/verify`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -65,7 +67,7 @@ const CategoryPage = ({ categoryId }) => {
   }, []);
 
   useEffect(() => {
-    fetch(`/api/pages/dto/category/${categoryId}`)
+    fetch(`${API_URL}/api/pages/dto/category/${categoryId}`)
       .then((res) => res.json())
       .then((data) => {
         setPage(data);
@@ -80,7 +82,7 @@ const CategoryPage = ({ categoryId }) => {
   }, [categoryId]);
 
   useEffect(() => {
-    fetch(`/api/notifications/category/${categoryId}`)
+    fetch(`${API_URL}/api/notifications/category/${categoryId}`)
       .then((res) => res.json())
       .then((data) => {
         setNotifications(data);
@@ -102,7 +104,7 @@ const CategoryPage = ({ categoryId }) => {
     try {
       const token = sessionStorage.getItem("token");
 
-      const res = await fetch(`/api/pages/${page.id}`, {
+      const res = await fetch(`${API_URL}/api/pages/${page.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`, // <-- token ovdje

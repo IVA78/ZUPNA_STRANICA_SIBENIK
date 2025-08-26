@@ -18,6 +18,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Fotogalerija = () => {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,7 +28,7 @@ const Fotogalerija = () => {
   const [currentGallery, setCurrentGallery] = useState([]);
 
   useEffect(() => {
-    fetch("/api/notifications/all")
+    fetch(`${API_URL}/api/notifications/all`)
       .then((res) => res.json())
       .then((data) => {
         setNotifications(data);
