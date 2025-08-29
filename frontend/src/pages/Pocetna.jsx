@@ -35,6 +35,7 @@ import {
 
 import { IoShareSocialSharp } from "react-icons/io5";
 import { FiRefreshCw } from "react-icons/fi";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 import svpetar from "../assets/svpetar.jpg";
 
@@ -717,6 +718,22 @@ const Pocetna = () => {
         >
           {/* Linkovi */}
           <Heading size="md" margin={2}>
+            Raspored bogoslužja
+          </Heading>
+          <ChakraLink
+            href="/raspored-bogosluzja"
+            color="teal.800"
+            fontWeight="medium"
+            _hover={{ textDecoration: "underline" }}
+          >
+            <HStack spacing={2}>
+              <FaRegCalendarAlt />
+              <Text>Pogledaj ovdje</Text>
+            </HStack>
+          </ChakraLink>
+
+          {/* Linkovi */}
+          <Heading size="md" margin={2} marginTop="1em">
             Preporučeni sadržaj
           </Heading>
 
@@ -786,7 +803,7 @@ const Pocetna = () => {
           )}
 
           {/* Dogadjaji */}
-          <Heading size="md" margin={2}>
+          <Heading size="md" margin={2} marginTop="1em">
             Nadolazeći događaji
           </Heading>
 
