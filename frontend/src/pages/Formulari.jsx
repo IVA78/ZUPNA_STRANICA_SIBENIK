@@ -95,7 +95,7 @@ const Formulari = () => {
       if (res.ok) {
         toast({
           title: "Uspješno!",
-          description: "Formular je poslan.",
+          description: "Formular je objavljen.",
           status: "success",
           duration: 3000,
           isClosable: true,

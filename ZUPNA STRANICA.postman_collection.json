@@ -1,0 +1,1080 @@
+{
+	"info": {
+		"_postman_id": "80adbbcc-a9db-4ba5-8c2a-5fdbab7a7d7c",
+		"name": "ZUPNA STRANICA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30628262"
+	},
+	"item": [
+		{
+			"name": "test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"iva\",\r\n  \"password\": \"lozinka\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add notification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Prva pričest 2025",
+							"description": "Naslov obavijesti",
+							"type": "text"
+						},
+						{
+							"key": "summary",
+							"value": "Održana je pričest",
+							"description": "Kratki opis",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "Tekst obavijesti...",
+							"description": "Sadržaj",
+							"type": "text"
+						},
+						{
+							"key": "categoryId",
+							"value": "2",
+							"description": "ID kategorije (broj)",
+							"type": "text"
+						},
+						{
+							"key": "coverPhoto",
+							"description": "Naslovna slika",
+							"type": "file",
+							"src": "postman-cloud:///1f0688f6-2187-4f30-bc51-522a9e91997c"
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Prva slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Downloads/supper-2610875_1280.jpg"
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Druga slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Downloads/logo.jpg"
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Treca slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Downloads/logo.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/notifications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notifications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete notification",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Prva pričest 2025",
+							"description": "Naslov obavijesti",
+							"type": "text"
+						},
+						{
+							"key": "summary",
+							"value": "Održana je pričest",
+							"description": "Kratki opis",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "Tekst obavijesti...",
+							"description": "Sadržaj",
+							"type": "text"
+						},
+						{
+							"key": "categoryId",
+							"value": "2",
+							"description": "ID kategorije (broj)",
+							"type": "text"
+						},
+						{
+							"key": "coverPhoto",
+							"description": "Naslovna slika",
+							"type": "file",
+							"src": "postman-cloud:///1f0688f6-2187-4f30-bc51-522a9e91997c"
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Prva slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Downloads/supper-2610875_1280.jpg"
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Druga slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Downloads/logo.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/notifications/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notifications",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add notification Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Prva pričest 2025",
+							"description": "Naslov obavijesti",
+							"type": "text"
+						},
+						{
+							"key": "summary",
+							"value": "Održana je pričest",
+							"description": "Kratki opis",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "Tekst obavijesti...",
+							"description": "Sadržaj",
+							"type": "text"
+						},
+						{
+							"key": "categoryId",
+							"value": "1",
+							"description": "ID kategorije (broj)",
+							"type": "text"
+						},
+						{
+							"key": "coverPhoto",
+							"description": "Naslovna slika",
+							"type": "file",
+							"src": "postman-cloud:///1f0688f6-2187-4f30-bc51-522a9e91997c"
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Prva slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-16 203152.png"
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Druga slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-19 163815.png"
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Treca slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-12 201029.png"
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Cetvrtka slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-12 200803.png"
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Peta slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-11 204148.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/notifications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notifications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add notification Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Prva pričest 2025",
+							"description": "Naslov obavijesti",
+							"type": "text"
+						},
+						{
+							"key": "summary",
+							"value": "Održana je pričest",
+							"description": "Kratki opis",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "Tekst obavijesti...",
+							"description": "Sadržaj",
+							"type": "text"
+						},
+						{
+							"key": "categoryId",
+							"value": "1",
+							"description": "ID kategorije (broj)",
+							"type": "text"
+						},
+						{
+							"key": "coverPhoto",
+							"description": "Naslovna slika",
+							"type": "file",
+							"src": "postman-cloud:///1f0688f6-2187-4f30-bc51-522a9e91997c"
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Prva slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Downloads/supper-2610875_1280.jpg"
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Druga slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Downloads/logo.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/notifications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notifications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add notification Copy 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Prva pričest 2025",
+							"description": "Naslov obavijesti",
+							"type": "text"
+						},
+						{
+							"key": "summary",
+							"value": "Održana je pričest",
+							"description": "Kratki opis",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "Tekst obavijesti...",
+							"description": "Sadržaj",
+							"type": "text"
+						},
+						{
+							"key": "categoryId",
+							"value": "1",
+							"description": "ID kategorije (broj)",
+							"type": "text"
+						},
+						{
+							"key": "coverPhoto",
+							"description": "Naslovna slika",
+							"type": "file",
+							"src": "postman-cloud:///1f0688f6-2187-4f30-bc51-522a9e91997c",
+							"disabled": true
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Prva slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Downloads/supper-2610875_1280.jpg",
+							"disabled": true
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Druga slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Downloads/logo.jpg",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/notifications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notifications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all notifications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/notifications/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notifications",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get notifications by cat ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/notifications/category/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"notifications",
+						"category",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post link",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"url\": \"https://youtu.be/wmAlXly_Sac?si=MUCZrJ0RyRUd5nWT\",\r\n  \"text\": \"Pogledaj video\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/links",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"links"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get links",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"url\": \"https://example.com/video.mp4\",\r\n  \"text\": \"Pogledaj video\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/links",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"links"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete link",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"url\": \"https://example.com/video.mp4\",\r\n  \"text\": \"Pogledaj video\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/links/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"links",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post event",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Sveta misa za mlade\",\r\n  \"datetime\": \"2025-08-15T18:00:00\",\r\n  \"location\": \"Crkva sv. Marka, dvorana\",\r\n  \"description\": \"Susret mladih i misa koju predvodi fra Ivan.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get event",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete event",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/events/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"events",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post form",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Prijavnica za krizmu",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/38595/Downloads/UP00_2022.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/forms",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"forms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete form",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Prijavnica za krizmu",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/38595/Downloads/CV (1).pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/forms/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"forms",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all forms",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Prijavnica za krizmu",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/38595/Downloads/CV.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/forms",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"forms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "download form",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Prijavnica za krizmu",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/38595/Downloads/CV.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/forms/1/download",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"forms",
+						"1",
+						"download"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pages post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Sv. Petar",
+							"description": "Naslov obavijesti",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "<p>\nSveti Petar Apostol bio je galilejski ribar, brat Andrijin. Zajedno sa Jakovom i Ivanom bio je s Kristom u prisnijem odnosu od ostalih učenika. Sveti Petar je imao položaj predstavnika – često govori u ime Apostola.\n</p>\n<br>\n<p>\nSveti Matej u svom Evanđelju bilježi kako su Petar i Andrija pozvani u apostolsku službu:<br>\n“Kad je Isus prolazio pokraj Galilejskog mora, opazi dvojicu braće, Šimuna, zvanog Petar, i brata mu Andriju, kako bacaju mrežu u more – bili su, naime, ribari – pa im reče: – Pođite za mnom, i učinit ću vas ribarima ljudi! Oni istoga časa ostave mreže i pođu za njim” (Mt 4,18-20).\n</p>\n\n<p>\nOd trenutka svoga poziva Petar se često spominje u Evanđeljima. U Cezareji je Petar odgovorio na Kristovo pitanje: “A vi, što vi kažete, tko sam Ja?” – izričući svoju veliku ispovijest: “Ti si Krist – Pomazanik, Sin Boga živoga!” Isus mu nato odgovori: “Ti si Petar – Stijena i na toj stijeni sagradit ću Crkvu svoju, i vrata paklena neće je nadvladati. Tebi ću dati ključeve kraljevstva nebeskoga…” (Mt 16,15-19).\n</p>\n\n<p>\nU izvještajima Evanđelja o Kristovoj muci svima je poznato Petrovo obećanje vjernosti, njegovo nijekanje Krista i njegovo iskreno kajanje. Petrov život poslije Isusova uzašašća opisuje se u Djelima Apostolskim. Pronio je Spasiteljevu riječ širom Male Azije, usredotočujući svoju djelatnost oko Antiohije. Kasnije je pošao u Rim, gdje je utemeljio prvu kršćansku zajednicu. Svoje djelovanje u Rimu nastavio je oko dvadeset i pet godina.\n</p>\n\n<p>\nNo bio je optužen da je bacio uroke na jednu od carevih ljubavnica. Na traženje svojih kršćanskih pristaša Petar odluči pobjeći iz grada, no na putu mu se ukaza Isus. Petar ga upita: “Kamo ćeš, Gospodine?” Isus mu odvrati: “U Rim, da me opet razapnu!” Petar je to shvatio kao znak Božje volje, vratio se u Rim i bio uhićen i bačen u tamnicu. Naposljetku je bio išiban bičevima i raspet naglavce na križ. To je učinjeno na njegovo traženje, jer nije sebe smatrao dostojnim da umre jednako kao Krist.\n</p>\n\n<p>\nNa većini slika i kipova Sveti Petar je prikazan kako drži dva ključa. Djela apostolska svjedoče kako je iz Svetog Petra Apostola zračila tolika čudotvorna moć da su bolesnici ozdravljali čak i prolaskom Petrove sjene. Sveti Petar se zaziva za oslobođenje od vrućice, ugriza zmija, opsjednutosti i bolova u nogama.\n</p>\n",
+							"description": "Sadržaj",
+							"type": "text"
+						},
+						{
+							"key": "categoryId",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-19 172153.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/pages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pages/dto",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "\tPovijest župe",
+							"description": "Naslov obavijesti",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "text",
+							"value": "Ovo je tekst o povijesti...",
+							"description": "Sadržaj",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "categoryId",
+							"value": "1",
+							"description": "ID kategorije (broj)",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Cetvrtka slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-12 200803.png",
+							"disabled": true
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Peta slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-11 204148.png",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/pages/dto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pages",
+						"dto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pages/dto/{id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "\tPovijest župe",
+							"description": "Naslov obavijesti",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "text",
+							"value": "Ovo je tekst o povijesti...",
+							"description": "Sadržaj",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "categoryId",
+							"value": "1",
+							"description": "ID kategorije (broj)",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Cetvrtka slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-12 200803.png",
+							"disabled": true
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Peta slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-11 204148.png",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/pages/dto/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pages",
+						"dto",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pages/dto/category/{categoryId}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "\tPovijest župe",
+							"description": "Naslov obavijesti",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "text",
+							"value": "Ovo je tekst o povijesti...",
+							"description": "Sadržaj",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "categoryId",
+							"value": "1",
+							"description": "ID kategorije (broj)",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Cetvrtka slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-12 200803.png",
+							"disabled": true
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Peta slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-11 204148.png",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/pages/dto/category/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pages",
+						"dto",
+						"category",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pages/dto/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "\tPovijest župe",
+							"description": "Naslov obavijesti",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "text",
+							"value": "Ovo je tekst o povijesti...",
+							"description": "Sadržaj",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "categoryId",
+							"value": "1",
+							"description": "ID kategorije (broj)",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Cetvrtka slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-12 200803.png",
+							"disabled": true
+						},
+						{
+							"key": "galleryPhotos",
+							"description": "Peta slika galerije",
+							"type": "file",
+							"src": "/C:/Users/38595/Pictures/Screenshots/Screenshot 2025-03-11 204148.png",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/pages/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pages",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
