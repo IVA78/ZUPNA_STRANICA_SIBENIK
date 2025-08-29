@@ -78,6 +78,12 @@ const Pocetna = () => {
 
   const [currentNotificationId, setCurrentNotificationId] = useState(null);
 
+  const [visibleCount, setVisibleCount] = useState(7); // početno 7 obavijesti
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 7); // prikaži još 7 po kliku
+  };
+
   const toast = useToast();
 
   // State za event
@@ -457,7 +463,7 @@ const Pocetna = () => {
             borderRadius="md"
             padding={3}
           >
-            {filteredEvents.map((event) => (
+            {filteredEvents.slice(0, visibleCount).map((event) => (
               <Box
                 key={event.id}
                 borderWidth="1px"
@@ -674,6 +680,27 @@ const Pocetna = () => {
                 )}
               </Box>
             ))}
+
+            {/* Gumb za učitavanje više */}
+            {visibleCount < filteredEvents.length && (
+              <Box textAlign="center" mt={4}>
+                <Button
+                  onClick={handleLoadMore}
+                  mt={4}
+                  variant="outline"
+                  color="black"
+                  borderColor="rgba(23,24,16)"
+                  w="full"
+                  _hover={{
+                    bg: "#86654b",
+                    color: "RGBA(248, 245, 240)",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Prikaži još obavijesti
+                </Button>
+              </Box>
+            )}
           </SimpleGrid>
         </Box>
 

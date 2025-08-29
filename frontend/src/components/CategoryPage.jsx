@@ -35,6 +35,12 @@ const CategoryPage = ({ categoryId }) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const [visibleCount, setVisibleCount] = useState(7); // početno 7 obavijesti
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 7); // prikaži još 7 po kliku
+  };
+
   const toast = useToast();
 
   // provjera na mount
@@ -288,7 +294,7 @@ const CategoryPage = ({ categoryId }) => {
             borderRadius="md"
             padding={3}
           >
-            {notifications.map((event) => (
+            {notifications.slice(0, visibleCount).map((event) => (
               <Box
                 key={event.id}
                 borderWidth="1px"
@@ -335,6 +341,27 @@ const CategoryPage = ({ categoryId }) => {
                 </Box>
               </Box>
             ))}
+
+            {/* Gumb za učitavanje više */}
+            {visibleCount < notifications.length && (
+              <Box textAlign="center" mt={4}>
+                <Button
+                  onClick={handleLoadMore}
+                  mt={4}
+                  variant="outline"
+                  color="black"
+                  borderColor="rgba(23,24,16)"
+                  w="full"
+                  _hover={{
+                    bg: "#86654b",
+                    color: "RGBA(248, 245, 240)",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Prikaži još obavijesti
+                </Button>
+              </Box>
+            )}
           </SimpleGrid>
         )}
       </Box>
