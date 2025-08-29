@@ -22,6 +22,16 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { ArrowRightIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { FiHome } from "react-icons/fi";
+import { Icon } from "@chakra-ui/react";
+import { InfoOutlineIcon } from "@chakra-ui/icons";
+import {
+  FaPrayingHands,
+  FaBook,
+  FaRoute,
+  FaWpforms,
+  FaEnvelope,
+} from "react-icons/fa";
 
 import { useEffect, useState } from "react";
 
@@ -115,7 +125,7 @@ const Navbar = () => {
           colSpan={{ base: 1, lg: 1, xl: "none" }}
         >
           <IconButton
-            colSpan={6}
+            colSpan={5}
             py={4}
             px={2}
             marginLeft={3}
@@ -143,16 +153,26 @@ const Navbar = () => {
           justifyContent="center"
         >
           <Box px={12} py={2}>
-            <Flex gap={{ base: 1, lg: 1, xl: 10 }} align="center">
-              <Link
+            <Flex gap={{ base: 1, lg: 1, xl: 8 }} align="center">
+              <Button
+                as={Link}
                 href="/"
-                color="gray.700"
+                variant="ghost"
                 fontSize="xl"
                 fontWeight="semibold"
-                _hover={{ color: "#86654b", fontWeight: "bold" }}
+                border="1px solid"
+                borderColor="gray.200"
+                borderRadius="lg"
+                backgroundColor="#86654b"
+                color="white"
+                _hover={{
+                  fontWeight: "bold",
+                  backgroundColor: "rgba(255, 255, 255, 0.4)",
+                  color: "#86654b",
+                }}
               >
                 POČETNA
-              </Link>
+              </Button>
 
               <Menu>
                 <MenuButton
@@ -161,7 +181,18 @@ const Navbar = () => {
                   color="gray.700"
                   fontSize="xl"
                   fontWeight="semibold"
-                  _hover={{ color: "#86654b", fontWeight: "bold" }}
+                  _hover={{
+                    fontWeight: "bold",
+                    backgroundColor: "rgba(255, 255, 255, 0.4)",
+                    textColor: "#86654b",
+                  }}
+                  border="1px solid"
+                  borderColor="gray.200"
+                  borderRadius="lg" // 🔹 Zaobljeni rubovi
+                  overflow="hidden" // 🔹 Da se zaobljenje primjeni i na iteme
+                  padding=".8em"
+                  backgroundColor="#86654b"
+                  textColor="white"
                 >
                   O ŽUPI
                 </MenuButton>
@@ -208,7 +239,18 @@ const Navbar = () => {
                   color="gray.700"
                   fontSize="xl"
                   fontWeight="semibold"
-                  _hover={{ color: "#86654b", fontWeight: "bold" }}
+                  _hover={{
+                    fontWeight: "bold",
+                    backgroundColor: "rgba(255, 255, 255, 0.4)",
+                    textColor: "#86654b",
+                  }}
+                  border="1px solid"
+                  borderColor="gray.200"
+                  borderRadius="lg" // 🔹 Zaobljeni rubovi
+                  overflow="hidden" // 🔹 Da se zaobljenje primjeni i na iteme
+                  padding=".8em"
+                  backgroundColor="#86654b"
+                  textColor="white"
                 >
                   ŽUPNE AKTIVNOSTI
                 </MenuButton>
@@ -295,7 +337,18 @@ const Navbar = () => {
                   color="gray.700"
                   fontSize="xl"
                   fontWeight="semibold"
-                  _hover={{ color: "#86654b", fontWeight: "bold" }}
+                  _hover={{
+                    fontWeight: "bold",
+                    backgroundColor: "rgba(255, 255, 255, 0.4)",
+                    textColor: "#86654b",
+                  }}
+                  border="1px solid"
+                  borderColor="gray.200"
+                  borderRadius="lg" // 🔹 Zaobljeni rubovi
+                  overflow="hidden" // 🔹 Da se zaobljenje primjeni i na iteme
+                  padding=".8em"
+                  backgroundColor="#86654b"
+                  textColor="white"
                 >
                   ŽUPNA KATEHEZA
                 </MenuButton>
@@ -384,33 +437,68 @@ const Navbar = () => {
                 </MenuList>
               </Menu>
 
-              <Link
+              <Button
+                as={Link}
                 href="/hodocasca"
-                color="gray.700"
+                variant="ghost"
                 fontSize="xl"
                 fontWeight="semibold"
-                _hover={{ color: "#86654b", fontWeight: "bold" }}
+                border="1px solid"
+                borderColor="gray.200"
+                borderRadius="lg"
+                px="1em"
+                py=".8em"
+                backgroundColor="#86654b"
+                color="white"
+                _hover={{
+                  fontWeight: "bold",
+                  backgroundColor: "rgba(255, 255, 255, 0.4)",
+                  color: "#86654b",
+                }}
               >
                 HODOČAŠĆA
-              </Link>
-              <Link
+              </Button>
+
+              <Button
+                as={Link}
                 href="/formulari"
-                color="gray.700"
+                variant="ghost"
                 fontSize="xl"
                 fontWeight="semibold"
-                _hover={{ color: "#86654b", fontWeight: "bold" }}
+                border="1px solid"
+                borderColor="gray.200"
+                borderRadius="lg"
+                backgroundColor="#86654b"
+                color="white"
+                _hover={{
+                  fontWeight: "bold",
+                  backgroundColor: "rgba(255, 255, 255, 0.4)",
+                  color: "#86654b",
+                }}
               >
                 FORMULARI
-              </Link>
-              <Link
+              </Button>
+
+              <Button
+                as={Link}
                 href="/kontakt"
-                color="gray.700"
+                variant="ghost"
                 fontSize="xl"
                 fontWeight="semibold"
-                _hover={{ color: "#86654b", fontWeight: "bold" }}
+                border="1px solid"
+                borderColor="gray.200"
+                borderRadius="lg"
+                backgroundColor="#86654b"
+                color="white"
+                _hover={{
+                  fontWeight: "bold",
+                  backgroundColor: "rgba(255, 255, 255, 0.4)",
+                  color: "#86654b",
+                }}
               >
                 KONTAKT
-              </Link>
+              </Button>
+
               {isLoggedIn ? (
                 <Link
                   href="/upute"
@@ -446,6 +534,7 @@ const Navbar = () => {
                     fontWeight="semibold"
                     _hover={{ color: "#86654b", fontWeight: "bold" }}
                   >
+                    <Icon as={FiHome} boxSize={5} mr={2} color="black" />
                     POČETNA
                   </Link>
 
@@ -461,6 +550,12 @@ const Navbar = () => {
                       _hover={{ color: "#86654b", fontWeight: "bold" }}
                     >
                       <Box px={3} py={5}>
+                        <Icon
+                          as={InfoOutlineIcon}
+                          boxSize={5}
+                          mr={2}
+                          color="#black"
+                        />
                         <Text as="span" mr={2}>
                           O ŽUPI
                         </Text>
@@ -515,6 +610,12 @@ const Navbar = () => {
                       _hover={{ color: "#86654b", fontWeight: "bold" }}
                     >
                       <Box px={3} py={5}>
+                        <Icon
+                          as={FaPrayingHands}
+                          boxSize={5}
+                          mr={2}
+                          color="#black"
+                        />
                         <Text as="span" mr={2}>
                           ŽUPNE AKTIVNOSTI
                         </Text>
@@ -609,6 +710,7 @@ const Navbar = () => {
                       _hover={{ color: "#86654b", fontWeight: "bold" }}
                     >
                       <Box px={3} py={5}>
+                        <Icon as={FaBook} boxSize={5} mr={2} color="black" />
                         <Text as="span" mr={2}>
                           ŽUPNA KATEHEZA
                         </Text>
@@ -707,6 +809,7 @@ const Navbar = () => {
                     fontWeight="semibold"
                     _hover={{ color: "#86654b", fontWeight: "bold" }}
                   >
+                    <Icon as={FaRoute} boxSize={5} mr={2} color="black" />
                     HODOČAŠĆA
                   </Link>
                   <Link
@@ -716,6 +819,7 @@ const Navbar = () => {
                     fontWeight="semibold"
                     _hover={{ color: "#86654b", fontWeight: "bold" }}
                   >
+                    <Icon as={FaWpforms} boxSize={5} mr={2} color="black" />
                     FORMULARI
                   </Link>
                   <Link
@@ -725,6 +829,7 @@ const Navbar = () => {
                     fontWeight="semibold"
                     _hover={{ color: "#86654b", fontWeight: "bold" }}
                   >
+                    <Icon as={FaEnvelope} boxSize={5} mr={2} color="black" />
                     KONTAKT
                   </Link>
                   {isLoggedIn ? (
