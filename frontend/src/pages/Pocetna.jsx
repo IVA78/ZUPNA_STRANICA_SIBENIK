@@ -38,6 +38,7 @@ import { FiRefreshCw } from "react-icons/fi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 
 import svpetar from "../assets/svpetar.jpg";
+import RijecSvPetra from "../components/RijecSvPetra";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -454,6 +455,8 @@ const Pocetna = () => {
               </Text>
             </Box>
           </Box>
+
+          <RijecSvPetra></RijecSvPetra>
 
           <FilterKategorija onFilterChange={handleFilterChange} />
 
