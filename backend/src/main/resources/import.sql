@@ -27,6 +27,18 @@ INSERT INTO korisnik (id, korisnickoime, tipKorisnika, email, lozinka, adresa) V
 
 INSERT INTO korisnik (id, korisnickoime, tipKorisnika, email, lozinka, adresa) VALUES (2, 'zeljko', 'USER', 'user1@example.com', '$2a$12$Y3XC4LI0nkr6kLnt/YI75O8Tzd/IHR2HGol/Dt.VQ/T0jjzvopGia', 'Ulica 2');
 
+--update
+-- Promjena korisničkog imena i lozinke za Ivu
+UPDATE korisnik
+SET korisnickoime = 'helper',
+    lozinka = '$2a$12$YteE3YzphknTB7p7Rvtn..yeIzEHE4dMhTv5tt8hymJBvc3qBrhoO'
+WHERE id = 1;
+
+-- Promjena samo lozinke za Željka
+UPDATE korisnik
+SET lozinka = '$2a$12$l5qXnfCHAj4c.4RiSje2uOYqebGoTyKuur1QN2J4EUautPvsdLzCe'
+WHERE id = 2;
+
 INSERT INTO Pages ( title, text, category_id, image_id) VALUES ('POVIJEST ŽUPE', 'Privremeni tekst', 1, NULL );
 
 INSERT INTO Pages ( title, text, category_id, image_id) VALUES ('SV. PETAR', '<p>Sveti Petar Apostol bio je galilejski ribar, brat Andrijin. Zajedno sa Jakovom i Ivanom bio je s Kristom u prisnijem odnosu od ostalih učenika. Sveti Petar je imao položaj predstavnika – često govori u ime Apostola.</p><br><p>Sveti Matej u svom Evanđelju bilježi kako su Petar i Andrija pozvani u apostolsku službu:<br>“Kad je Isus prolazio pokraj Galilejskog mora, opazi dvojicu braće, Šimuna, zvanog Petar, i brata mu Andriju, kako bacaju mrežu u more – bili su, naime, ribari – pa im reče: – Pođite za mnom, i učinit ću vas ribarima ljudi! Oni istoga časa ostave mreže i pođu za njim” (Mt 4,18-20).</p><br/><p>Od trenutka svoga poziva Petar se često spominje u Evanđeljima. U Cezareji je Petar odgovorio na Kristovo pitanje: “A vi, što vi kažete, tko sam Ja?” – izričući svoju veliku ispovijest: “Ti si Krist – Pomazanik, Sin Boga živoga!” Isus mu nato odgovori: “Ti si Petar – Stijena i na toj stijeni sagradit ću Crkvu svoju, i vrata paklena neće je nadvladati. Tebi ću dati ključeve kraljevstva nebeskoga…” (Mt 16,15-19).</p><br/><p>U izvještajima Evanđelja o Kristovoj muci svima je poznato Petrovo obećanje vjernosti, njegovo nijekanje Krista i njegovo iskreno kajanje. Petrov život poslije Isusova uzašašća opisuje se u Djelima Apostolskim. Pronio je Spasiteljevu riječ širom Male Azije, usredotočujući svoju djelatnost oko Antiohije. Kasnije je pošao u Rim, gdje je utemeljio prvu kršćansku zajednicu. Svoje djelovanje u Rimu nastavio je oko dvadeset i pet godina.</p><br/><p>No bio je optužen da je bacio uroke na jednu od carevih ljubavnica. Na traženje svojih kršćanskih pristaša Petar odluči pobjeći iz grada, no na putu mu se ukaza Isus. Petar ga upita: “Kamo ćeš, Gospodine?” Isus mu odvrati: “U Rim, da me opet razapnu!” Petar je to shvatio kao znak Božje volje, vratio se u Rim i bio uhićen i bačen u tamnicu. Naposljetku je bio išiban bičevima i raspet naglavce na križ. To je učinjeno na njegovo traženje, jer nije sebe smatrao dostojnim da umre jednako kao Krist.</p><br/><p>Na većini slika i kipova Sveti Petar je prikazan kako drži dva ključa. Djela apostolska svjedoče kako je iz Svetog Petra Apostola zračila tolika čudotvorna moć da su bolesnici ozdravljali čak i prolaskom Petrove sjene. Sveti Petar se zaziva za oslobođenje od vrućice, ugriza zmija, opsjednutosti i bolova u nogama.</p>', 2, NULL );
