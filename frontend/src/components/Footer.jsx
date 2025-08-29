@@ -17,10 +17,15 @@ import {
   useDisclosure,
   FormControl,
   FormLabel,
+  HStack,
+  Link,
 } from "@chakra-ui/react";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { PhoneIcon, EmailIcon, InfoIcon } from "@chakra-ui/icons";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -62,21 +67,94 @@ const Footer = () => {
       <Flex
         direction={{ base: "column", md: "row" }}
         justify="space-between"
-        align={{ base: "flex-start", md: "center" }}
+        align="flex-start" // 🔹 uvijek poravnato gore
         gap={10}
         marginBottom={3}
       >
-        <Box flex="1">
+        <Box
+          flex="1"
+          display="flex"
+          flexDirection="column"
+          alignItems="flex-start"
+        >
           <Heading size="sm" mb={2} fontSize="xl">
-            Riječ sv. Petra
+            Kontakt podaci
           </Heading>
-          <Text fontStyle="italic" maxW="400px" fontSize="xl">
-            „Budite trijezni, bdijte! Protivnik vaš đavao obilazi kao ričući
-            lav, tražeći koga da proždre.” (1 Pt 5,8)
-          </Text>
+
+          <Stack spacing={2} fontSize="lg">
+            <HStack>
+              <PhoneIcon color="black" />
+              <Text>00 385 22 339 840</Text>
+            </HStack>
+
+            <HStack>
+              <EmailIcon color="black" />
+              <Text>info.vidici@gmail.com</Text>
+            </HStack>
+
+            <HStack>
+              <InfoIcon color="black" />
+              <Text>Žiro račun: IBAN HR41 23600001101928847</Text>
+            </HStack>
+          </Stack>
+          <Link
+            href="/kontakt"
+            color="black"
+            fontWeight="medium"
+            mt={3}
+            display="inline-block"
+            _hover={{ textDecoration: "underline", color: "#86654b" }}
+          >
+            ➤ Više na...
+          </Link>
         </Box>
 
-        <Box flex="1">
+        {/* 🔹 Društvene mreže */}
+        <Box
+          flex="1"
+          display="flex"
+          flexDirection="column"
+          alignItems="flex-start"
+        >
+          <Heading size="sm" mb={3} fontSize="xl">
+            Zapratite nas
+          </Heading>
+          <HStack marginTop={5}>
+            <Box display="flex">
+              <Link
+                href="https://www.facebook.com/zupavidicisibenik/"
+                isExternal
+                _hover={{ color: "#4267B2" }}
+              >
+                <FaFacebook size="28" />
+              </Link>
+              <Text marginLeft={2} fontSize="xl">
+                Župa Vidici
+              </Text>
+            </Box>
+          </HStack>
+          <HStack marginTop={5}>
+            <Box display="flex">
+              <Link
+                href="https://www.instagram.com/zupavidici/"
+                isExternal
+                _hover={{ color: "#C13584" }}
+              >
+                <FaInstagram size="28" />
+              </Link>
+              <Text marginLeft={2} fontSize="xl">
+                Župa sv. Petra Vidici
+              </Text>
+            </Box>
+          </HStack>
+        </Box>
+
+        <Box
+          flex="1"
+          display="flex"
+          flexDirection="column"
+          alignItems="flex-start"
+        >
           <Heading size="sm" mb={2} fontSize="xl">
             PRIJAVA
           </Heading>
@@ -99,7 +177,12 @@ const Footer = () => {
           </Button>
         </Box>
 
-        <Box flex="1">
+        <Box
+          flex="1"
+          display="flex"
+          flexDirection="column"
+          alignItems="flex-start"
+        >
           <Heading size="sm" mb={2} fontSize="xl">
             Autor
           </Heading>
