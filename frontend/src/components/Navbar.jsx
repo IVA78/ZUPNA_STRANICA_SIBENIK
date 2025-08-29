@@ -75,8 +75,8 @@ const Navbar = () => {
           <Image
             src={logo}
             alt="Logo"
-            maxWidth={{ base: "3em", lg: "10em", xl: "10em" }}
-            maxHeight={{ base: "3em", lg: "5em", xl: "5em" }}
+            maxWidth={{ base: "5em", lg: "12em", xl: "12em" }}
+            maxHeight={{ base: "5em", lg: "7em", xl: "7em" }}
             marginRight={{ base: "1em", lg: "2em", xl: "2em" }}
           />
           <Flex
