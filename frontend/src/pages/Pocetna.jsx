@@ -36,6 +36,8 @@ import {
 import { IoShareSocialSharp } from "react-icons/io5";
 import { FiRefreshCw } from "react-icons/fi";
 
+import svpetar from "../assets/svpetar.jpg";
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 const Pocetna = () => {
@@ -418,20 +420,32 @@ const Pocetna = () => {
         p={4}
         gap={6}
       >
-        {/* Glavni sadržaj - fleksibilna širina */}
-
         <Box flex="1">
           <Box
-            p={5}
-            bg="RGBA(248, 245, 240)"
+            flex="1"
+            position="relative"
+            height="25em"
+            backgroundImage={svpetar}
+            backgroundPosition="center"
             borderRadius="md"
-            marginBottom={3}
+            overflow="hidden"
+            mb={3}
           >
-            <Text fontSize="xl" color="gray.600" mt={1}>
-              Dobrodošli na stranicu Župe sv. Petra – Vidici, Šibenik. Ovdje
-              možete pratiti najnovije obavijesti, preporučeni sadržaj te
-              nadolazeće događaje naše župne zajednice.
-            </Text>
+            <Box
+              position="absolute"
+              top="50%"
+              left="50%"
+              transform="translate(-50%, -50%)"
+              bg="rgba(255, 255, 255, 0.5)"
+              w="101%"
+              py={3}
+            >
+              <Text fontSize="xl" color="gray.700" textAlign="center">
+                Dobrodošli na stranicu Župe sv. Petra – Vidici, Šibenik. Ovdje
+                možete pratiti najnovije obavijesti, preporučeni sadržaj te
+                nadolazeće događaje naše župne zajednice.
+              </Text>
+            </Box>
           </Box>
 
           <FilterKategorija onFilterChange={handleFilterChange} />

@@ -156,7 +156,7 @@ const Formulari = () => {
               >
                 <ChakraLink
                   href={`/api/forms/${f.id}/download`}
-                  isExternal
+                  download
                   color="teal.600"
                   fontWeight="medium"
                   _hover={{ textDecoration: "underline" }}
