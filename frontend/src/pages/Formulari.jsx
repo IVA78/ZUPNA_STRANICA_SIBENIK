@@ -116,11 +116,9 @@ const Formulari = () => {
     }
   };
 
-  const downloadFile = async (id, name, token) => {
+  const downloadFile = async (id, name) => {
     try {
-      const res = await fetch(`${API_URL}/api/forms/${id}/download`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(`${API_URL}/api/forms/${id}/download`);
 
       if (!res.ok) throw new Error("Download failed");
 
@@ -177,7 +175,7 @@ const Formulari = () => {
                 alignItems="center"
               >
                 <ChakraLink
-                  onClick={() => downloadFile(f.id, f.name, token)}
+                  onClick={() => downloadFile(f.id, f.name)}
                   color="teal.600"
                   fontWeight="medium"
                   _hover={{ textDecoration: "underline" }}
