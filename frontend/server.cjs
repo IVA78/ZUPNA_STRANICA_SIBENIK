@@ -1,13 +1,17 @@
-const express = require("express");
-const path = require("path");
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serviraj statičke fajlove iz dist
+// Serviraj statične fajlove iz dist
 app.use(express.static(path.join(__dirname, "dist")));
 
-// Za SPA routing: svi GET requesti idu na index.html
+// SPA routing
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 });
