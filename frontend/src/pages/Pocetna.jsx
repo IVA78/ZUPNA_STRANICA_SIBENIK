@@ -429,31 +429,15 @@ const Pocetna = () => {
         gap={6}
       >
         <Box flex="1">
-          <Box
-            flex="1"
-            position="relative"
-            height="25em"
-            backgroundImage={svpetar}
-            backgroundPosition="center"
-            borderRadius="md"
-            overflow="hidden"
-            mb={3}
-          >
-            <Box
-              position="absolute"
-              top="50%"
-              left="50%"
-              transform="translate(-50%, -50%)"
-              bg="rgba(255, 255, 255, 0.5)"
-              w="101%"
-              py={3}
-            >
-              <Text fontSize="xl" color="gray.700" textAlign="center">
-                Dobrodošli na stranicu Župe sv. Petra – Vidici, Šibenik. Ovdje
-                možete pratiti najnovije obavijesti, preporučeni sadržaj te
-                nadolazeće događaje naše župne zajednice.
-              </Text>
-            </Box>
+          <Box p={5} bg="RGBA(248, 245, 240)" marginBottom={3}>
+            <Heading size="md" mb={3} color="#86654b">
+              Dobrodošli na mrežnu stranicu Župe sv. Petra – Vidici, Šibenik.
+            </Heading>
+            <Text fontSize="xl" color="gray.700" textAlign="center">
+              Na ovoj stranici možete pronaći najnovije obavijesti, preporučene
+              sadržaje za duhovni rast te informacije o nadolazećim događanjima
+              i slavljima naše župne zajednice.
+            </Text>
           </Box>
 
           <RijecSvPetra></RijecSvPetra>
@@ -684,28 +668,27 @@ const Pocetna = () => {
                 )}
               </Box>
             ))}
-
-            {/* Gumb za učitavanje više */}
-            {visibleCount < filteredEvents.length && (
-              <Box textAlign="center" mt={4}>
-                <Button
-                  onClick={handleLoadMore}
-                  mt={4}
-                  variant="outline"
-                  color="black"
-                  borderColor="rgba(23,24,16)"
-                  w="full"
-                  _hover={{
-                    bg: "#86654b",
-                    color: "RGBA(248, 245, 240)",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Prikaži još obavijesti
-                </Button>
-              </Box>
-            )}
           </SimpleGrid>
+          {/* Gumb za učitavanje više */}
+          {visibleCount < filteredEvents.length && (
+            <Box textAlign="center" mt={4}>
+              <Button
+                onClick={handleLoadMore}
+                mt={4}
+                variant="outline"
+                color="black"
+                borderColor="rgba(23,24,16)"
+                w="full"
+                _hover={{
+                  bg: "#86654b",
+                  color: "RGBA(248, 245, 240)",
+                  fontWeight: "bold",
+                }}
+              >
+                Prikaži još obavijesti
+              </Button>
+            </Box>
+          )}
         </Box>
 
         {/* Dodatni sadržaj - fleksibilna širina */}

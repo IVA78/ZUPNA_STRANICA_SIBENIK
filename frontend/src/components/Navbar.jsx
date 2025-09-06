@@ -160,16 +160,7 @@ const Navbar = () => {
                 variant="ghost"
                 fontSize="xl"
                 fontWeight="semibold"
-                border="1px solid"
-                borderColor="gray.200"
-                borderRadius="lg"
-                backgroundColor="#86654b"
-                color="white"
-                _hover={{
-                  fontWeight: "bold",
-                  backgroundColor: "rgba(255, 255, 255, 0.4)",
-                  color: "#86654b",
-                }}
+                _hover={{ color: "#86654b", fontWeight: "bold" }}
               >
                 POČETNA
               </Button>
@@ -181,18 +172,7 @@ const Navbar = () => {
                   color="gray.700"
                   fontSize="xl"
                   fontWeight="semibold"
-                  _hover={{
-                    fontWeight: "bold",
-                    backgroundColor: "rgba(255, 255, 255, 0.4)",
-                    textColor: "#86654b",
-                  }}
-                  border="1px solid"
-                  borderColor="gray.200"
-                  borderRadius="lg" // 🔹 Zaobljeni rubovi
-                  overflow="hidden" // 🔹 Da se zaobljenje primjeni i na iteme
-                  padding=".8em"
-                  backgroundColor="#86654b"
-                  textColor="white"
+                  _hover={{ color: "#86654b", fontWeight: "bold" }}
                 >
                   O ŽUPI
                 </MenuButton>
@@ -205,6 +185,7 @@ const Navbar = () => {
                   >
                     Povijest Župe
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/sv-petar"
@@ -213,6 +194,7 @@ const Navbar = () => {
                   >
                     Sv. Petar
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/raspored-bogosluzja"
@@ -221,6 +203,7 @@ const Navbar = () => {
                   >
                     Raspored bogoslužja
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/fotogalerija"
@@ -239,18 +222,7 @@ const Navbar = () => {
                   color="gray.700"
                   fontSize="xl"
                   fontWeight="semibold"
-                  _hover={{
-                    fontWeight: "bold",
-                    backgroundColor: "rgba(255, 255, 255, 0.4)",
-                    textColor: "#86654b",
-                  }}
-                  border="1px solid"
-                  borderColor="gray.200"
-                  borderRadius="lg" // 🔹 Zaobljeni rubovi
-                  overflow="hidden" // 🔹 Da se zaobljenje primjeni i na iteme
-                  padding=".8em"
-                  backgroundColor="#86654b"
-                  textColor="white"
+                  _hover={{ color: "#86654b", fontWeight: "bold" }}
                 >
                   ŽUPNE AKTIVNOSTI
                 </MenuButton>
@@ -263,6 +235,7 @@ const Navbar = () => {
                   >
                     Kateheze za odrasle
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/djecji-zbor"
@@ -271,6 +244,7 @@ const Navbar = () => {
                   >
                     Dječji zbor
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/zupni-pjevacki-zbor"
@@ -279,6 +253,7 @@ const Navbar = () => {
                   >
                     Župni pjevački zbor
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/zupno-vijece"
@@ -287,6 +262,7 @@ const Navbar = () => {
                   >
                     Župno pastoralno i ekonomsko vijeće
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/poboznosti"
@@ -295,6 +271,7 @@ const Navbar = () => {
                   >
                     Pobožnosti
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/zupni-caritas"
@@ -303,6 +280,8 @@ const Navbar = () => {
                   >
                     Župni Caritas
                   </MenuItem>
+                  <Divider></Divider>
+
                   <MenuItem
                     as="a"
                     href="/ministranti"
@@ -311,6 +290,7 @@ const Navbar = () => {
                   >
                     Ministranti
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/mladi"
@@ -319,6 +299,7 @@ const Navbar = () => {
                   >
                     Mladi
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/kazaliste"
@@ -337,18 +318,7 @@ const Navbar = () => {
                   color="gray.700"
                   fontSize="xl"
                   fontWeight="semibold"
-                  _hover={{
-                    fontWeight: "bold",
-                    backgroundColor: "rgba(255, 255, 255, 0.4)",
-                    textColor: "#86654b",
-                  }}
-                  border="1px solid"
-                  borderColor="gray.200"
-                  borderRadius="lg" // 🔹 Zaobljeni rubovi
-                  overflow="hidden" // 🔹 Da se zaobljenje primjeni i na iteme
-                  padding=".8em"
-                  backgroundColor="#86654b"
-                  textColor="white"
+                  _hover={{ color: "#86654b", fontWeight: "bold" }}
                 >
                   ŽUPNA KATEHEZA
                 </MenuButton>
@@ -361,6 +331,7 @@ const Navbar = () => {
                   >
                     Krštenje
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/sveta-pricest"
@@ -369,6 +340,7 @@ const Navbar = () => {
                   >
                     Sveta Pričest
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/sveta-potvrda"
@@ -377,6 +349,7 @@ const Navbar = () => {
                   >
                     Sveta Potvrda
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/euharistija"
@@ -385,6 +358,7 @@ const Navbar = () => {
                   >
                     Euharistija
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/ispovijed"
@@ -393,7 +367,7 @@ const Navbar = () => {
                   >
                     Ispovijed
                   </MenuItem>
-
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/bolesnicko-pomazanje"
@@ -402,6 +376,7 @@ const Navbar = () => {
                   >
                     Bolesničko pomazanje
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/zenidba"
@@ -410,6 +385,7 @@ const Navbar = () => {
                   >
                     Ženidba
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/sveti-red"
@@ -418,6 +394,7 @@ const Navbar = () => {
                   >
                     Sveti red
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/blagoslov-obitelji"
@@ -426,6 +403,7 @@ const Navbar = () => {
                   >
                     Blagoslov obitelji
                   </MenuItem>
+                  <Divider></Divider>
                   <MenuItem
                     as="a"
                     href="/sprovod"
@@ -443,18 +421,7 @@ const Navbar = () => {
                 variant="ghost"
                 fontSize="xl"
                 fontWeight="semibold"
-                border="1px solid"
-                borderColor="gray.200"
-                borderRadius="lg"
-                px="1em"
-                py=".8em"
-                backgroundColor="#86654b"
-                color="white"
-                _hover={{
-                  fontWeight: "bold",
-                  backgroundColor: "rgba(255, 255, 255, 0.4)",
-                  color: "#86654b",
-                }}
+                _hover={{ color: "#86654b", fontWeight: "bold" }}
               >
                 HODOČAŠĆA
               </Button>
@@ -465,16 +432,7 @@ const Navbar = () => {
                 variant="ghost"
                 fontSize="xl"
                 fontWeight="semibold"
-                border="1px solid"
-                borderColor="gray.200"
-                borderRadius="lg"
-                backgroundColor="#86654b"
-                color="white"
-                _hover={{
-                  fontWeight: "bold",
-                  backgroundColor: "rgba(255, 255, 255, 0.4)",
-                  color: "#86654b",
-                }}
+                _hover={{ color: "#86654b", fontWeight: "bold" }}
               >
                 FORMULARI
               </Button>
@@ -485,16 +443,7 @@ const Navbar = () => {
                 variant="ghost"
                 fontSize="xl"
                 fontWeight="semibold"
-                border="1px solid"
-                borderColor="gray.200"
-                borderRadius="lg"
-                backgroundColor="#86654b"
-                color="white"
-                _hover={{
-                  fontWeight: "bold",
-                  backgroundColor: "rgba(255, 255, 255, 0.4)",
-                  color: "#86654b",
-                }}
+                _hover={{ color: "#86654b", fontWeight: "bold" }}
               >
                 KONTAKT
               </Button>
@@ -571,6 +520,7 @@ const Navbar = () => {
                       >
                         Povijest Župe
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/sv-petar"
@@ -579,6 +529,7 @@ const Navbar = () => {
                       >
                         Sv. Petar
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/raspored-bogosluzja"
@@ -587,6 +538,7 @@ const Navbar = () => {
                       >
                         Raspored bogoslužja
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/fotogalerija"
@@ -631,6 +583,7 @@ const Navbar = () => {
                       >
                         Kateheze za odrasle
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/djecji-zbor"
@@ -639,6 +592,7 @@ const Navbar = () => {
                       >
                         Dječji zbor
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/zupni-pjevacki-zbor"
@@ -647,6 +601,7 @@ const Navbar = () => {
                       >
                         Župni pjevački zbor
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/zupno-vijece"
@@ -655,6 +610,7 @@ const Navbar = () => {
                       >
                         Župno pastoralno i ekonomsko vijeće
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/poboznosti"
@@ -663,6 +619,7 @@ const Navbar = () => {
                       >
                         Pobožnosti
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/zupni-caritas"
@@ -671,6 +628,7 @@ const Navbar = () => {
                       >
                         Župni Caritas
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/ministranti"
@@ -679,6 +637,7 @@ const Navbar = () => {
                       >
                         Ministranti
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/mladi"
@@ -687,6 +646,7 @@ const Navbar = () => {
                       >
                         Mladi
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/kazaliste"
@@ -726,6 +686,7 @@ const Navbar = () => {
                       >
                         Krštenje
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/sveta-pricest"
@@ -734,6 +695,7 @@ const Navbar = () => {
                       >
                         Sveta Pričest
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/sveta-potvrda"
@@ -742,6 +704,7 @@ const Navbar = () => {
                       >
                         Sveta Potvrda
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/euharistija"
@@ -750,6 +713,7 @@ const Navbar = () => {
                       >
                         Euharistija
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/ispovijed"
@@ -758,7 +722,7 @@ const Navbar = () => {
                       >
                         Ispovijed
                       </MenuItem>
-
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/bolesnicko-pomazanje"
@@ -767,6 +731,7 @@ const Navbar = () => {
                       >
                         Bolesničko pomazanje
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/zenidba"
@@ -775,6 +740,7 @@ const Navbar = () => {
                       >
                         Ženidba
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/sveti-red"
@@ -783,6 +749,7 @@ const Navbar = () => {
                       >
                         Sveti red
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/blagoslov-obitelji"
@@ -791,6 +758,7 @@ const Navbar = () => {
                       >
                         Blagoslov obitelji
                       </MenuItem>
+                      <Divider></Divider>
                       <MenuItem
                         as="a"
                         href="/sprovod"
