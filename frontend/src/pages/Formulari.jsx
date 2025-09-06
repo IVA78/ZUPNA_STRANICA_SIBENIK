@@ -116,6 +116,28 @@ const Formulari = () => {
     }
   };
 
+  const downloadFile = async (id, name, token) => {
+    try {
+      const res = await fetch(`${API_URL}/api/forms/${id}/download`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!res.ok) throw new Error("Download failed");
+
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Download error:", err);
+    }
+  };
+
   return (
     <div>
       <Navbar></Navbar>
@@ -155,14 +177,14 @@ const Formulari = () => {
                 alignItems="center"
               >
                 <ChakraLink
-                  href={`/api/forms/${f.id}/download`}
-                  download
+                  onClick={() => downloadFile(f.id, f.name, token)}
                   color="teal.600"
                   fontWeight="medium"
                   _hover={{ textDecoration: "underline" }}
                 >
                   📄 {f.name}
                 </ChakraLink>
+
                 {isLoggedIn && (
                   <Button
                     size="sm"
