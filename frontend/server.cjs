@@ -4,13 +4,8 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serviraj statične fajlove iz dist
+// Serviraj statične fajlove
 app.use(express.static(path.join(__dirname, "dist")));
-
-// SPA routing: svi GET requesti idu na index.html
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
 
 app.listen(port, () => {
   console.log(`Frontend running on port ${port}`);
