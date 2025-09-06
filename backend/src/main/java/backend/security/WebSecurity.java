@@ -113,7 +113,7 @@ public class WebSecurity  {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
-                "https://zupna-stranica-f-production.up.railway.app/", // frontend production
+                "https://zupna-stranica-f-production.up.railway.app", // frontend Render
                 "http://localhost:5173"                       // lokalno Vite
         ));
         configuration.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
