@@ -128,8 +128,6 @@ const Navbar = () => {
             colSpan={5}
             py={4}
             px={2}
-            marginLeft={3}
-            marginRight={3}
             icon={<HamburgerIcon />}
             variant="ghost"
             color="#f8f5f0"
