@@ -21,10 +21,10 @@ public class Notification {
     @ManyToOne
     private Category category;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Photo coverPhoto; // naslovna slika
 
-    @OneToOne(mappedBy = "notification", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "notification", cascade = CascadeType.ALL, orphanRemoval = true)
     private Gallery gallery;
 
     // getters/setters
