@@ -13,6 +13,7 @@ public class Photo {
     private String imageUrl; // Cloudinary URL
 
     @ManyToOne
+    @JoinColumn(name = "gallery_id")
     private Gallery gallery;
 
     // getters/setters

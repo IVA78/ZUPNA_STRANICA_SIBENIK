@@ -22,10 +22,12 @@ public class Notification {
     private Category category;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Photo coverPhoto; // naslovna slika
+    @JoinColumn(name = "cover_photo_id") // eksplicitno definiraj FK kolonu
+    private Photo coverPhoto;
 
     @OneToOne(mappedBy = "notification", cascade = CascadeType.ALL, orphanRemoval = true)
     private Gallery gallery;
+
 
     // getters/setters
 

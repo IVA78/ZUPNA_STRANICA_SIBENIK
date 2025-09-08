@@ -16,6 +16,7 @@ public class Gallery {
     private String description;
 
     @OneToOne
+    @JoinColumn(name = "notification_id")
     private Notification notification;
 
     @OneToMany(mappedBy = "gallery", cascade = CascadeType.ALL, orphanRemoval = true)
