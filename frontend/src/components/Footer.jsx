@@ -25,7 +25,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { PhoneIcon, EmailIcon, InfoIcon } from "@chakra-ui/icons";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -84,7 +84,7 @@ const Footer = () => {
           <Stack spacing={2} fontSize="lg">
             <HStack>
               <PhoneIcon color="black" />
-              <Text>00 385 22 339 840</Text>
+              <Text>0916018412</Text>
             </HStack>
 
             <HStack>
@@ -144,6 +144,20 @@ const Footer = () => {
               </Link>
               <Text marginLeft={2} fontSize="xl">
                 Župa sv. Petra Vidici
+              </Text>
+            </Box>
+          </HStack>
+          <HStack marginTop={5}>
+            <Box display="flex">
+              <Link
+                href="https://www.youtube.com/@zupavidici8135"
+                isExternal
+                _hover={{ color: "#FF0000" }}
+              >
+                <FaYoutube size="28" />
+              </Link>
+              <Text marginLeft={2} fontSize="xl">
+                Župa sv. Petra Vidici – YouTube
               </Text>
             </Box>
           </HStack>

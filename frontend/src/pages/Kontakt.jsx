@@ -125,7 +125,7 @@ const Kontakt = () => {
 
           <Stack spacing={1}>
             <Text>
-              <strong>Telefon:</strong> 00 385 22 339 840
+              <strong>Telefon:</strong> 0916018412
             </Text>
             <Text>
               <strong>E-mail:</strong> info.vidici@gmail.com

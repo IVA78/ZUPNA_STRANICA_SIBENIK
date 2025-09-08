@@ -96,7 +96,7 @@ const Navbar = () => {
             gap={{ base: 0, lg: 1, xl: 1 }}
           >
             <Text
-              fontSize={{ base: "xs", lg: "s", xl: "s" }}
+              fontSize={{ base: "s", lg: "l", xl: "lg" }}
               fontWeight="semibold"
             >
               Šibenska biskupija
@@ -110,7 +110,7 @@ const Navbar = () => {
               ŽUPA SV. PETRA
             </Text>
             <Text
-              fontSize={{ base: "xs", lg: "s", xl: "s" }}
+              fontSize={{ base: "s", lg: "l", xl: "lg" }}
               fontWeight="semibold"
             >
               Župa Sv. Petra, Vidici, Šibenik

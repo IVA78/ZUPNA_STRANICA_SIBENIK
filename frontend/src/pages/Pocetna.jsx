@@ -430,7 +430,7 @@ const Pocetna = () => {
       >
         <Box flex="1">
           <Box p={5} bg="RGBA(248, 245, 240)" marginBottom={3}>
-            <Heading size="md" mb={3} color="#86654b">
+            <Heading size="md" mb={3} color="#86654b" textAlign="center">
               Dobrodošli na mrežnu stranicu Župe sv. Petra – Vidici, Šibenik.
             </Heading>
             <Text fontSize="xl" color="gray.700" textAlign="center">

@@ -105,6 +105,6 @@ public class NotificationController {
                     .body(Collections.singletonMap("error", "Greška prilikom brisanja fotografije"));
         }
     }
-    
+
 
 }

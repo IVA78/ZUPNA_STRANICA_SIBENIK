@@ -151,36 +151,9 @@ public class NotificationService {
         Notification notification = notificationRepo.findById(notificationId)
                 .orElseThrow(() -> new RuntimeException("Obavijest ne postoji"));
 
-        // Brisanje naslovne slike
-        if (notification.getCoverPhoto() != null) {
-            try {
-                fileUploadService.delete(notification.getCoverPhoto().getImageUrl());
-            } catch (Exception e) {
-                // log greške
-            }
-            notification.setCoverPhoto(null); // ukloni FK prije brisanja
-        }
-
-        // Brisanje galerije i svih fotografija
-        if (notification.getGallery() != null) {
-            Gallery gallery = notification.getGallery();
-            if (gallery.getPhotos() != null) {
-                for (Photo photo : gallery.getPhotos()) {
-                    try {
-                        fileUploadService.delete(photo.getImageUrl());
-                    } catch (Exception e) {
-                        // log greške
-                    }
-                    photoRepo.delete(photo);
-                }
-                gallery.getPhotos().clear();
-            }
-            notification.setGallery(null); // ukloni FK prije brisanja
-        }
-
-        // Na kraju obriši obavijest
         notificationRepo.delete(notification);
     }
+
 
     public void deletePhotoFromNotification(Long notificationId, Long photoId) {
         Notification notification = notificationRepo.findById(notificationId)
