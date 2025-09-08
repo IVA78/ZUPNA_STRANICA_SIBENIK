@@ -734,85 +734,90 @@ const Pocetna = () => {
           ) : links.length === 0 ? (
             <Text color="gray.500">Trenutno nema linkova za prikazati.</Text>
           ) : (
-            <Stack spacing={3}>
-              {links.map((link) => (
-                <HStack
-                  key={link.id}
-                  justifyContent="space-between"
-                  bg="white"
-                  p={2}
-                  borderRadius="md"
-                  boxShadow="sm"
-                >
-                  <ChakraLink
-                    href={link.url}
-                    isExternal
-                    color="#8b6f5e"
-                    _hover={{ textDecoration: "underline" }}
-                  >
-                    <HStack spacing={2}>
-                      <Icon as={IoShareSocialSharp} boxSize={5} />
-                      <Text>{link.text}</Text>
-                    </HStack>
-                  </ChakraLink>
-
-                  {/* YouTube thumbnail */}
-                  {(() => {
-                    const videoId = link.url.includes("youtube.com/watch")
-                      ? new URLSearchParams(new URL(link.url).search).get("v")
-                      : link.url.includes("youtu.be/")
-                      ? link.url.split("youtu.be/")[1]
-                      : null;
-
-                    return (
-                      videoId && (
-                        <Image
-                          src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
-                          alt={link.text}
-                          boxSize="120px"
-                          borderRadius="md"
-                          objectFit="cover"
-                        />
-                      )
-                    );
-                  })()}
-
-                  {isLoggedIn && (
-                    <Button
-                      size="xs"
-                      colorScheme="red"
-                      variant="outline"
-                      onClick={async () => {
-                        try {
-                          const token = sessionStorage.getItem("token");
-
-                          const res = await fetch(
-                            `${API_URL}/api/links/${link.id}`,
-                            {
-                              method: "DELETE",
-                              headers: {
-                                Authorization: `Bearer ${token}`, // <-- token ovdje
-                              },
-                            }
-                          );
-                          if (res.ok) {
-                            setLinks((prev) =>
-                              prev.filter((l) => l.id !== link.id)
-                            );
-                          } else {
-                            console.error("Greška kod brisanja poveznice");
-                          }
-                        } catch (err) {
-                          console.error("Došlo je do greške:", err);
-                        }
-                      }}
+            <>
+              <Stack spacing={3}>
+                {links.map((link) => (
+                  <>
+                    <HStack
+                      key={link.id}
+                      justifyContent="space-between"
+                      bg="white"
+                      p={2}
+                      borderRadius="md"
+                      boxShadow="sm"
                     >
-                      Obriši
-                    </Button>
-                  )}
-                </HStack>
-              ))}
-            </Stack>
+                      <ChakraLink
+                        href={link.url}
+                        isExternal
+                        color="#8b6f5e"
+                        _hover={{ textDecoration: "underline" }}
+                      >
+                        <HStack spacing={2}>
+                          <Icon as={IoShareSocialSharp} boxSize={5} />
+                          <Text>{link.text}</Text>
+                        </HStack>
+                      </ChakraLink>
+
+                      {/* YouTube thumbnail */}
+                      {(() => {
+                        const videoId = link.url.includes("youtube.com/watch")
+                          ? new URLSearchParams(new URL(link.url).search).get(
+                              "v"
+                            )
+                          : link.url.includes("youtu.be/")
+                          ? link.url.split("youtu.be/")[1]
+                          : null;
+
+                        return (
+                          videoId && (
+                            <Image
+                              src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+                              alt={link.text}
+                              boxSize="120px"
+                              borderRadius="md"
+                              objectFit="cover"
+                            />
+                          )
+                        );
+                      })()}
+                    </HStack>
+                    {isLoggedIn && (
+                      <Button
+                        size="xs"
+                        colorScheme="red"
+                        variant="outline"
+                        onClick={async () => {
+                          try {
+                            const token = sessionStorage.getItem("token");
+
+                            const res = await fetch(
+                              `${API_URL}/api/links/${link.id}`,
+                              {
+                                method: "DELETE",
+                                headers: {
+                                  Authorization: `Bearer ${token}`, // <-- token ovdje
+                                },
+                              }
+                            );
+                            if (res.ok) {
+                              setLinks((prev) =>
+                                prev.filter((l) => l.id !== link.id)
+                              );
+                            } else {
+                              console.error("Greška kod brisanja poveznice");
+                            }
+                          } catch (err) {
+                            console.error("Došlo je do greške:", err);
+                          }
+                        }}
+                      >
+                        Obriši
+                      </Button>
+                    )}
+                  </>
+                ))}
+              </Stack>
+            </>
           )}
 
           {/* Dogadjaji */}
