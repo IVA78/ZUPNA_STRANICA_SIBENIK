@@ -750,6 +750,27 @@ const Pocetna = () => {
                     </HStack>
                   </ChakraLink>
 
+                  {/* YouTube thumbnail */}
+                  {(() => {
+                    const videoId = link.url.includes("youtube.com/watch")
+                      ? new URLSearchParams(new URL(link.url).search).get("v")
+                      : link.url.includes("youtu.be/")
+                      ? link.url.split("youtu.be/")[1]
+                      : null;
+
+                    return (
+                      videoId && (
+                        <Image
+                          src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
+                          alt={link.text}
+                          boxSize="120px"
+                          borderRadius="md"
+                          objectFit="cover"
+                        />
+                      )
+                    );
+                  })()}
+
                   {isLoggedIn && (
                     <Button
                       size="xs"
