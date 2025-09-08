@@ -84,8 +84,7 @@ const Dashboard = () => {
               📰 Obavijesti
             </Heading>
             <Text>
-              Objava i uređivanje obavijesti vrši se izravno ovdje, na stranici{" "}
-              <b>KONTROLNA PLOČA</b>.
+              Objava i uređivanje obavijesti vrši se na stranici <b>Početna</b>.
             </Text>
             <Text mt={2}>
               Kako biste vidjeli promjene nakon uređivanja ili dodavanja
