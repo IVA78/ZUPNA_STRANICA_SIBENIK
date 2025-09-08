@@ -123,6 +123,8 @@ const Pocetna = () => {
     content: "",
   });
 
+  const [openEventId, setOpenEventId] = useState(null);
+
   // provjera na mount
   useEffect(() => {
     async function checkLogin() {
@@ -511,12 +513,16 @@ const Pocetna = () => {
                     mt={2}
                     color="blue.500"
                     cursor="pointer"
-                    onClick={onEventOpen}
+                    onClick={() => setOpenEventId(event.id)}
                   >
                     Pročitaj cijelu obavijest
                   </Text>
 
-                  <Modal isOpen={isEventOpen} onClose={onEventClose} size="xl">
+                  <Modal
+                    isOpen={openEventId === event.id}
+                    onClose={() => setOpenEventId(null)}
+                    size="xl"
+                  >
                     <ModalOverlay bg="blackAlpha.300" />
                     <ModalContent>
                       <ModalHeader>{event.title}</ModalHeader>
