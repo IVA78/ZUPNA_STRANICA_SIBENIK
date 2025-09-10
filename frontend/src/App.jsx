@@ -25,6 +25,7 @@ import SvetaPotvrda from "./pages/SvetaPotvrda";
 import ZupniCaritas from "./pages/ZupniCaritas";
 import Ministranti from "./pages/Ministranti";
 import Mladi from "./pages/Mladi";
+import Kazaliste from "./pages/Kazaliste";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./components/Dashboard";
 
@@ -58,7 +59,7 @@ function App() {
         <Route path="/zupni-caritas" element={<ZupniCaritas />} />
         <Route path="/ministranti" element={<Ministranti />} />
         <Route path="/mladi" element={<Mladi />} />
-        <Route path="/kazaliste" element={<Mladi />} />
+        <Route path="/kazaliste" element={<Kazaliste />} />
 
         <Route
           path="/upute"
