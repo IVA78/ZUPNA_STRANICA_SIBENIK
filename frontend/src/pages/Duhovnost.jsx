@@ -2,7 +2,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import CategoryPage from "../components/CategoryPage";
 
-const Sprovod = () => {
+const Duhovnost = () => {
   return (
     <div>
       <Navbar></Navbar>
@@ -12,4 +12,4 @@ const Sprovod = () => {
   );
 };
 
-export default Sprovod;
+export default Duhovnost;

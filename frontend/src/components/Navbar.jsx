@@ -404,11 +404,11 @@ const Navbar = () => {
                   <Divider></Divider>
                   <MenuItem
                     as="a"
-                    href="/sprovod"
+                    href="/duhovnost"
                     fontSize="xl"
                     fontWeight="semibold"
                   >
-                    Sprovod
+                    Duhovnost
                   </MenuItem>
                 </MenuList>
               </Menu>
@@ -759,11 +759,11 @@ const Navbar = () => {
                       <Divider></Divider>
                       <MenuItem
                         as="a"
-                        href="/sprovod"
+                        href="/duhovnost"
                         fontSize="xl"
                         fontWeight="semibold"
                       >
-                        Sprovod
+                        Duhovnost
                       </MenuItem>
                     </MenuList>
                   </Menu>

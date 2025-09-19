@@ -14,7 +14,6 @@ import BolesnickoPomazanje from "./pages/BolesnickoPomazanje";
 import Zenidba from "./pages/Zenidba";
 import SvetiRed from "./pages/SvetiRed";
 import BlagoslovObitelji from "./pages/BlagoslovObitelji";
-import Sprovod from "./pages/Sprovod";
 import Hodocasca from "./pages/Hodocasca";
 import Fotogalerija from "./pages/Fotogalerija";
 import Formulari from "./pages/Formulari";
@@ -28,6 +27,7 @@ import Mladi from "./pages/Mladi";
 import Kazaliste from "./pages/Kazaliste";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./components/Dashboard";
+import Duhovnost from "./pages/Duhovnost";
 
 function App() {
   return (
@@ -49,7 +49,7 @@ function App() {
         <Route path="/zenidba" element={<Zenidba />} />
         <Route path="/sveti-red" element={<SvetiRed />} />
         <Route path="/blagoslov-obitelji" element={<BlagoslovObitelji />} />
-        <Route path="/sprovod" element={<Sprovod />} />
+        <Route path="/duhovnost" element={<Duhovnost />} />
         <Route path="/hodocasca" element={<Hodocasca />} />
         <Route path="/formulari" element={<Formulari />} />
         <Route path="/kontakt" element={<Kontakt />} />
