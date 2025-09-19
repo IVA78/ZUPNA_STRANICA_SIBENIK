@@ -11,6 +11,7 @@ import backend.repository.CategoryRepository;
 import backend.repository.NotificationRepository;
 import backend.repository.PhotoRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -82,7 +83,7 @@ public class NotificationService {
     }
 
     public List<NotificationDTO> getAllNotifications() {
-        List<Notification> notifications = notificationRepo.findAll();
+        List<Notification> notifications = notificationRepo.findAll(Sort.by(Sort.Direction.DESC, "date"));
         // Pretvori entitete u DTO-e da ne šalješ nepotrebne podatke
         return notifications.stream()
                 .map(notification -> toDTO(notification))
@@ -90,7 +91,7 @@ public class NotificationService {
     }
 
     public List<NotificationDTO> getNotificationsByCategoryId(Long categoryId) {
-        List<Notification> notifications = notificationRepo.findByCategoryId(categoryId);
+        List<Notification> notifications = notificationRepo.findByCategoryId(categoryId, Sort.by(Sort.Direction.DESC, "date"));
         return notifications.stream()
                 .map(notification -> toDTO(notification))
                 .toList();
