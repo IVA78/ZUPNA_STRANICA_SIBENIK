@@ -114,7 +114,8 @@ public class WebSecurity  {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
                 "https://zupna-stranica-f-production.up.railway.app", // frontend Render
-                "http://localhost:5173"                       // lokalno Vite
+                "http://localhost:5173" ,                      // lokalno Vite
+                "https://zupa-svetoga-petra.hr"
         ));
         configuration.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
