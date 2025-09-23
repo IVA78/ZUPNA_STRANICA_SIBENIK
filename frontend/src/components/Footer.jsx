@@ -127,10 +127,11 @@ const Footer = () => {
                 _hover={{ color: "#4267B2" }}
               >
                 <FaFacebook size="28" />
+
+                <Text marginLeft={2} fontSize="xl">
+                  Župa Vidici
+                </Text>
               </Link>
-              <Text marginLeft={2} fontSize="xl">
-                Župa Vidici
-              </Text>
             </Box>
           </HStack>
           <HStack marginTop={5}>
@@ -141,10 +142,11 @@ const Footer = () => {
                 _hover={{ color: "#C13584" }}
               >
                 <FaInstagram size="28" />
+
+                <Text marginLeft={2} fontSize="xl">
+                  Župa sv. Petra Vidici
+                </Text>
               </Link>
-              <Text marginLeft={2} fontSize="xl">
-                Župa sv. Petra Vidici
-              </Text>
             </Box>
           </HStack>
           <HStack marginTop={5}>
@@ -155,10 +157,11 @@ const Footer = () => {
                 _hover={{ color: "#FF0000" }}
               >
                 <FaYoutube size="28" />
+
+                <Text marginLeft={2} fontSize="xl">
+                  Župa sv. Petra Vidici – YouTube
+                </Text>
               </Link>
-              <Text marginLeft={2} fontSize="xl">
-                Župa sv. Petra Vidici – YouTube
-              </Text>
             </Box>
           </HStack>
         </Box>

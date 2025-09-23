@@ -509,7 +509,12 @@ const Navbar = () => {
                         <ArrowRightIcon />
                       </Box>
                     </MenuButton>
-                    <MenuList bg="white" boxShadow="lg">
+                    <MenuList
+                      bg="white"
+                      boxShadow="lg"
+                      maxH="50vh"
+                      overflowY="scroll"
+                    >
                       <MenuItem
                         as="a"
                         href="/povijest-zupe"
@@ -572,7 +577,12 @@ const Navbar = () => {
                         <ArrowRightIcon />
                       </Box>
                     </MenuButton>
-                    <MenuList bg="white" boxShadow="lg">
+                    <MenuList
+                      bg="white"
+                      boxShadow="lg"
+                      maxH="50vh"
+                      overflowY="scroll"
+                    >
                       <MenuItem
                         as="a"
                         href="/zupna-kateheza"
@@ -675,7 +685,12 @@ const Navbar = () => {
                         <ArrowRightIcon />
                       </Box>
                     </MenuButton>
-                    <MenuList bg="white" boxShadow="lg">
+                    <MenuList
+                      bg="white"
+                      boxShadow="lg"
+                      maxH="50vh"
+                      overflowY="scroll"
+                    >
                       <MenuItem
                         as="a"
                         href="/krstenje"
