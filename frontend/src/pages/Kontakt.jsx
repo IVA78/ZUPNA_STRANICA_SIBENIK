@@ -50,7 +50,7 @@ const Kontakt = () => {
     const data = {
       from_name: name,
       from_email: email,
-      to_name: "Iva",
+      to_name: "Željko",
       message: message,
     };
 
