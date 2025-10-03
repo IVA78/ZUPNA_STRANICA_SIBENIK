@@ -530,9 +530,7 @@ const Pocetna = () => {
                       <ModalBody>
                         <Text>{event.content}</Text>
                       </ModalBody>
-                      <ModalFooter>
-                        <Button onClick={onEventClose}>Zatvori</Button>
-                      </ModalFooter>
+                      <ModalFooter></ModalFooter>
                     </ModalContent>
                   </Modal>
                 </Box>
