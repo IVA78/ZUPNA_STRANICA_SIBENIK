@@ -125,7 +125,7 @@ const Fotogalerija = () => {
                 <>
                   <Box
                     w="90vw" // fiksna širina okvira
-                    h="80vh" // fiksna visina okvira
+                    h="75vh" // fiksna visina okvira
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
@@ -141,19 +141,15 @@ const Fotogalerija = () => {
                       maxH="95%"
                     />
                   </Box>
-                  <Box p={4}>
-                    <Text fontSize="sm" color="gray.600">
+
+                  <Box p={4} w="full">
+                    <Text fontSize="sm" color="gray.600" textAlign="center">
                       {currentGallery[selectedImageIndex].description}
                     </Text>
                   </Box>
 
                   {currentGallery.length > 1 && (
-                    <Stack
-                      p={4}
-                      direction="row"
-                      justify="space-between"
-                      spacing={5}
-                    >
+                    <Stack direction="row" justify="space-between" spacing={5}>
                       <Text
                         as="button"
                         onClick={() =>
