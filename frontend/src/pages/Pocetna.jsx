@@ -20,6 +20,7 @@ import {
   ModalFooter,
   ModalCloseButton,
   useDisclosure,
+  Spacer,
   HStack,
   Icon,
   Link as ChakraLink,
@@ -1202,20 +1203,36 @@ const Pocetna = () => {
       {/* Modal za prikaz slike */}
       <Modal isOpen={isImageOpen} onClose={onImageClose} isCentered size="xl">
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent maxW="90vw" maxH="90vh">
           <ModalCloseButton />
-          <ModalBody p={0}>
+          <ModalBody
+            p={0}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+          >
             {currentGallery.length > 0 && selectedImageIndex !== null && (
               <>
-                <Image
-                  src={currentGallery[selectedImageIndex].imageUrl}
-                  alt={currentGallery[selectedImageIndex].description}
-                  objectFit="contain"
-                  w="100%"
-                  maxH="80vh"
-                />
-                <Box p={4}>
-                  <Text fontSize="sm" color="gray.600">
+                <Box
+                  w="90vw" // fiksna širina okvira
+                  h="80vh" // fiksna visina okvira
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  bg="gray.50" // lagana pozadina za kontrast
+                >
+                  <Image
+                    src={currentGallery[selectedImageIndex].imageUrl}
+                    alt={currentGallery[selectedImageIndex].description}
+                    objectFit="contain"
+                    minW="95%"
+                    minH="95%"
+                    maxW="95%"
+                    maxH="95%"
+                  />
+                </Box>
+                <Box p={4} w="full">
+                  <Text fontSize="sm" color="gray.600" textAlign="center">
                     {currentGallery[selectedImageIndex].description}
                   </Text>
                 </Box>
@@ -1276,7 +1293,12 @@ const Pocetna = () => {
                 )}
 
                 {currentGallery.length > 1 && (
-                  <Stack direction="row" justify="space-between" p={4}>
+                  <Stack
+                    direction="row"
+                    justify="space-between"
+                    spacing={5}
+                    marginBottom={5}
+                  >
                     <Text
                       as="button"
                       onClick={() =>
@@ -1291,6 +1313,7 @@ const Pocetna = () => {
                     >
                       ← Prethodna
                     </Text>
+                    <Spacer></Spacer>
                     <Text
                       as="button"
                       onClick={() =>
