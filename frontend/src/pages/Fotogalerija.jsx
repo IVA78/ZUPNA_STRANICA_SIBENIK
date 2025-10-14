@@ -153,7 +153,6 @@ const Fotogalerija = () => {
                       direction="row"
                       justify="space-between"
                       spacing={5}
-                      marginBottom={5}
                     >
                       <Text
                         as="button"

@@ -1293,12 +1293,7 @@ const Pocetna = () => {
                 )}
 
                 {currentGallery.length > 1 && (
-                  <Stack
-                    direction="row"
-                    justify="space-between"
-                    spacing={5}
-                    marginBottom={5}
-                  >
+                  <Stack direction="row" justify="space-between" spacing={5}>
                     <Text
                       as="button"
                       onClick={() =>
