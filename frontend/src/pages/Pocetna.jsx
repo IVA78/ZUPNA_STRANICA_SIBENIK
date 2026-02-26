@@ -38,7 +38,6 @@ import { IoShareSocialSharp } from "react-icons/io5";
 import { FiRefreshCw } from "react-icons/fi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 
-import svpetar from "../assets/svpetar.jpg";
 import RijecSvPetra from "../components/RijecSvPetra";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -522,7 +521,7 @@ const Pocetna = () => {
                   <Modal
                     isOpen={openEventId === event.id}
                     onClose={() => setOpenEventId(null)}
-                    size="xl"
+                    size={{ base: "full", sm: "lg", md: "xl", lg: "2xl" }}
                   >
                     <ModalOverlay bg="blackAlpha.300" />
                     <ModalContent>
@@ -531,7 +530,15 @@ const Pocetna = () => {
                       <ModalBody>
                         <Text>{event.content}</Text>
                       </ModalBody>
-                      <ModalFooter></ModalFooter>
+                      <ModalFooter>
+                        <Button
+                          onClick={() => setOpenEventId(null)}
+                          colorScheme="brown"
+                          variant="outline"
+                        >
+                          Zatvori
+                        </Button>
+                      </ModalFooter>
                     </ModalContent>
                   </Modal>
                 </Box>
@@ -647,14 +654,14 @@ const Pocetna = () => {
                               headers: {
                                 Authorization: `Bearer ${token}`, // <-- token ovdje
                               },
-                            }
+                            },
                           );
                           if (res.ok) {
                             setEvents((prev) =>
-                              prev.filter((e) => e.id !== event.id)
+                              prev.filter((e) => e.id !== event.id),
                             );
                             setFilteredEvents((prev) =>
-                              prev.filter((e) => e.id !== event.id)
+                              prev.filter((e) => e.id !== event.id),
                             );
                           } else {
                             console.error("Greška kod brisanja obavijesti");
@@ -761,11 +768,11 @@ const Pocetna = () => {
                       {(() => {
                         const videoId = link.url.includes("youtube.com/watch")
                           ? new URLSearchParams(new URL(link.url).search).get(
-                              "v"
+                              "v",
                             )
                           : link.url.includes("youtu.be/")
-                          ? link.url.split("youtu.be/")[1]
-                          : null;
+                            ? link.url.split("youtu.be/")[1]
+                            : null;
 
                         return (
                           videoId && (
@@ -796,11 +803,11 @@ const Pocetna = () => {
                                 headers: {
                                   Authorization: `Bearer ${token}`, // <-- token ovdje
                                 },
-                              }
+                              },
                             );
                             if (res.ok) {
                               setLinks((prev) =>
-                                prev.filter((l) => l.id !== link.id)
+                                prev.filter((l) => l.id !== link.id),
                               );
                             } else {
                               console.error("Greška kod brisanja poveznice");
@@ -867,11 +874,11 @@ const Pocetna = () => {
                               headers: {
                                 Authorization: `Bearer ${token}`, // <-- token ovdje
                               },
-                            }
+                            },
                           );
                           if (res.ok) {
                             setFutureEvents((prev) =>
-                              prev.filter((e) => e.id !== event.id)
+                              prev.filter((e) => e.id !== event.id),
                             );
                           } else {
                             console.error("Greška kod brisanja eventa");
@@ -1262,24 +1269,24 @@ const Pocetna = () => {
                               headers: {
                                 "Content-Type": "application/json",
                                 Authorization: `Bearer ${sessionStorage.getItem(
-                                  "token"
+                                  "token",
                                 )}`,
                               },
-                            }
+                            },
                           );
 
                           if (res.ok) {
                             setCurrentGallery((prev) =>
                               prev.filter(
-                                (_, idx) => idx !== selectedImageIndex
-                              )
+                                (_, idx) => idx !== selectedImageIndex,
+                              ),
                             );
                             setSelectedImageIndex(null);
                             onImageClose();
                           } else {
                             const err = await res.json();
                             alert(
-                              err.error || "Greška prilikom brisanja slike"
+                              err.error || "Greška prilikom brisanja slike",
                             );
                           }
                         }}
@@ -1293,14 +1300,19 @@ const Pocetna = () => {
                 )}
 
                 {currentGallery.length > 1 && (
-                  <Stack direction="row" justify="space-between" spacing={5}>
+                  <Stack
+                    direction="row"
+                    justify="space-between"
+                    spacing={5}
+                    mb="2em"
+                  >
                     <Text
                       as="button"
                       onClick={() =>
                         setSelectedImageIndex(
                           (prev) =>
                             (prev - 1 + currentGallery.length) %
-                            currentGallery.length
+                            currentGallery.length,
                         )
                       }
                       fontWeight="bold"
@@ -1313,7 +1325,7 @@ const Pocetna = () => {
                       as="button"
                       onClick={() =>
                         setSelectedImageIndex(
-                          (prev) => (prev + 1) % currentGallery.length
+                          (prev) => (prev + 1) % currentGallery.length,
                         )
                       }
                       fontWeight="bold"

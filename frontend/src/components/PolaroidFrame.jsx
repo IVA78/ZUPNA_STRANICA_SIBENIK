@@ -36,8 +36,15 @@ const PolaroidFrame = ({ imageSrc, altText = "Polaroid" }) => {
         borderRadius="10px"
         boxShadow="xl"
         position="relative"
+        maxW="40em"
       >
-        <Image src={imageSrc} alt={altText} borderRadius="5px" />
+        <Image
+          src={imageSrc}
+          alt={altText}
+          borderRadius="5px"
+          w="100%"
+          objectFit="cover"
+        />
       </Box>
 
       {/* Spajalica */}

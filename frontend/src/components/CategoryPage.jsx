@@ -15,6 +15,15 @@ import {
   Flex,
   IconButton,
   useToast,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalCloseButton,
+  useDisclosure,
+  Spacer,
 } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 import PolaroidFrame from "./PolaroidFrame";
@@ -37,11 +46,26 @@ const CategoryPage = ({ categoryId }) => {
 
   const [visibleCount, setVisibleCount] = useState(7); // početno 7 obavijesti
 
+  const [currentGallery, setCurrentGallery] = useState([]);
+
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+
+  const [currentNotificationId, setCurrentNotificationId] = useState(null);
+
+  const [openEventId, setOpenEventId] = useState(null);
+
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 7); // prikaži još 7 po kliku
   };
 
   const toast = useToast();
+
+  // Za modal slike
+  const {
+    isOpen: isImageOpen,
+    onOpen: onImageOpen,
+    onClose: onImageClose,
+  } = useDisclosure();
 
   // provjera na mount
   useEffect(() => {
@@ -146,6 +170,13 @@ const CategoryPage = ({ categoryId }) => {
     }
   };
 
+  const openImageModal = (gallery, index, notificationId) => {
+    setCurrentGallery(gallery);
+    setSelectedImageIndex(index);
+    setCurrentNotificationId(notificationId);
+    onImageOpen();
+  };
+
   if (loading) return <Spinner size="xl" mt={10} />;
 
   return (
@@ -161,17 +192,18 @@ const CategoryPage = ({ categoryId }) => {
           <Heading as="h2" size="xl">
             {page.title}
           </Heading>
-          {page.imageUrl && (
-            <PolaroidFrame imageSrc={page.imageUrl} altText={page.title} />
-          )}
-          <Box mt={6}>
+          <Stack spacing={10} align="center">
+            {page.imageUrl && (
+              <PolaroidFrame imageSrc={page.imageUrl} altText={page.title} />
+            )}
+
             <Box
               className="page-text"
               fontSize="md"
               lineHeight="1.8"
               dangerouslySetInnerHTML={{ __html: page.text }}
             />
-          </Box>
+          </Stack>
         </Box>
         {isLoggedIn && (
           <>
@@ -312,6 +344,9 @@ const CategoryPage = ({ categoryId }) => {
                       w="100%"
                       h="200px"
                       transition="transform 0.2s"
+                      onClick={() =>
+                        openImageModal([event.coverPhoto], 0, event.id)
+                      }
                       _hover={{ transform: "scale(1.02)" }}
                     />
                   )}
@@ -334,11 +369,49 @@ const CategoryPage = ({ categoryId }) => {
                             objectFit="cover"
                             borderRadius="md"
                             transition="transform 0.2s"
+                            onClick={() =>
+                              openImageModal(
+                                event.galleryPhotos,
+                                index,
+                                event.id,
+                              )
+                            }
                             _hover={{ transform: "scale(1.05)" }}
                           />
                         ))}
                       </Stack>
                     )}
+                    <Text
+                      mt={2}
+                      color="blue.500"
+                      cursor="pointer"
+                      onClick={() => setOpenEventId(event.id)}
+                    >
+                      Pročitaj cijelu obavijest
+                    </Text>
+                    <Modal
+                      isOpen={openEventId === event.id}
+                      onClose={() => setOpenEventId(null)}
+                      size={{ base: "full", sm: "lg", md: "xl", lg: "2xl" }}
+                    >
+                      <ModalOverlay bg="blackAlpha.300" />
+                      <ModalContent>
+                        <ModalHeader>{event.title}</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                          <Text>{event.content}</Text>
+                        </ModalBody>
+                        <ModalFooter>
+                          <Button
+                            onClick={() => setOpenEventId(null)}
+                            colorScheme="brown"
+                            variant="outline"
+                          >
+                            Zatvori
+                          </Button>
+                        </ModalFooter>
+                      </ModalContent>
+                    </Modal>
                   </Box>
                 </Box>
               ))}
@@ -365,6 +438,141 @@ const CategoryPage = ({ categoryId }) => {
             )}
           </>
         )}
+
+        {/* Modal za prikaz slike */}
+        <Modal isOpen={isImageOpen} onClose={onImageClose} isCentered size="xl">
+          <ModalOverlay />
+          <ModalContent maxW="90vw" maxH="90vh">
+            <ModalCloseButton />
+            <ModalBody
+              p={0}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              {currentGallery.length > 0 && selectedImageIndex !== null && (
+                <>
+                  <Box
+                    w="90vw" // fiksna širina okvira
+                    h="80vh" // fiksna visina okvira
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    bg="gray.50" // lagana pozadina za kontrast
+                  >
+                    <Image
+                      src={currentGallery[selectedImageIndex].imageUrl}
+                      alt={currentGallery[selectedImageIndex].description}
+                      objectFit="contain"
+                      minW="95%"
+                      minH="95%"
+                      maxW="95%"
+                      maxH="95%"
+                    />
+                  </Box>
+                  <Box p={4} w="full">
+                    <Text fontSize="sm" color="gray.600" textAlign="center">
+                      {currentGallery[selectedImageIndex].description}
+                    </Text>
+                  </Box>
+
+                  {/* Gumb za brisanje slike */}
+                  {isLoggedIn ? (
+                    <>
+                      <Box px={4} pb={4}>
+                        <Button
+                          colorScheme="red"
+                          size="sm"
+                          onClick={async () => {
+                            if (
+                              !currentNotificationId ||
+                              selectedImageIndex === null
+                            )
+                              return;
+
+                            const photoId =
+                              currentGallery[selectedImageIndex].id;
+
+                            const token = sessionStorage.getItem("token");
+
+                            const res = await fetch(
+                              `${API_URL}/api/notifications/${currentNotificationId}/photos/${photoId}`,
+                              {
+                                method: "DELETE",
+                                headers: {
+                                  "Content-Type": "application/json",
+                                  Authorization: `Bearer ${sessionStorage.getItem(
+                                    "token",
+                                  )}`,
+                                },
+                              },
+                            );
+
+                            if (res.ok) {
+                              setCurrentGallery((prev) =>
+                                prev.filter(
+                                  (_, idx) => idx !== selectedImageIndex,
+                                ),
+                              );
+                              setSelectedImageIndex(null);
+                              onImageClose();
+                            } else {
+                              const err = await res.json();
+                              alert(
+                                err.error || "Greška prilikom brisanja slike",
+                              );
+                            }
+                          }}
+                        >
+                          Obriši fotografiju
+                        </Button>
+                      </Box>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+
+                  {currentGallery.length > 1 && (
+                    <Stack
+                      direction="row"
+                      justify="space-between"
+                      spacing={5}
+                      mb="2em"
+                    >
+                      <Text
+                        as="button"
+                        onClick={() =>
+                          setSelectedImageIndex(
+                            (prev) =>
+                              (prev - 1 + currentGallery.length) %
+                              currentGallery.length,
+                          )
+                        }
+                        fontWeight="bold"
+                        color="#86654b"
+                      >
+                        ← Prethodna
+                      </Text>
+                      <Spacer></Spacer>
+                      <Text
+                        as="button"
+                        onClick={() =>
+                          setSelectedImageIndex(
+                            (prev) => (prev + 1) % currentGallery.length,
+                          )
+                        }
+                        fontWeight="bold"
+                        color="#86654b"
+                      >
+                        Sljedeća →
+                      </Text>
+                    </Stack>
+                  )}
+                </>
+              )}
+            </ModalBody>
+          </ModalContent>
+        </Modal>
       </Box>
     </>
   );
