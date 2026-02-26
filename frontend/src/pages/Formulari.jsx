@@ -190,13 +190,17 @@ const Formulari = () => {
                     variant="outline"
                     onClick={async () => {
                       try {
-                        const res = await fetch(`/api/forms/${f.id}`, {
-                          method: "DELETE",
-                        });
+                        console.log("id: " + f.id);
+                        const res = await fetch(
+                          `${API_URL}/api/forms/${f.id}`,
+                          {
+                            method: "DELETE",
+                          },
+                        );
                         if (res.ok) {
                           // makni iz state-a bez refreša
                           setFormulari((prev) =>
-                            prev.filter((x) => x.id !== f.id)
+                            prev.filter((x) => x.id !== f.id),
                           );
                         } else {
                           console.error("Greška kod brisanja formulara");

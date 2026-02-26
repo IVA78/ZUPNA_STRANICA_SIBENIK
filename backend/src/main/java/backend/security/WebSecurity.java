@@ -59,7 +59,8 @@ public class WebSecurity  {
 
                 .requestMatchers(HttpMethod.GET, "/api/forms").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/forms/*/download").permitAll()
-                .requestMatchers(HttpMethod.DELETE, "/api/forms/*").hasRole("USER")
+                .requestMatchers(HttpMethod.OPTIONS, "/api/forms/**").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/api/forms/**").hasRole("USER")
                 .requestMatchers(HttpMethod.POST, "/api/forms").hasRole("USER")
 
 
