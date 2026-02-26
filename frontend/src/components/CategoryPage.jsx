@@ -1,6 +1,10 @@
 // src/components/CategoryPage.jsx
 
 import React, { useEffect, useState } from "react";
+
+import { useSearchParams } from "react-router-dom";
+import { useRef } from "react";
+
 import {
   Box,
   Heading,
@@ -26,6 +30,7 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
+
 import PolaroidFrame from "./PolaroidFrame";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -44,8 +49,6 @@ const CategoryPage = ({ categoryId }) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [visibleCount, setVisibleCount] = useState(7); // početno 7 obavijesti
-
   const [currentGallery, setCurrentGallery] = useState([]);
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
@@ -53,6 +56,12 @@ const CategoryPage = ({ categoryId }) => {
   const [currentNotificationId, setCurrentNotificationId] = useState(null);
 
   const [openEventId, setOpenEventId] = useState(null);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const notifRefs = useRef({});
+
+  const [visibleCount, setVisibleCount] = useState(7); // početno 7 obavijesti
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 7); // prikaži još 7 po kliku
@@ -95,6 +104,28 @@ const CategoryPage = ({ categoryId }) => {
 
     checkLogin();
   }, []);
+
+  // automatski otvori modal ako postoji parametar
+  useEffect(() => {
+    const eventIdFromUrl = searchParams.get("event");
+    if (eventIdFromUrl) {
+      setOpenEventId(Number(eventIdFromUrl));
+    }
+  }, []);
+
+  // scroll + otvaranje modala iz URL-a
+  useEffect(() => {
+    const eventIdFromUrl = searchParams.get("event");
+    if (!eventIdFromUrl) return;
+
+    const eventId = Number(eventIdFromUrl);
+
+    // Scroll do obavijesti
+    const targetEl = notifRefs.current[eventId];
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [searchParams, notifications]);
 
   useEffect(() => {
     fetch(`${API_URL}/api/pages/dto/category/${categoryId}`)
@@ -175,6 +206,49 @@ const CategoryPage = ({ categoryId }) => {
     setSelectedImageIndex(index);
     setCurrentNotificationId(notificationId);
     onImageOpen();
+  };
+
+  //Event modal
+  const openModal = (id) => {
+    setOpenEventId(id);
+    setSearchParams({ event: id });
+  };
+
+  const closeModal = () => {
+    setOpenEventId(null);
+    setSearchParams({});
+  };
+
+  // mapa između categoryName i path-a
+  const categoryPathMap = {
+    "Povijest župe": "/povijest-zupe",
+    "Sv. Petar": "/sv-petar",
+    "Raspored bogoslužja": "/raspored-bogosluzja",
+    "Župna kateheza za odrasle": "/zupna-kateheza",
+    "Dječji zbor": "/djecji-zbor",
+    "Župni pjevački zbor": "/zupni-pjevacki-zbor",
+    "Župno pastoralno i ekonomsko vijeće": "/zupno-vijece",
+    Pobožnosti: "/poboznosti",
+    Krštenje: "/krstenje",
+    "Sveta Pričest": "/sveta-pricest",
+    "Sveta Potvrda": "/sveta-potvrda",
+    Euharistija: "/euharistija",
+    Ispovijed: "/ispovijed",
+    "Bolesničko pomazanje": "/bolesnicko-pomazanje",
+    Ženidba: "/zenidba",
+    "Sveti red": "/sveti-red",
+    "Blagoslov obitelji": "/blagoslov-obitelji",
+    Sprovod: "/sprovod",
+    Hodočašća: "/hodocasca",
+    "Župni Caritas": "/zupni-caritas",
+    Ministranti: "/ministranti",
+    Mladi: "/mladi",
+    "Kršćansko kazalište župe sv. Petra": "/kazaliste",
+  };
+
+  // funkcija koja vraća path po categoryName
+  const getCategoryPath = (categoryName) => {
+    return categoryPathMap[categoryName] || "/obavijesti"; // fallback path
   };
 
   if (loading) return <Spinner size="xl" mt={10} />;
@@ -330,6 +404,7 @@ const CategoryPage = ({ categoryId }) => {
               {notifications.slice(0, visibleCount).map((event) => (
                 <Box
                   key={event.id}
+                  ref={(el) => (notifRefs.current[event.id] = el)}
                   borderWidth="1px"
                   borderRadius="xl"
                   overflow="hidden"
@@ -351,66 +426,108 @@ const CategoryPage = ({ categoryId }) => {
                     />
                   )}
 
-                  <Box p={4}>
-                    <Heading size="md">{event.title}</Heading>
-                    <Text fontSize="sm" color="gray.600">
-                      {event.date} • {event.categoryName}
-                    </Text>
-                    <Text mt={2}>{event.summary}</Text>
+                  <Box
+                    p={4}
+                    display="flex"
+                    flexDirection="column"
+                    minH="350px" // minimalna visina obavijesti
+                  >
+                    {/* Gornji dio koji raste */}
+                    <Box flex="1">
+                      <Heading size="md">{event.title}</Heading>
+                      <Text fontSize="sm" color="gray.600">
+                        {event.date} • {event.categoryName}
+                      </Text>
+                      <Text mt={2}>{event.summary}</Text>
 
-                    {event.galleryPhotos.length > 0 && (
-                      <Stack direction="row" spacing={2} mt={4} wrap="wrap">
-                        {event.galleryPhotos.slice(0, 3).map((photo, index) => (
-                          <Image
-                            key={index}
-                            src={photo.imageUrl}
-                            alt={photo.description}
-                            boxSize="80px"
-                            objectFit="cover"
-                            borderRadius="md"
-                            transition="transform 0.2s"
-                            onClick={() =>
-                              openImageModal(
-                                event.galleryPhotos,
-                                index,
-                                event.id,
-                              )
-                            }
-                            _hover={{ transform: "scale(1.05)" }}
-                          />
-                        ))}
+                      {event.galleryPhotos.length > 0 && (
+                        <Stack direction="row" spacing={2} mt={4} wrap="wrap">
+                          {event.galleryPhotos
+                            .slice(0, 3)
+                            .map((photo, index) => (
+                              <Image
+                                key={index}
+                                src={photo.imageUrl}
+                                alt={photo.description}
+                                boxSize="80px"
+                                objectFit="cover"
+                                borderRadius="md"
+                                transition="transform 0.2s"
+                                onClick={() =>
+                                  openImageModal(
+                                    event.galleryPhotos,
+                                    index,
+                                    event.id,
+                                  )
+                                }
+                                _hover={{ transform: "scale(1.05)" }}
+                              />
+                            ))}
+                        </Stack>
+                      )}
+                    </Box>
+
+                    {/* Donji dio – uvijek prilepljeno za dno */}
+                    <Flex mt={4} align="center" justify="space-between">
+                      <Text
+                        color="blue.500"
+                        cursor="pointer"
+                        onClick={() => openModal(event.id)}
+                      >
+                        Pročitaj cijelu obavijest
+                      </Text>
+
+                      <Stack direction="row" spacing={2}>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          color="black"
+                          borderColor="rgba(23,24,16)"
+                          _hover={{
+                            bg: "#86654b",
+                            color: "RGBA(248, 245, 240)",
+                            fontWeight: "bold",
+                          }}
+                          fontSize="l"
+                          onClick={() => {
+                            const url =
+                              window.location.origin +
+                              `${getCategoryPath(event.categoryName)}?event=${event.id}`;
+                            navigator.clipboard.writeText(url);
+                          }}
+                        >
+                          Kopiraj link
+                        </Button>
                       </Stack>
-                    )}
-                    <Text
-                      mt={2}
-                      color="blue.500"
-                      cursor="pointer"
-                      onClick={() => setOpenEventId(event.id)}
-                    >
-                      Pročitaj cijelu obavijest
-                    </Text>
+                    </Flex>
+
                     <Modal
                       isOpen={openEventId === event.id}
-                      onClose={() => setOpenEventId(null)}
+                      onClose={closeModal}
                       size={{ base: "full", sm: "lg", md: "xl", lg: "2xl" }}
                     >
-                      <ModalOverlay bg="blackAlpha.300" />
+                      {" "}
+                      <ModalOverlay bg="blackAlpha.300" />{" "}
                       <ModalContent>
-                        <ModalHeader>{event.title}</ModalHeader>
-                        <ModalCloseButton />
+                        {" "}
+                        <ModalHeader>{event.title}</ModalHeader>{" "}
+                        <ModalCloseButton />{" "}
                         <ModalBody>
-                          <Text>{event.content}</Text>
-                        </ModalBody>
+                          {" "}
+                          <Text>{event.content}</Text>{" "}
+                        </ModalBody>{" "}
                         <ModalFooter>
+                          {" "}
                           <Button
                             onClick={() => setOpenEventId(null)}
                             colorScheme="brown"
                             variant="outline"
                           >
-                            Zatvori
-                          </Button>
-                        </ModalFooter>
-                      </ModalContent>
+                            {" "}
+                            Zatvori{" "}
+                          </Button>{" "}
+                        </ModalFooter>{" "}
+                      </ModalContent>{" "}
                     </Modal>
                   </Box>
                 </Box>
