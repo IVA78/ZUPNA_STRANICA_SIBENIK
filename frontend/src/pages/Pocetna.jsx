@@ -1221,8 +1221,8 @@ const Pocetna = () => {
             {currentGallery.length > 0 && selectedImageIndex !== null && (
               <>
                 <Box
-                  w="90vw" // fiksna širina okvira
-                  h="80vh" // fiksna visina okvira
+                  w="85vw" // fiksna širina okvira
+                  h="75vh" // fiksna visina okvira
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
