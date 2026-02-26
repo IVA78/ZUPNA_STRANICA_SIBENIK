@@ -12,7 +12,7 @@ RUN chmod +x mvnw
 RUN ./mvnw clean package
 
 # Stvaranje containera u kojem ce se vrtiti aplikacija
-FROM openjdk:21-jdk-slim
+FROM openjdk:21-jdk
 
 ## Ovdje je moguce instalirati alate potrebne za rad aplikacije. Vjerojatno vam nece trebati, no dobro je znati.
 ## Linux distro koji se koristi je Alpine, stoga se kao package manager koristi apk
