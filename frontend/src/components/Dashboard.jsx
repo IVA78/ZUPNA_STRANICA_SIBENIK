@@ -100,6 +100,11 @@ const Dashboard = () => {
               <b>Početna</b>. Klikom na neku od fotografija i otvaranjem
               galerije možete naći željenu fotografiju.
             </Text>
+            <Text mt={2}>
+              Dijeljenje određene objave može se napraviti{" "}
+              <b>kopiranjem linka na podstranici pripadajuće kategorije</b>{" "}
+              obavijesti.
+            </Text>
           </Box>
 
           <Divider />
