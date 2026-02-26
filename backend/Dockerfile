@@ -1,5 +1,5 @@
 # Container za izgradnju (build) aplikacije
-FROM openjdk:21-jdk-slim AS builder
+FROM openjdk:21-jdk AS builder
 
 # Kopiranje izvornog koda u container
 COPY .mvn .mvn
