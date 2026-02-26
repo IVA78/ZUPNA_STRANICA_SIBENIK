@@ -190,13 +190,23 @@ const Formulari = () => {
                     variant="outline"
                     onClick={async () => {
                       try {
+                        const token = sessionStorage.getItem("token"); // uzmi token iz sessionStorage
+                        if (!token) {
+                          alert("Niste prijavljeni!");
+                          return;
+                        }
+
                         console.log("id: " + f.id);
                         const res = await fetch(
                           `${API_URL}/api/forms/${f.id}`,
                           {
                             method: "DELETE",
+                            headers: {
+                              Authorization: `Bearer ${token}`, // token je ovdje ključan
+                            },
                           },
                         );
+
                         if (res.ok) {
                           // makni iz state-a bez refreša
                           setFormulari((prev) =>
