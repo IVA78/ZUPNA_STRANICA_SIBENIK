@@ -1,6 +1,7 @@
 # Parish Website
 
 A fullstack web application for a parish website built with a modern frontend and backend architecture.
+
 Check it out: https://zupa-svetoga-petra.hr/
 
 ## 🧱 Architecture
